@@ -18,7 +18,6 @@ import model.openData.RequestInfo;
  * 템플릿화 하고, DataGetterTemplete 클래스를 상속 받는 클래스에서 abstract method인 getData()
  * method를 overriding함으로써 구체적으로 어떻게 데이터를 받아서 처리할 것인지 정한다. open API를 이용하는 여러
  * 클래스들은 이 클래스를 상속 받음으로써 open API의 서버로 요청 하고 응답 받는 부분을 그대로 쓸 수 있다.
- * 
  * @author janghae
  *
  */
