@@ -14,7 +14,7 @@ import model.openData.dataForm.StoreZoneDataForm;
 import model.openData.template.DataGetterTemplate;
 
 public class ApiTest {
-	@Test
+	
 	public void getStoreZone() throws IOException{
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("type", "xml");
@@ -35,8 +35,8 @@ public class ApiTest {
 	@Test
 	public void getGoogle(){
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("origins", "Vancouver BC");		
-		parameters.put("destinations", "San Francisco");
+		parameters.put("origins", "Vancouver BC|역삼역|수원역");		
+		parameters.put("destinations", "San Francisco|강남역|금정역");
 		parameters.put("mode", "transit");
 		parameters.put("language", "kr-ko");
 		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/distancematrix/xml", parameters, "key", "AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
