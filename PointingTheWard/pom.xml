@@ -7,7 +7,6 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-
 		<!-- Test용 API (JUnit, Spring test) start -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -19,6 +18,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.2.4.RELEASE</version>
 		</dependency>
+
 		<!-- Test용 API (JUnit, Spring test) end -->
 
 		<!-- Spring framework start -->
@@ -32,8 +32,13 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.2.4.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>4.2.4.RELEASE</version>
+		</dependency>
 		<!-- Spring framework end -->
-		
+
 		<!-- java mail start -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -41,7 +46,7 @@
 			<version>1.4.7</version>
 		</dependency>
 		<!-- java mail end -->
-		
+
 		<dependency>
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-calendar</artifactId>

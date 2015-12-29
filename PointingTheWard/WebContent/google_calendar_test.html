@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({ url: 'https://www.googleapis.com/calendar/v3/calendars/janghaeye@gmail.com/events?key=AIzaSyAfCwtKwhFhdElxyvYLXweUWCm-9c_sCfw',
-				type: 'GET'})
+				type: 'POST'})
 				.done(function(data){
 					console.log(data);})
 				.fail(function (jqHXR, textStatus) {
