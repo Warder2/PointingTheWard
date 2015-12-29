@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-	
+
 		<!-- Test용 API (JUnit, Spring test) start -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -20,7 +20,7 @@
 			<version>4.2.4.RELEASE</version>
 		</dependency>
 		<!-- Test용 API (JUnit, Spring test) end -->
-		
+
 		<!-- Spring framework start -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -33,6 +33,20 @@
 			<version>4.2.4.RELEASE</version>
 		</dependency>
 		<!-- Spring framework end -->
+		
+		<!-- java mail start -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<!-- java mail end -->
+		
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-calendar</artifactId>
+			<version>v3-rev157-1.21.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

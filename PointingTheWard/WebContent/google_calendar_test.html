@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({ url: 'https://www.googleapis.com/calendar/v3/calendars/janghaeye@gmail.com/events?key=AIzaSyAfCwtKwhFhdElxyvYLXweUWCm-9c_sCfw',
+				type: 'GET'})
+				.done(function(data){
+					console.log(data);})
+				.fail(function (jqHXR, textStatus) {
+					console.log("addEvent(): ajax failed = " + jqHXR.responseText);
+					console.log(jqHXR);});
+	});
+</script>
+</head>
+<body>
+
+</body>
+</html>
