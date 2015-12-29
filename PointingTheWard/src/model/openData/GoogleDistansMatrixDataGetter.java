@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 import model.openData.template.DataGetterDOMTemplate;
 
-public class GoogleDataGetter extends DataGetterDOMTemplate{
+public class GoogleDistansMatrixDataGetter extends DataGetterDOMTemplate{
 	@Override
 	protected <T> List<T> getData(Element root) {
 	

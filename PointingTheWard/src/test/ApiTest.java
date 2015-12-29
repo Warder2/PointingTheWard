@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import model.openData.GoogleDataGetter;
+import model.openData.GoogleDistansMatrixDataGetter;
 import model.openData.RequestInfo;
 import model.openData.StoreZoneDataGetter;
 import model.openData.dataForm.StoreZoneDataForm;
@@ -41,7 +41,7 @@ public class ApiTest {
 		parameters.put("language", "kr-ko");
 		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/distancematrix/xml", parameters, "key", "AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
 		
-		DataGetterTemplate templete = new GoogleDataGetter();
+		DataGetterTemplate templete = new GoogleDistansMatrixDataGetter();
 		try {
 			templete.getData(requestInfo);
 		} catch (IOException e) {
