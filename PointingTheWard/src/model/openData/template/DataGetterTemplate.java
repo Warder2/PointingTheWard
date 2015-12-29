@@ -1,4 +1,4 @@
-package model.openData.templete;
+package model.openData.template;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,7 +22,7 @@ import model.openData.RequestInfo;
  * @author janghae
  *
  */
-public abstract class DataGetterTemplete {
+public abstract class DataGetterTemplate {
 	/**
 	 * 사용자는 DataGetterTemplete의 public method인 getData() method에 여러 요청 정보를 가진
 	 * RequestInfo 객체를 전달하여 getData() methid를 호출한다. 여러 요청 정보를 가진 RequestInfo

@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import model.openData.dataForm.StoreZoneDataForm;
-import model.openData.templete.DataGetterDOMTemplete;
+import model.openData.template.DataGetterDOMTemplate;
 
 /**
  * DataGetterDOMTemplete 클래스를 상속하여  Restful 방식의 Open API인 공공데이터로 제공하는 소상공인 상가업소 정보 서비스에 요청하여 응답된 데이터들을 DOM parsing 방식으로 parsing 하여 반환 하는 클래스.
@@ -15,7 +15,7 @@ import model.openData.templete.DataGetterDOMTemplete;
  * @author janghae
  *
  */
-public class StoreZoneDataGetter extends DataGetterDOMTemplete{
+public class StoreZoneDataGetter extends DataGetterDOMTemplate{
 	
 	@SuppressWarnings("unchecked")
 	@Override

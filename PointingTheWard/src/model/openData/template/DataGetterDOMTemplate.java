@@ -1,4 +1,4 @@
-package model.openData.templete;
+package model.openData.template;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
  * @author janghae
  *
  */
-public abstract class DataGetterDOMTemplete extends DataGetterTemplete{
+public abstract class DataGetterDOMTemplate extends DataGetterTemplate{
 	/**
 	 * DataGetterTemplete 클래스의 protected method인 getData() method를 overriding 했다.
 	 * open API 서버의 응답을 DOM parsing 방식으로 처리하는 부분을 정의했다. 실질적으로 응답 데이터를 parsing 하여 데이터를 반환하는 부분을 분리하여 구현 객체에서 정의할 것을 위임한다.

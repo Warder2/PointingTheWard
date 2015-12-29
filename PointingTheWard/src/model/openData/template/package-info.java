@@ -5,4 +5,4 @@
  * @author janghae
  *
  */
-package model.openData.templete;
+package model.openData.template;

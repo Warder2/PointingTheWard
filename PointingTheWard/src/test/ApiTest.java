@@ -19,7 +19,7 @@ import org.junit.Test;
 import model.openData.RequestInfo;
 import model.openData.StoreZoneDataGetter;
 import model.openData.dataForm.StoreZoneDataForm;
-import model.openData.templete.DataGetterTemplete;
+import model.openData.template.DataGetterTemplate;
 
 public class ApiTest {
 	//@Test
@@ -32,7 +32,7 @@ public class ApiTest {
 		
 		RequestInfo requestInfo = new RequestInfo("http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneOne",
 				parameters, "ServiceKey", "b4%2FOQgFU8EroBosLvjRoPFNiXwHX8W2d8wFrsmJTm1r%2FeiOUcmlWXOzIU1j6%2BjsZgSumHK0TRaf87G%2BH%2BY1oIw%3D%3D");
-		DataGetterTemplete templete = new StoreZoneDataGetter();
+		DataGetterTemplate templete = new StoreZoneDataGetter();
 		List<StoreZoneDataForm> infos = templete.getData(requestInfo);
 		for(StoreZoneDataForm dataForm : infos){
 			System.out.println(dataForm);
