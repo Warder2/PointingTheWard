@@ -1,9 +1,15 @@
 package model.service;
 
+import model.Abstract.AbstractGroupService;
 import model.beans.Group;
 
-public class GroupService {
-
+public class GroupService extends AbstractGroupService{
+	public boolean addGroup(Group group){
+		return false;
+	}
+	public boolean addGroup(int index,Group group){
+		return false;
+	}
 	public Group searchGroupName(String name){
 		
 		return null;
