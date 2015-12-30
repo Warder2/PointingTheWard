@@ -34,6 +34,71 @@ public class PointList {
 		return points.addAll(index, c);
 	}
 
+	public Point searchPoint(Point point){
+		
+		for(Point p : points){
+			if(p.equals(point)) return p;
+		}
+		return null;
+	}
+	
+	public Point searchPointValue(double lng, double lat){
+		
+		for(Point p : points){
+			if(p.getLat() == lat && p.getLng() == lng)
+				return p;
+		}
+		
+		return null;
+	}
+	
+	public boolean modifyPoint(Point point,  Point newPoint){
+		
+		Point p = searchPoint(point);
+		
+		if( p != null){
+			p = newPoint;
+			return true;
+		}
+		return false;
+
+	}
+	
+	public boolean modifyPointValue(Point point, double newlng , double newlat){
+		
+		Point p = searchPoint(point);
+		
+		if( p != null){
+			p.setLat(newlat);
+			p.setLng(newlng);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean deletePoint(Point point){
+		
+		Point p = searchPoint(point);
+		
+		if( p != null){
+			remove(p);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean deletePointValue(double lat, double lng){
+		
+		Point p = searchPointValue(lng, lat);
+		
+		if( p != null){
+			remove(p);
+			return true;
+		}
+		return false;
+		
+	}
+	
 	public void clear() {
 		points.clear();
 	}

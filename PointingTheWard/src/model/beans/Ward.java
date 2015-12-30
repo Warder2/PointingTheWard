@@ -5,7 +5,8 @@ public class Ward {
 	private String eDate;
 	private String sTime;
 	private String eTime;
-	
+	private Place place;
+
 	public Ward() {
 		// TODO Auto-generated constructor stub
 	}
@@ -16,8 +17,7 @@ public class Ward {
 		this.sTime = sTime;
 		this.eTime = eTime;
 	}
-	private Place place;
-
+	
 	public String getsDate() {
 		return sDate;
 	}
