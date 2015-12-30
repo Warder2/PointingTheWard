@@ -99,6 +99,17 @@ public class GroupList {
 		
 	}
 	
+	public boolean deleteGroup(Group group){
+		
+		Group g = searchGroup(group);
+		
+		if(g!= null){
+			remove(g);
+			return true;
+		}
+		return false;
+	}
+	
 	public void clear() {
 		groups.clear();
 	}
