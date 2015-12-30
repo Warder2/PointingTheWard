@@ -171,9 +171,11 @@ public class MemberList {
 	public int deleteMemberName(String name){
 		int i = 0;
 		for (Member m : members) {
-			if (m.getName().equals(name))
+			if (m.getName().equals(name)){
 				remove(m);
-			i++;
+				i++;
+			}
+			
 		}
 		return i;
 	}
@@ -181,9 +183,10 @@ public class MemberList {
 	public boolean deleteMemberEmail(String email){
 		
 		for (Member m : members) {
-			if (m.getEmail().equals(email))
+			if (m.getEmail().equals(email)){
 				remove(m);
-			return true;
+				return true;
+			}
 		}
 		return false;
 	}

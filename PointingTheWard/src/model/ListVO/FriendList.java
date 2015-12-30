@@ -1,11 +1,16 @@
 package model.ListVO;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import model.beans.Friend;
 
+/**
+ * @author Samsung
+ *
+ */
 public class FriendList {
 	private List<Friend> friends;
 
@@ -33,6 +38,110 @@ public class FriendList {
 	public boolean addAll(int index, Collection<? extends Friend> c) {
 		return friends.addAll(index, c);
 	}
+
+	
+
+	public Friend searchFriendEmail(String email){
+		
+		for(Friend f : friends){
+			if(f.getEmail().equals(email))
+				return f;
+		}
+		return null;
+	}
+	
+	public List<Friend> searchFriendName(String name){
+		
+		List<Friend> fList = new ArrayList<Friend>();
+		
+		for(Friend f : friends){
+			fList.add(f);
+		}
+		if(fList.isEmpty())
+			return null;
+		return fList;
+	}
+	
+	public Friend searchFriend(Friend friend){
+		for(Friend f : friends){
+			if(f.getEmail().equals(friend.getEmail()))
+				return f;
+		}
+		return null;
+	}
+
+	
+	public boolean modifyFriendName(String email, String name){
+		
+		Friend f = searchFriendEmail(email);
+		
+		if(f != null){
+			f.setName(name);
+			return true;	
+		}
+		return false;
+	}
+	
+	public boolean modifyFriendEmail(String email, String newMail){
+		
+		Friend f= searchFriendEmail(email);
+		
+		if(f != null){
+			f.setEmail(email);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean modifyFriend(String email, Friend newFriend){
+		
+		Friend f= searchFriendEmail(email);
+		
+		if(f != null){
+			f = newFriend;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean modifyFriend(Friend friend, Friend newFriend){
+		
+		Friend f= searchFriendEmail(friend.getEmail());
+		
+		if(f != null){
+			f = newFriend;
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public int deleteFriendName(String name){
+	
+		int i  = 0;
+		
+		for(Friend f : friends){
+			if(f.getName().equals(name)){
+				remove(f);
+				i++;
+			}
+		}
+		
+		return i;
+	}
+	
+	public boolean deleteFriendEmail(String email){
+		
+		for(Friend f : friends){
+			
+			if(f.getEmail().equals(email)){
+				remove(f);
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	public void clear() {
 		friends.clear();

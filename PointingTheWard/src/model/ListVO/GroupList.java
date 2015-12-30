@@ -1,9 +1,10 @@
 package model.ListVO;
 
-import java.security.acl.Group;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import model.beans.Group;;
 
 public class GroupList {
 	private List<Group> groups;
@@ -32,6 +33,30 @@ public class GroupList {
 	public boolean addAll(int index, Collection<? extends Group> c) {
 		return groups.addAll(index, c);
 	}
+
+	
+	public Group searchGroupName(String name){
+		
+		for(Group g : groups){
+			if(g.getName().equals(name))
+				return g;
+		}
+		return null;
+	}
+	
+	public boolean modifyGroupName(String name, String newName){
+		
+		Group g = searchGroupName(name);
+		
+		if(g != null){
+			g.setName(newName);
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
 
 	public void clear() {
 		groups.clear();
