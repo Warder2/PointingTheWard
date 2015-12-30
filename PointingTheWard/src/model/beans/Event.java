@@ -1,16 +1,47 @@
 package model.beans;
 
 import java.util.List;
-
+/**
+ * 일정 정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Event {
+	/**
+	 * 제목
+	 */
 	private String title;
+	/**
+	 * 시작날짜
+	 */
 	private String sDate;
+	/**
+	 * 종료날짜
+	 */
 	private String eDate;
+	/**
+	 * 시작시간
+	 */
 	private String sTime;
+	/**
+	 * 종료시간
+	 */
 	private String eTime;
+	/**
+	 * 내용
+	 */
 	private String content;
+	/**
+	 * 장소
+	 */
 	private Place place;
+	/**
+	 * 참가자
+	 */
 	private List<Member> participants;
+	/**
+	 * Defalut constructor
+	 */
 	public Event() {
 	}
 	public Event(String title, String sDate, String eDate, String sTime, String eTime, String content, Place place,
