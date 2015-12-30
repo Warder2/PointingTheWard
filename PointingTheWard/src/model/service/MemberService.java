@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.beans.Member;
-
+/**
+ * 회원에 관한 서비스를 제공하는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class MemberService {
 	/**
 	 * 로그인

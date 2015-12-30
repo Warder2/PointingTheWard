@@ -6,32 +6,60 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.beans.Member;
-
+/**
+ * 회원을 List로 가지고 있는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class MemberList {
-
+	/**
+	 * 회원 List
+	 */
 	private List<Member> members;
-
+	/**
+	 * 기본 생성자
+	 */
 	public MemberList() {
 		super();
 	}
-
+	/**
+	 * 생성자
+	 * @param members
+	 */
 	public MemberList(List<Member> members) {
 		super();
 		this.members = members;
 	}
-
+	/**
+	 * 특정 인데스에 회원을 추가하는 메소드
+	 * @param index 삽입할 인덱스
+	 * @param member 회원
+	 */
 	public void add(int index, Member member) {
 		members.add(index, member);
 	}
-
+	/**
+	 * 회원을 추가하는 메소드
+	 * @param member 회원
+	 * @return 회원추가 성공-true 실패-false
+	 */
 	public boolean add(Member member) {
 		return members.add(member);
 	}
-
+	/**
+	 * 회원을 추가하는 메소드
+	 * @param member Member type의 회원
+	 * @return 회원추가 성공-true 실패-false
+	 */
 	public boolean addAll(Collection<? extends Member> member) {
 		return members.addAll(member);
 	}
-
+	/**
+	 * 특정 인데스에 회원을 추가하는 메소드
+	 * @param index 추가할 인덱스
+	 * @param member Member type의 회원
+	 * @return 회원추가 성공-true 실패-false
+	 */
 	public boolean addAll(int index, Collection<? extends Member> member) {
 		return members.addAll(index, member);
 	}
