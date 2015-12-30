@@ -1,13 +1,13 @@
 package model.Abstract;
 
 import model.ListVO.MemberList;
-import model.interfaces.MemberDropOutAble;
-import model.interfaces.MemberModifiAble;
-import model.interfaces.MemberSearchAble;
-import model.interfaces.MemberSignInAble;
-import model.interfaces.MemberSignUpAble;
+import model.interfaces.MemberDropoutable;
+import model.interfaces.MemberModifiable;
+import model.interfaces.MemberSearchable;
+import model.interfaces.MemberSignInable;
+import model.interfaces.MemberSignUpable;
 
-public abstract class AbstractMemberService implements MemberSignInAble,MemberSignUpAble,MemberSearchAble,MemberModifiAble,MemberDropOutAble{
+public abstract class AbstractMemberService implements MemberSignInable,MemberSignUpable,MemberSearchable,MemberModifiable,MemberDropoutable{
 	private static MemberList members;
 	static{
 		AbstractMemberService.members = new MemberList();
