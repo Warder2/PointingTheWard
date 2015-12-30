@@ -42,7 +42,15 @@ public class GroupList {
 				return g;
 		}
 		return null;
+	}	
+	public Group searchGroup(Group group){
+		for(Group g : groups){
+			if(g.getName().equals(group.getName()))
+				return g;
+		}
+		return null;
 	}
+	
 	
 	public boolean modifyGroupName(String name, String newName){
 		
@@ -55,9 +63,42 @@ public class GroupList {
 		return false;
 	}
 	
+	public boolean modifyGroup(String name, Group newGroup){
+		
+		Group g = searchGroupName(name);
+		
+		if(g != null){
+			g = newGroup;
+			return true;
+		}
+		
+		return false;
+	}
 	
+	public boolean modifyGroup(Group group, Group newGroup){
+		
+		Group g = searchGroupName(group.getName());
+		
+		if(g != null){
+			g = newGroup;
+			return true;
+		}
+		
+		return false;
+	}
 	
-
+	public boolean deleteGroupName(String name){
+		
+		Group g = searchGroupName(name);
+		
+		if(g != null){
+			remove(g);
+			return true;
+		}
+		return false;
+		
+	}
+	
 	public void clear() {
 		groups.clear();
 	}
