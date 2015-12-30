@@ -1,22 +1,44 @@
 package model.openData.dataForm;
 
 public class GoogleDistanceMatrixDataForm {
+	private String origins;
+	private String destination;
 	private String durationValue;
 	private String durationResult;
 	private String distanceValue;
 	private String distanceResult;
-	public GoogleDistanceMatrixDataForm(String durationValue, String durationResult, String distanceValue,
-			String distanceResult) {
+	public GoogleDistanceMatrixDataForm() {
+		super();
+	}
+	public GoogleDistanceMatrixDataForm(String origins, String destination, String durationValue,
+			String distanceValue) {
+		super();
+		this.origins = origins;
+		this.destination = destination;
+		this.durationValue = durationValue;
+		this.distanceValue = distanceValue;
+	}
+	public GoogleDistanceMatrixDataForm(String origins, String destination, String durationValue, String durationResult,
+			String distanceValue, String distanceResult) {
+		super();
+		this.origins = origins;
+		this.destination = destination;
 		this.durationValue = durationValue;
 		this.durationResult = durationResult;
 		this.distanceValue = distanceValue;
 		this.distanceResult = distanceResult;
 	}
-	public GoogleDistanceMatrixDataForm(String durationValue, String distanceValue) {
-		this(durationValue,null,distanceValue,null);
+	public String getOrigins() {
+		return origins;
 	}
-	public GoogleDistanceMatrixDataForm() {
-		this("0","0","0","0");
+	public void setOrigins(String origins) {
+		this.origins = origins;
+	}
+	public String getDestination() {
+		return destination;
+	}
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 	public String getDurationValue() {
 		return durationValue;
@@ -44,8 +66,8 @@ public class GoogleDistanceMatrixDataForm {
 	}
 	@Override
 	public String toString() {
-		return "GoogleDistansMatrixDataForm [durationValue=" + durationValue + ", durationResult=" + durationResult
-				+ ", distanceValue=" + distanceValue + ", distanceResult=" + distanceResult + "]";
+		return "GoogleDistanceMatrixDataForm [origins=" + origins + ", destination=" + destination + ", durationValue="
+				+ durationValue + ", durationResult=" + durationResult + ", distanceValue=" + distanceValue
+				+ ", distanceResult=" + distanceResult + "]";
 	}
-	
 }
