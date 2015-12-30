@@ -4,9 +4,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import model.Abstract.AbstractGroupService;
 import model.beans.Group;;
 
-public class GroupList {
+public class GroupList{
 	private List<Group> groups;
 
 	public GroupList() {
