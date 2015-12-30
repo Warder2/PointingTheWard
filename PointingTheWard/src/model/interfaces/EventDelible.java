@@ -2,7 +2,7 @@ package model.interfaces;
 
 import model.beans.Event;
 
-public interface EventDeletable {
+public interface EventDelible {
 	public boolean deleteEvent(Event event);
 	public boolean deleteEventTitle(String title);
 	public boolean deleteEventDate(String sDate,String eDate);

@@ -3,11 +3,12 @@ package model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Abstract.AbstractCalendarService;
 import model.beans.Event;
 import model.beans.Member;
 import model.beans.Place;
 
-public class CalendarService {
+public class CalendarService extends AbstractCalendarService{
 	public boolean createEvent(Event event){
 		return false;
 	}
