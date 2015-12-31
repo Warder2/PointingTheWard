@@ -41,6 +41,16 @@ public class MemberController {
 		return view;
 	}
 	
+	@RequestMapping(value={"/memberSearch"})
+	public ModelAndView memberSearch(@RequestParam(value="search") Member member){
+		System.out.println("memberSearch");
+		Service service = context.getBean("memberSearch",Service.class);
+		
+		
+		ModelAndView view = new ModelAndView();
+		view.setViewName("");//jsp명
+		return view;
+	}
 	@RequestMapping(value={"/memberModify"})
 	public ModelAndView memberModify(@RequestParam(value="modify") Member member){
 		System.out.println("memberModify");

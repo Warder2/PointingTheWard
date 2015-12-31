@@ -20,6 +20,7 @@ public class ServiceTest {
 	}
 	
 	//1
+	@Test
 	public void memberSignUp(){
 		System.out.println("memberSignUp");
 		Service service = context.getBean("memberSignUpService",Service.class);
