@@ -18,6 +18,7 @@ public class EventRegistService extends AbstractCalendarService implements Event
 	@Override
 	public boolean registEvent(Event event) {
 		// TODO Auto-generated method stub
+		System.out.println(event);
 		return false;
 	}
 

@@ -9,7 +9,7 @@ public class FriendAddtionService extends AbstractFriendService implements Frien
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("FriendAddtionService test : " + request.getObject("test"));
 	}
 
 	@Override

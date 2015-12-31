@@ -14,6 +14,8 @@ public class EventSearchService extends AbstractCalendarService implements Event
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
 		
+		System.out.println("sDate : " + request.getObject("sDate"));
+		System.out.println("eDate : " + request.getObject("eDate"));
 	}
 
 	@Override

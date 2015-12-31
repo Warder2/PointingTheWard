@@ -13,7 +13,7 @@ public class EventModifyService extends AbstractCalendarService implements Event
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("EventModifyService test : " + request.getObject("test"));
 	}
 
 	@Override
