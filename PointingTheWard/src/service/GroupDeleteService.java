@@ -8,7 +8,7 @@ public class GroupDeleteService extends AbstractGroupService implements GroupDel
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("GroupDeleteService test : " + request.getObject("test"));
 	}
 
 	@Override

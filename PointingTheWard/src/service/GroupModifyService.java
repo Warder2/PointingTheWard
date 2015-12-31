@@ -11,7 +11,7 @@ public class GroupModifyService extends AbstractGroupService implements GroupMod
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("GroupModifyService test : " + request.getObject("test"));
 	}
 
 	@Override

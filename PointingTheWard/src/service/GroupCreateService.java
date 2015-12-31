@@ -9,7 +9,7 @@ public class GroupCreateService extends AbstractGroupService implements GroupCre
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("GroupCreateService test : " + request.getObject("test"));
 	}
 
 	@Override

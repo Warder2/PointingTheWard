@@ -9,7 +9,7 @@ public class GroupSearchService extends AbstractGroupService implements GroupSea
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("GroupSearchService test : " + request.getObject("test"));
 	}
 
 	@Override
