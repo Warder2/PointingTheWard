@@ -19,6 +19,7 @@ public class ServiceTest {
 	@Before
 	public void setup(){
 		context = new GenericXmlApplicationContext("ServiceContext.xml");
+		//쪼큼 수정
 	}
 	
 	//1
