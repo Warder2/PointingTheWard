@@ -1,4 +1,4 @@
-package model.ListVO;
+package model.List;
 
 import java.util.ArrayList;
 import java.util.Collection;

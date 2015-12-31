@@ -1,6 +1,6 @@
 package model.openDataVO;
 
-import model.ListVO.PointList;
+import model.List.PointList;
 
 public class StoreZone {
 	/**

@@ -1,6 +1,6 @@
 package service.interfaces;
 
-import model.ListVO.MemberList;
+import model.List.MemberList;
 import model.beans.Event;
 
 public interface EventRegistable {

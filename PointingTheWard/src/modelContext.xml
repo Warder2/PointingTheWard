@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://www.springframework.org/schema/mvc
+               http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<!-- model beans -->
+	<bean id="event"		class="model.beans.Event"/>
+	<bean id="friend"		class="model.beans.Friend"/>
+	<bean id="group"		class="model.beans.Group"/>
+	<bean id="member"		class="model.beans.Member"/>
+	<bean id="place"		class="model.beans.Place"/>
+	<bean id="point"		class="model.beans.Point"/>
+	<bean id="ward"			class="model.beans.Ward"/>
+	
+	<bean id="calendar"		class="model.List.Calendar"/>
+	<bean id="friendList"	class="model.List.FriendList"/>
+	<bean id="groupList"	class="model.List.GroupList"/>
+	<bean id="memberList"	class="model.List.MemberList"/>
+	<bean id="placeList"	class="model.List.PlaceList"/>
+	<bean id="pointList"	class="model.List.PointList"/>
+	<bean id="wardList"		class="model.List.WardList"/>
+</beans>

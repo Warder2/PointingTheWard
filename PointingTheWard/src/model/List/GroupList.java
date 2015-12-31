@@ -1,4 +1,4 @@
-package model.ListVO;
+package model.List;
 
 import java.util.Collection;
 import java.util.Iterator;

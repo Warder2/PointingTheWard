@@ -1,6 +1,6 @@
 package service;
 
-import model.ListVO.MemberList;
+import model.List.MemberList;
 import model.beans.Group;
 import model.beans.Member;
 import service.abstracts.AbstractGroupService;

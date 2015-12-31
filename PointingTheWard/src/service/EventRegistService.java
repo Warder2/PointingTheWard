@@ -1,6 +1,6 @@
 package service;
 
-import model.ListVO.MemberList;
+import model.List.MemberList;
 import model.beans.Event;
 import service.abstracts.AbstractCalendarService;
 import service.interfaces.EventRegistable;
