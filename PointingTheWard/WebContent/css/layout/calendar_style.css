@@ -1,0 +1,59 @@
+@IMPORT url("calendar_layout.css");
+
+@MEDIA screen and (max-width: 767px) {
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+}
+
+@MEDIA screen and (min-width: 960px) {
+	input.calendarControlBtn {
+		cursor: pointer;
+	}
+	input#prevMonthBtn {
+		background-image: url("../../img/prev_month_img.jpg");
+	}
+	input#prevYearBtn {
+		background-image: url("../../img/prev_year_img.jpg");
+	}
+	input#nextMonthBtn {
+		background-image: url("../../img/next_month_img.jpg");
+	}
+	input#nextYearBtn {
+		background-image: url("../../img/next_year_img.jpg");
+	}
+	input.calendarControlBtn{
+		background-position: center;
+		background-size: 100%;
+		border-radius: 100%;
+		padding: 1% 3% 3% 3%;
+	}
+}
+
+table {
+	border-style: solid;
+	border-width: thin;
+	border-radius: 2%;
+}
+
+table thead {
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+}
+
+div.day_block {
+	cursor: pointer;
+}
+a.dayBlocks{
+	text-decoration: none;
+	color: black;
+}
+label.sunDaysLabel{
+	color: red;
+}
+label.satDaysLabel{
+	color: blue;
+}
+label.daysLabel {
+	color: black;
+}

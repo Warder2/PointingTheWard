@@ -1,0 +1,36 @@
+@MEDIA screen and (max-width: 767px) {
+	input.calendarControlBtn {
+		display: none;
+	}
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+	input.calendarControlBtn {
+		display: none;
+	}
+}
+
+@MEDIA screen and (min-width: 960px) {
+	input.calendarControlBtn {
+		float: right;
+		margin-left: 1%;
+	}
+}
+table#calendarTable{
+	width: 100%;
+}
+
+table#calendarTable td {
+	width: 5%;
+	text-align: center;
+}
+
+div.day_block>label {
+	padding: 10% 10% 10% 10%;
+}
+
+img.event_img {
+	width: 20%;
+	height: 5%;
+	background-color: black;
+}
