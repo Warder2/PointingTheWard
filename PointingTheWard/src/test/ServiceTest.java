@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import model.beans.Event;
 import model.beans.Member;
 import service.Service;
 import service.ServiceMacro;
@@ -61,7 +62,7 @@ public class ServiceTest {
 		
 	}
 	//4
-
+	@Test
 	public void memberModify(){
 		System.out.println("memberModify");
 		Service service = context.getBean("memberModifyService" , Service.class);
@@ -84,6 +85,7 @@ public class ServiceTest {
 		service.execute(serviceRequest);
 	}
 	//6
+	@Test
 	public void eventRegist(){
 		System.out.println("eventRegist");
 		Service service = context.getBean("eventRegistService" , Service.class);
@@ -91,31 +93,36 @@ public class ServiceTest {
 		
 		
 		ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
-		serviceRequest.addObject("id", "admin");
+		serviceRequest.addObject("eventInfo", new Event());
 		service.execute(serviceRequest);
 	}
 	//7
+	@Test
 	public void eventSearch(){
 		System.out.println("eventSearch");
-		Service service = context.getBean("memberSearchService" , Service.class);
+		Service service = context.getBean("eventSearchService" , Service.class);
 		
 		
 		
 		ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
-		serviceRequest.addObject("id", "admin");
+		serviceRequest.addObject("sDate", "1/6");
+		serviceRequest.addObject("eDate", "1/6");
+
 		service.execute(serviceRequest);
 	}
 	//8
+	@Test
 	public void eventModify(){
 		System.out.println("eventModify");
 		
-		this.service = context.getBean("eventModifyService",Service.class);
+		service = context.getBean("eventModifyService",Service.class);
 		ServiceRequest serviceRequest = context.getBean("serviceRequest",ServiceRequest.class);
 		
-		serviceRequest.addObject("title", "newTitle");
+		serviceRequest.addObject("test", "success");
 		service.execute(serviceRequest);
 	}
 	//9
+	@Test
 	public void eventDelete(){
 		System.out.println("eventDelete");
 		
@@ -127,6 +134,7 @@ public class ServiceTest {
 		service.execute(request);
 	}
 	//10
+	@Test
 	public void friendAddtion(){
 		System.out.println("friendAddtion");
 	}
