@@ -1,7 +1,7 @@
 package service.abstracts;
 
 import service.Service;
-import service.interfaces.EventCreatable;
+import service.interfaces.EventRegistable;
 import service.interfaces.EventDelible;
 import service.interfaces.EventModifiable;
 import service.interfaces.EventSearchable;

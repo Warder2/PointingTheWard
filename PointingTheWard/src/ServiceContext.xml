@@ -1,29 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 
-xmlns="http://www.springframework.org/schema/beans"
-xmlns:mvc="http://www.springframework.org/schema/mvc" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
                http://www.springframework.org/schema/beans/spring-beans.xsd
                http://www.springframework.org/schema/mvc
                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-
-
+	<!-- service Request Bean -->
+	<bean id="serviceRequest" class="service.ServiceRequestImpl" scope="prototype"></bean>
 	
-	<bean id="memberSignUpService" class="service.MemberSignUpService"></bean>
-	<bean id="memberDroupoutService" class="service.MemberDropoutService"></bean>
-	<bean id="deleteEventService" class="service.EventDeleteService"/>
-	<bean id="modifyEventService" class="service.EventModifyService"/>
-	<bean id="registEventService" class="service.EventRegistService"/>
-	<bean id="registAndDeleteService" class="service.ServiceMacro">
+	<!-- Service beans -->
+	<bean id="eventDeleteService" class="service.EventDeleteService" />
+	<bean id="eventModifyService" class="service.EventModifyService" />
+	<bean id="eventRegistService" class="service.EventRegistService" />
+	<bean id="eventSearchService" class="service.EventSearchService" />
+
+	<bean id="friendAddtionService" class="service.FriendAddtionService" />
+	<bean id="friendDeleteService" class="service.FriendDeleteService" />
+	<bean id="friendModifyService" class="service.FriendModifyService" />
+	<bean id="friendSearchService" class="service.FriendSearchService" />
+
+	<bean id="groupCreateService" class="service.GroupCreateService" />
+	<bean id="groupDeleteService" class="service.GroupDeleteService" />
+	<bean id="groupModifyService" class="service.GroupModifyService" />
+	<bean id="groupSearchService" class="service.GroupSearchService" />
+
+	<bean id="memberDropoutService" class="service.MemberDropoutService" />
+	<bean id="memberModifyService" class="service.MemberModifyService" />
+	<bean id="memberSearchService" class="service.MemberSearchService" />
+	<bean id="memberSignInService" class="service.MemberSignInService" />
+	<bean id="memberSignUpService" class="service.MemberSignUpService" />
+
+	<bean id="placeDeleteService" class="service.PlaceDeleteService" />
+	<bean id="placeModifyService" class="service.PlaceModifyService" />
+	<bean id="placeRegistService" class="service.PlaceRegistService" />
+	<bean id="placeSearchService" class="service.PlaceSearchService" />
+
+	<bean id="wardRecommedService" class="service.WardRecommedService" />
+	
+	<!-- Service Macro beans -->
+	<bean id="memberDropoutMacro" class="service.ServiceMacro">
 		<property name="services">
 			<list>
-				<ref bean="registEventService"/>
-				<ref bean="deleteEventService"/>
+				<ref bean="placeDeleteService" />
+				<ref bean="eventDeleteService" />
+				<ref bean="groupDeleteService" />
+				<ref bean="friendDeleteService" />
+				<ref bean="memberDropoutService" />
 			</list>
 		</property>
 	</bean>
-	<bean id="serviceRequest" class="service.ServiceRequestImpl" scope="prototype"></bean>
-	   
+
+	<bean id="friendDeleteMacro" class="service.ServiceMacro">
+		<property name="services">
+			<list>
+				<ref bean="placeDeleteService" />
+				<ref bean="eventDeleteService" />
+				<ref bean="groupDeleteService" />
+				<ref bean="friendDeleteService" />
+			</list>
+		</property>
+	</bean>
+	
 </beans>
