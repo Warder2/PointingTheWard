@@ -10,7 +10,10 @@ public class PlaceDeleteService extends AbstractPlaceService implements PlaceDel
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		Place placeInfo = request.getObject("placeInfo");
+		if(placeInfo != null){
+			deletePlace(placeInfo);
+		}
 	}
 
 	@Override
@@ -28,6 +31,7 @@ public class PlaceDeleteService extends AbstractPlaceService implements PlaceDel
 	@Override
 	public boolean deletePlace(Place place) {
 		// TODO Auto-generated method stub
+		System.out.println("delete: " + place);
 		return false;
 	}
 

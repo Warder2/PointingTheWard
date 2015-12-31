@@ -6,8 +6,9 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import model.beans.Member;
+import model.beans.Place;
+import model.beans.Point;
 import service.Service;
-import service.ServiceMacro;
 import service.ServiceRequest;
 
 public class ServiceTest {
@@ -20,7 +21,6 @@ public class ServiceTest {
 	}
 	
 	//1
-	@Test
 	public void memberSignUp(){
 		System.out.println("memberSignUp");
 		Service service = context.getBean("memberSignUpService",Service.class);
@@ -74,7 +74,7 @@ public class ServiceTest {
 		service.execute(serviceRequest);
 	}
 	//5
-	@Test
+
 	public void memberDropout(){
 		System.out.println("memberDropout");
 		Service service = context.getBean("memberDropoutMacro" , Service.class);
@@ -116,6 +116,7 @@ public class ServiceTest {
 		service.execute(serviceRequest);
 	}
 	//9
+	
 	public void eventDelete(){
 		System.out.println("eventDelete");
 		
@@ -159,20 +160,50 @@ public class ServiceTest {
 		System.out.println("groupDelete");
 	}
 	//18
+	
 	public void placeRegist(){
-		System.out.println("placeRegist");
+		System.out.println("placeRegistService");
+		
+		service = context.getBean("placeRegistService", Service.class);
+		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+		
+		request.addObject("placeInfo", new Place("장소이름",new Point(0.0,0.0)));
+		
+		service.execute(request);
 	}
 	//19
+	
 	public void placeSearch(){
 		System.out.println("placeSearch");
+		service = context.getBean("placeSearchService", Service.class);
+		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+		
+		request.addObject("placeName","장소명");
+		
+		service.execute(request);
 	}
 	//20
+	
 	public void placeModify(){
 		System.out.println("placeModify");
+		service = context.getBean("placeModifyService", Service.class);
+		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+		
+		request.addObject("placeInfo",new Place("장소이름",new Point(0.0,0.0)));
+		request.addObject("newPlaceInfo", new Place("새장소이름",new Point(1.0,1.0)));
+		
+		service.execute(request);
 	}
 	//21
+
 	public void placeDelete(){
 		System.out.println("placeDelete");
+		service = context.getBean("placeDeleteService", Service.class);
+		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+		
+		request.addObject("placeInfo",new Place("장소이름",new Point(0.0,0.0)));
+				
+		service.execute(request);
 	}
 	//22
 	public void wardRecommendService(){

@@ -10,6 +10,10 @@ public class PlaceSearchService extends AbstractPlaceService implements PlaceSea
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
+		String placeName = request.getObject("placeName");
+		if(placeName != null){
+			searchPlaceName(placeName);
+		}
 		
 	}
 
@@ -22,6 +26,7 @@ public class PlaceSearchService extends AbstractPlaceService implements PlaceSea
 	@Override
 	public Place searchPlaceName(String name) {
 		// TODO Auto-generated method stub
+		System.out.println(name);
 		return null;
 	}
 

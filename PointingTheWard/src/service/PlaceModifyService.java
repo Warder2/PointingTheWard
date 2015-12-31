@@ -10,6 +10,11 @@ public class PlaceModifyService extends AbstractPlaceService implements PlaceMod
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
+		Place placeInfo = request.getObject("placeInfo");
+		Place newPlaceInfo = request.getObject("newPlaceInfo");
+		if(placeInfo != null){
+			modifyPlace(placeInfo, newPlaceInfo);
+		}
 		
 	}
 
@@ -28,6 +33,8 @@ public class PlaceModifyService extends AbstractPlaceService implements PlaceMod
 	@Override
 	public boolean modifyPlace(Place place, Place newPlace) {
 		// TODO Auto-generated method stub
+		System.out.println(place);
+		System.out.println(newPlace);
 		return false;
 	}
 

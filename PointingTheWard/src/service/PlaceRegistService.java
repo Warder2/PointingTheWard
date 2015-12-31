@@ -10,6 +10,11 @@ public class PlaceRegistService extends AbstractPlaceService implements PlaceCre
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
 		
+		Place place = request.getObject("placeInfo");
+		
+		if(place != null){
+			placeCreate(place);
+		}
 	}
 
 	@Override
@@ -21,6 +26,7 @@ public class PlaceRegistService extends AbstractPlaceService implements PlaceCre
 	@Override
 	public boolean placeCreate(Place place) {
 		// TODO Auto-generated method stub
+		System.out.println(place);
 		return false;
 	}
 
