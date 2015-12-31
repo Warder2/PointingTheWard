@@ -12,6 +12,8 @@ public class MemberSearchService extends AbstractMemberService implements Member
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
 		
+		searchMemberEmail(request.getObject("email"));
+		
 	}
 
 	@Override
@@ -23,6 +25,9 @@ public class MemberSearchService extends AbstractMemberService implements Member
 	@Override
 	public Member searchMemberEmail(String email) {
 		// TODO Auto-generated method stub
+		
+		System.out.println(email);
+		
 		return null;
 	}
 

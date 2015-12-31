@@ -9,11 +9,13 @@ public class FriendDeleteService extends AbstractFriendService implements Friend
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
 		
+		deleteFriendEmail(request.getObject("email"));
 	}
 
 	@Override
 	public boolean deleteFriendEmail(String email) {
 		// TODO Auto-generated method stub
+		System.out.println("deleteFriendEmail email : " + email);
 		return false;
 	}
 

@@ -38,6 +38,8 @@
 
 	<bean id="wardRecommedService" class="service.WardRecommedService" />
 	
+	
+	
 	<!-- Service Macro beans -->
 	<bean id="memberDropoutMacro" class="service.ServiceMacro">
 		<property name="services">

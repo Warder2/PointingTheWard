@@ -9,7 +9,7 @@ public class MemberModifyService extends AbstractMemberService implements Member
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		modifyMemberEmail(request.getObject("email") , request.getObject("memberinfo"));
 	}
 
 	@Override
@@ -21,6 +21,8 @@ public class MemberModifyService extends AbstractMemberService implements Member
 	@Override
 	public boolean modifyMemberEmail(String email, Member newMember) {
 		// TODO Auto-generated method stub
+		System.out.println("email : " + email);
+		System.out.println(newMember);
 		return false;
 	}
 

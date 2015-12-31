@@ -10,6 +10,8 @@ public class MemberDropoutService extends AbstractMemberService implements Membe
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
 		
+		
+		removeMemberEmail(request.getObject("email"));
 	}
 
 	@Override
@@ -21,6 +23,7 @@ public class MemberDropoutService extends AbstractMemberService implements Membe
 	@Override
 	public boolean removeMemberEmail(String email) {
 		// TODO Auto-generated method stub
+		System.out.println(email);
 		return false;
 	}
 

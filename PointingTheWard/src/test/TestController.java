@@ -29,4 +29,15 @@ public class TestController {
 		view.setViewName("index");
 		return view;
 	}
+	/*
+	@RequestMapping(value={"/eventRdd"})
+	public ModelAndView registsEvent(@RequestParam(value="rg") Event event){
+		//폼데이터
+		//유효성쳌,
+		ServiceRequest serviceRequest = context.getBean("sr", ServiceRequest.class);
+		serviceRequest.addObject("dd", event);
+		context.getBean("serv", Service.class).execute(serviceRequest);
+		
+		ModelAndView view = new ModelAndView();
+	}*/
 }
