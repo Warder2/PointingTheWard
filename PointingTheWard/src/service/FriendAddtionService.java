@@ -2,9 +2,9 @@ package service;
 
 import model.beans.Friend;
 import service.abstracts.AbstractFriendService;
-import service.interfaces.FriendInsertable;
+import service.interfaces.FriendAddible;
 
-public class FriendAddtionService extends AbstractFriendService implements FriendInsertable{
+public class FriendAddtionService extends AbstractFriendService implements FriendAddible{
 
 	@Override
 	public void execute(ServiceRequest request) {
