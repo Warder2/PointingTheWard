@@ -8,7 +8,7 @@ public class FriendDeleteService extends AbstractFriendService implements Friend
 	@Override
 	public void execute(ServiceRequest request) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("FriendDeleteService test : " + request.getObject("test"));
 		deleteFriendEmail(request.getObject("email"));
 	}
 
