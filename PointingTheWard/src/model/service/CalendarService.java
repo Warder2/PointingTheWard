@@ -8,7 +8,7 @@ import model.beans.Event;
 import model.beans.Member;
 import model.beans.Place;
 
-public class CalendarService extends AbstractCalendarService{
+public class CalendarService{
 	public boolean createEvent(Event event){
 		return false;
 	}
