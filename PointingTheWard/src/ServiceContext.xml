@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+xmlns="http://www.springframework.org/schema/beans"
+xmlns:mvc="http://www.springframework.org/schema/mvc" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://www.springframework.org/schema/mvc
+               http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+
+	
+	<bean id="memberSignUpService" class="service.MemberSignUpService"></bean>
+	<bean id="memberDroupoutService" class="service.MemberDropoutService"></bean>
+	<bean id="deleteEventService" class="service.EventDeleteService"/>
+	<bean id="modifyEventService" class="service.EventModifyService"/>
+	<bean id="registEventService" class="service.EventRegistService"/>
+	<bean id="registAndDeleteService" class="service.ServiceMacro">
+		<property name="services">
+			<list>
+				<ref bean="registEventService"/>
+				<ref bean="deleteEventService"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="serviceRequest" class="service.ServiceRequestImpl" scope="prototype"></bean>
+	   
+</beans>

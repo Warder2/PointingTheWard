@@ -9,5 +9,5 @@ public class WardRecommedService extends AbstractWardService {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

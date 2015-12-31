@@ -8,19 +8,20 @@ public class EventDeleteService extends AbstractCalendarService implements Event
 
 	@Override
 	public void execute(ServiceRequest request) {
-		// TODO Auto-generated method stub
-		
+		String title = request.getObject("eventTitle");
+		if(title != null){
+			deleteEventTitle(title);
+		}
 	}
 
 	@Override
 	public boolean deleteEvent(Event event) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean deleteEventTitle(String title) {
-		// TODO Auto-generated method stub
+		System.out.println("delete : " + title);
 		return false;
 	}
 

@@ -8,13 +8,15 @@ public class EventRegistService extends AbstractCalendarService implements Event
 
 	@Override
 	public void execute(ServiceRequest request) {
-		// TODO Auto-generated method stub
-		
+		Event event = request.getObject("eventInfo");
+		if(event != null){
+			createEvent(event);
+		}
 	}
 
 	@Override
 	public boolean createEvent(Event event) {
-		// TODO Auto-generated method stub
+		System.out.println(event);
 		return false;
 	}
 

@@ -3,6 +3,6 @@ package service.interfaces;
 import model.beans.Member;
 
 public interface MemberSignUpable {
-	public boolean SingUp(Member member);
-	public boolean SingUp(String email,String name,String pwd,String location,String transportation);
+	public boolean SignUp(Member member);
+	public boolean SignUp(String email,String name,String pwd,String location,String transportation);
 }
