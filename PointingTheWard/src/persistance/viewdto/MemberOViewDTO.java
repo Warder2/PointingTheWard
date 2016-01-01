@@ -1,11 +1,13 @@
 package persistance.viewdto;
 
+import model.beans.Transportation;
+
 public class MemberOViewDTO {
 	
 		private String email;
 		private String name;
 		private String location;
-		private String transportation;
+		private Transportation transportation;
 		
 		
 		public MemberOViewDTO(){
@@ -13,7 +15,7 @@ public class MemberOViewDTO {
 		}
 
 
-		public MemberOViewDTO(String email, String name, String location, String transportation) {
+		public MemberOViewDTO(String email, String name, String location, Transportation transportation) {
 			super();
 			this.email = email;
 			this.name = name;
@@ -52,12 +54,12 @@ public class MemberOViewDTO {
 		}
 
 
-		public String getTransportation() {
+		public Transportation getTransportation() {
 			return transportation;
 		}
 
 
-		public void setTransportation(String transportation) {
+		public void setTransportation(Transportation transportation) {
 			this.transportation = transportation;
 		}
 

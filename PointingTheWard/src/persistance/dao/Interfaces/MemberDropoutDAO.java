@@ -6,5 +6,5 @@ public interface MemberDropoutDAO {
 	//drop user
 	void dropOutMember(String email);
 	//drop users
-	void dropOutMember(String... emails);
+	void dropOutMembers(String... emails);
 }

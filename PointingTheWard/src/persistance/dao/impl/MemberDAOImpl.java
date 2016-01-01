@@ -1,8 +1,12 @@
 package persistance.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import model.beans.Transportation;
 import persistance.dao.MemberDAO;
@@ -11,6 +15,18 @@ import persistance.viewdto.MemberOViewDTO;
 
 public class MemberDAOImpl implements MemberDAO{
 	private JdbcTemplate template;
+	private RowMapper<MemberDTO> memberDTOMapper = new RowMapper<MemberDTO>() {
+		@Override
+		public MemberDTO mapRow(ResultSet rs, int index) throws SQLException {
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setEmail(rs.getString("email"));
+			memberDTO.setName(rs.getString("name"));
+			memberDTO.setPwd(rs.getString("pwd"));
+			memberDTO.setLocation(rs.getString("location"));
+			memberDTO.setTransportaion(Transportation.valueOfByStr(rs.getString("transportation")));
+			return memberDTO;
+		}
+	};
 	
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
@@ -18,47 +34,45 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public void dropOutAll() {
-		
+		template.update("delete from member_view");
 	}
 
 	@Override
 	public void dropOutMember(String email) {
-		
+		template.update("delete from member_view where email='?'", email);
 	}
 
 	@Override
-	public void dropOutMember(String... emails) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void dropOutMembers(String... emails) {
+		for(String email : emails){
+			dropOutMember(email);
+		}
 	}
 
 	@Override
-	public void modifyMember(String email, String pwd) {
-		// TODO Auto-generated method stub
-		
+	public void modifyMemberPwd(String email, String pwd) {
+		template.update("update member_p_view set pwd='?' where email='?'",  pwd, email);
 	}
 
 	@Override
 	public void modifyMemberOp(MemberOViewDTO member) {
-		// TODO Auto-generated method stub
-		
+		modifyMemberOp(member.getEmail(), member.getName(), member.getLocation(), member.getTransportation());
 	}
 
 	@Override
-	public void modifyMember(String email, String name, String location, Transportation transportation) {
-		// TODO Auto-generated method stub
-		
+	public void modifyMemberOp(String email, String name, String location, Transportation transportation) {
+		template.update("update member_view set name='?', location='?', transportation='?' where email='?'",
+				name, location, transportation.getStr(), email);
 	}
 
 	@Override
 	public void modifyMember(MemberDTO member) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void modifyMember(String email, String pwd, String name, String location, Transportation transportation) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -76,8 +90,8 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public MemberDTO searchMember(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] args = new Object[]{email};
+		return template.queryForObject("select * from member_view where email=?", args, memberDTOMapper);
 	}
 
 	@Override
@@ -130,25 +144,28 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void signUpMember(MemberDTO member) {
-		// TODO Auto-generated method stub
-		
+		signUpMember(member.getEmail(), member.getName(), member.getPwd(), member.getLocation(), member.getTransportaion());
 	}
 
 	@Override
 	public void signUpMember(String email, String name, String pwd, String location, Transportation transportation) {
-		template.update("", email, name, pwd, location, transportation);
+		template.update("insert into member_view(email, name, pwd, location, transportation) values('?', '?', '?', '?', '?')", email, name, pwd, location, transportation);
 	}
 
 	@Override
+	@Transactional
 	public void signUpMembers(MemberDTO... members) {
-		// TODO Auto-generated method stub
-		
+		for(MemberDTO member : members){
+			signUpMember(member);
+		}
 	}
 
 	@Override
+	@Transactional
 	public void signUpMembers(List<MemberDTO> members) {
-		// TODO Auto-generated method stub
-		
+		for(MemberDTO member : members){
+			signUpMember(member);
+		}
 	}
 
 }

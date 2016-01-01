@@ -1,12 +1,14 @@
 package test;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import model.beans.Transportation;
 import persistance.dao.MemberDAO;
@@ -28,8 +30,27 @@ public class MemberTest {
 		};
 	}
 	
+	@After
+	@Before
+	public void deleteAll(){
+		memberDao.dropOutAll();
+	}
+	
 	@Test
 	public void signUp(){
-		System.out.println(memberDao);
+		System.out.println("signUp");
+		
+		memberDao.signUpMember(members[0]);
+		MemberDTO memberDTO = memberDao.searchMember(members[0].getEmail());
+		
+		Assert.isTrue(members[0].equals(memberDTO));
+	}
+	
+	@Test(expected=DuplicateKeyException.class)
+	public void signUpDuplicate(){
+		System.out.println("signUpDuplicate");
+		
+		memberDao.signUpMember(members[0]);
+		memberDao.signUpMember(members[0]);
 	}
 }
