@@ -2,22 +2,27 @@ package persistance.dao.impl;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import model.beans.Transportation;
 import persistance.dao.MemberDAO;
 import persistance.dto.MemberDTO;
 import persistance.viewdto.MemberOViewDTO;
 
 public class MemberDAOImpl implements MemberDAO{
-
+	private JdbcTemplate template;
+	
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+	}
+	
 	@Override
 	public void dropOutAll() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void dropOutMember(String email) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -131,8 +136,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void signUpMember(String email, String name, String pwd, String location, Transportation transportation) {
-		// TODO Auto-generated method stub
-		
+		template.update("", email, name, pwd, location, transportation);
 	}
 
 	@Override
