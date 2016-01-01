@@ -122,3 +122,5 @@ drop view member_o_view;
 drop view member_p_view;
 drop view member_view;
 drop table member_tb;
+
+select * from tab;
