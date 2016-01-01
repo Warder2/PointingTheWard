@@ -94,3 +94,31 @@ create view e_participant_info_view(e_code, email, title, s_date, e_date, s_time
 as select e_p.e_code, e_p.email, e.title, e.s_date, e.e_date, e.s_time, e.e_time, e.content, e.place 
 from e_participant_tb e_p, event_tb e
 where e_p.e_code=e.e_code with read only;
+
+
+
+
+
+drop view e_participant_info_view;
+drop view e_participant_view;
+drop table e_participant_tb;
+drop view event_view;
+drop table event_tb;
+drop sequence event_sequence;
+
+drop view g_participant_info_view;
+drop view g_participant_view;
+drop table g_participant_tb;
+
+drop view group_view;
+drop table group_tb;
+drop sequence group_sequence;
+
+drop view friend_info_view;
+drop view friend_view;
+drop table friend_tb;
+
+drop view member_o_view;
+drop view member_p_view;
+drop view member_view;
+drop table member_tb;
