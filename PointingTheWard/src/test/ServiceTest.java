@@ -9,6 +9,7 @@ import model.beans.Event;
 import model.beans.Member;
 import model.beans.Place;
 import model.beans.Point;
+import model.beans.Transportation;
 import service.Service;
 import service.ServiceRequest;
 
@@ -32,7 +33,7 @@ public class ServiceTest {
 		//3. service execute
 		
 		ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
-		serviceRequest.addObject("memberInfo", new Member("김대진","이메일","비번","주소","교통"));
+		serviceRequest.addObject("memberInfo", new Member("김대진","이메일","비번","주소",Transportation.TRANSIT));
 		service.execute(serviceRequest);	
 	}
 	//2
@@ -64,6 +65,7 @@ public class ServiceTest {
 		
 	}
 	//4
+	
 	public void memberModify(){
 		System.out.println("memberModify");
 		Service service = context.getBean("memberModifyService" , Service.class);
@@ -72,7 +74,7 @@ public class ServiceTest {
 		
 		ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
 		serviceRequest.addObject("email", "admin");
-		serviceRequest.addObject("memberinfo", new Member("김대진","이메일","비번","주소","교통"));
+		serviceRequest.addObject("memberinfo", new Member("김대진","이메일","비번","주소",Transportation.TRANSIT));
 		service.execute(serviceRequest);
 	}
 	//5
