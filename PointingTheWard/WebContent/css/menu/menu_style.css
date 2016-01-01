@@ -1,0 +1,27 @@
+@IMPORT url("menu_layout.css");
+
+@MEDIA screen and (max-width: 767px) {
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+}
+
+@MEDIA screen and (min-width: 960px) {
+	
+}
+
+div#headerDiv{
+	display: block;
+	background-color: #C73DA3;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 1%;
+}
+
+input#sideMenuBtn{
+	background-image: url("../../img/menu/menu_btn_img.png");
+	background-position: center;
+	background-size: 100%;
+	padding: 1% 5% 1% 5%;
+	cursor: pointer;
+}

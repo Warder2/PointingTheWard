@@ -1,0 +1,83 @@
+@IMPORT url("calendar_layout.css");
+
+@MEDIA screen and (max-width: 767px) {
+	a#registEventBtn {
+		border-radius: 100%;
+		padding: 7% 7% 7% 7%;
+	}
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+}
+
+@MEDIA screen and (min-width: 960px) {
+	input.calendarControlBtn {
+		cursor: pointer;
+	}
+	input#prevMonthBtn {
+		background-image: url("../../img/calendar/prev_month_img.jpg");
+	}
+	input#prevYearBtn {
+		background-image: url("../../img/calendar/prev_year_img.jpg");
+	}
+	input#nextMonthBtn {
+		background-image: url("../../img/calendar/next_month_img.jpg");
+	}
+	input#nextYearBtn {
+		background-image: url("../../img/calendar/next_year_img.jpg");
+	}
+	input.calendarControlBtn {
+		background-position: center;
+		background-size: 115%;
+		border-radius: 50%;
+		padding: 0.1% 2% 2% 2%;
+	}
+	a#registEventBtn {
+		padding: 4% 4% 4% 4%;
+		border-radius: 100%;
+	}
+}
+
+a#registEventBtn {
+	background-image: url("../../img/calendar/regist_event_img.png");
+	background-size: 100%;
+	background-position: center;
+	cursor: pointer;
+}
+
+a.dayBlocks {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+table#calendarTable>thead {
+	background-color: #C73DA3;
+	outline-style: solid;
+	outline-color: #C73DA3;
+}
+
+tr#calendarHead>td, tr#calendarDayHead>td {
+	outline-style: solid;
+	outline-color: #C73DA3;
+}
+
+tr#calendarDayHead label {
+	color: white;
+}
+
+label.sunDaysLabel {
+	color: red;
+}
+
+label.satDaysLabel {
+	color: blue;
+}
+
+label.daysLabel {
+	color: black;
+}
+
+label#currentYear, label#currentMonth {
+	font-size: 100%;
+	color: white;
+}
