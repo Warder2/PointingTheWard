@@ -16,11 +16,13 @@ public class MemberDAOImpl implements MemberDAO{
 	private	RowMapper<Member> mapper = new RowMapper<Member>() {
 		
 		@Override
-		public Member mapRow(ResultSet arg0, int arg1) throws SQLException {
-			return null;
+		public Member mapRow(ResultSet rs, int index) throws SQLException {
+			Member member = new Member();
+			member.setEmail(rs.getString("email"));
+			return member;
 		}
 	};
-	public void setTemplate(JdbcTemplate template) {
+	public void setTemplate(JdbcTemplate template){
 		this.template = template;
 	}
 	
@@ -85,9 +87,9 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public List<Member> searchMember(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member searchMember(String email) {
+		Object[] args = {email};
+		return (Member) template.query("sql", args, mapper);
 	}
 
 	@Override

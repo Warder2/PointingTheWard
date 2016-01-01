@@ -8,7 +8,7 @@ public interface MemberSearchDAO {
 	//search all
 	List<Member> searchAll();
 	//search member
-	List<Member> searchMember(String email);
+	Member searchMember(String email);
 	//search members
 	List<Member> searchMembers(String... emails);
 	//search member by name
