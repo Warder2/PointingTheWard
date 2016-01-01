@@ -26,6 +26,19 @@ public class GroupDAOImpl implements GroupDAO{
 			return groupDTO;
 		}
 	};
+	private RowMapper<GroupParticipantInfoViewDTO> groupParticipantInfoViewDTOMapper = new RowMapper<GroupParticipantInfoViewDTO>() {
+		
+		@Override
+		public GroupParticipantInfoViewDTO mapRow(ResultSet rs, int index) throws SQLException {
+			GroupParticipantInfoViewDTO groupParticipantInfoViewDTO = new GroupParticipantInfoViewDTO();
+			groupParticipantInfoViewDTO.setGroupCode(rs.getInt("g_code"));
+			groupParticipantInfoViewDTO.setEmail(rs.getString("email"));
+			groupParticipantInfoViewDTO.setGroupName(rs.getString("name"));
+			groupParticipantInfoViewDTO.setLocation(rs.getString("location"));
+			groupParticipantInfoViewDTO.setTransportation(rs.getString("transportation"));
+			return groupParticipantInfoViewDTO;
+		}
+	};
 	
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
@@ -132,19 +145,18 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public List<GroupDTO> searchGroupInfo(String email) {
-		return null;
+		return template.query("select * from group_view where email=?", groupDTOMapper, email);
 	}
 
 	@Override
 	public List<GroupParticipantInfoViewDTO> searchGroupParticipants(int gCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return template.query("select * from g_participant_info_view where g_code=?", groupParticipantInfoViewDTOMapper);
 	}
 
 	@Override
 	public GroupParticipantInfoViewDTO searchGroupParticipant(int gCode, String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return template.queryForObject("select * from g_participant_info_view where email=? and g_code=?", groupParticipantInfoViewDTOMapper, email, gCode);
 	}
 
 }
