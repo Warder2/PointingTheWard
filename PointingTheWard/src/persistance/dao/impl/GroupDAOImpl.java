@@ -2,6 +2,8 @@ package persistance.dao.impl;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import model.beans.Friend;
 import model.beans.Group;
 import persistance.dao.GroupDAO;
@@ -9,6 +11,11 @@ import persistance.dto.GroupDTO;
 import persistance.viewdto.GroupParticipantInfoViewDTO;
 
 public class GroupDAOImpl implements GroupDAO{
+	private JdbcTemplate template;
+	
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+	}
 
 	@Override
 	public void createGroup(Group group) {
