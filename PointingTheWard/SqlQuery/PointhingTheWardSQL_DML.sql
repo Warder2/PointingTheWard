@@ -142,3 +142,6 @@ values(1, 'email');
 select * from e_participant_info_view;
 select * from e_participant_info_view where email='email';
 select * from e_participant_info_view where email='email' and e_code=1;
+
+select event_sequence.nextval from dual;
+select event_sequence.currval from dual;

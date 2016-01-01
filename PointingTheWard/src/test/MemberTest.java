@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -52,5 +53,24 @@ public class MemberTest {
 		
 		memberDao.signUpMember(members[0]);
 		memberDao.signUpMember(members[0]);
+	}
+	
+	@Test
+	public void searchMember(){
+		System.out.println("searchMember");
+		
+		memberDao.signUpMember(members[0]);
+		MemberDTO memberDTO = memberDao.searchMember(members[0].getEmail());
+		
+		Assert.notNull(memberDTO);
+	}
+	
+	@Test(expected=EmptyResultDataAccessException.class)
+	public void searchMemberEmpty(){
+		System.out.println("searchMember");
+		
+		MemberDTO memberDTO = memberDao.searchMember(members[0].getEmail());
+		
+		Assert.notNull(memberDTO);
 	}
 }

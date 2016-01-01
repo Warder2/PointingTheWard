@@ -1,8 +1,12 @@
 package persistance.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import model.beans.Friend;
 import model.beans.Group;
@@ -12,6 +16,16 @@ import persistance.viewdto.GroupParticipantInfoViewDTO;
 
 public class GroupDAOImpl implements GroupDAO{
 	private JdbcTemplate template;
+	private RowMapper<GroupDTO> groupDTOMapper = new RowMapper<GroupDTO>() {
+		
+		@Override
+		public GroupDTO mapRow(ResultSet rs, int index) throws SQLException {
+			GroupDTO groupDTO = new GroupDTO();
+			groupDTO.setCode(rs.getInt("g_code"));
+			groupDTO.setName(rs.getString("name"));
+			return groupDTO;
+		}
+	};
 	
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
@@ -19,91 +33,105 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public void createGroup(Group group) {
-		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void createGroup(String name, String... ids) {
 		
 	}
 
 	@Override
-	public void createGroup(String name, List<Friend> friends) {
-		// TODO Auto-generated method stub
-		
+	public void createGroup(String name, List<String> ids) {
+		template.update("insert into group_view(g_code, name) values(group_sequence.nextval, ?)", name);
+		for(String id : ids){
+			template.update("insert into g_participant_view(g_code, email) values(?, ?)", id);
+		}
+	}
+	
+	@Override
+	public void deleteGroupAll() {
+		template.update("delete from group_view");
 	}
 
 	@Override
 	public void deleteGroup(int gCode) {
-		// TODO Auto-generated method stub
-		
+		template.update("delete from group_view where gCode=?", gCode);
 	}
 
 	@Override
 	public void deleteGroup(int gCode, String email) {
-		// TODO Auto-generated method stub
-		
+		template.update("delete from group_view where gCode=? and email=?", gCode, email);
 	}
 
 	@Override
+	@Transactional
 	public void deleteGroups(String email, int... gCodes) {
-		// TODO Auto-generated method stub
-		
+		for(int gCode : gCodes){
+			template.update("delete from g_participant_view where email=? and g_code=?", email, gCode);
+		}
 	}
 
 	@Override
 	public void deleteGroups(String email, List<Integer> gCodes) {
-		// TODO Auto-generated method stub
-		
+		for(int gCode : gCodes){
+			template.update("delete from g_participant_view where email=? and g_code=?", email, gCode);
+		}
 	}
 
 	@Override
 	public void modifyGroup(int gCode, Group group) {
-		// TODO Auto-generated method stub
-		
+		modifyGroup(gCode, group.getName());
 	}
 
 	@Override
 	public void modifyGroup(int gCode, String name) {
-		// TODO Auto-generated method stub
-		
+		template.update("update g_participant_view set name=? where g_code=?", name, gCode);
 	}
 
 	@Override
 	public void addFriend(int gCode, String email) {
-		// TODO Auto-generated method stub
-		
+		template.update("insert into g_participant_view(g_code, email) values(?, ?)", gCode, email);
 	}
 
 	@Override
+	@Transactional
 	public void addFriends(int gCode, String... emails) {
-		// TODO Auto-generated method stub
-		
+		for(String email : emails){
+			addFriend(gCode, email);
+		}
 	}
 
 	@Override
 	public void addFriend(int gCode, Friend friend) {
-		// TODO Auto-generated method stub
-		
+		addFriend(gCode, friend.getEmail());
 	}
 
 	@Override
+	@Transactional
 	public void addFriends(int gCode, Friend... friends) {
 		// TODO Auto-generated method stub
-		
+		for(Friend friend : friends){
+			addFriend(gCode, friend);
+		}
 	}
 
 	@Override
+	@Transactional
 	public void addFriends(int gCode, List<Friend> friends) {
 		// TODO Auto-generated method stub
-		
+		for(Friend friend : friends){
+			addFriend(gCode, friend);
+		}
 	}
 
 	@Override
 	public List<GroupDTO> searchGroupInfoAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return template.query("select * from group_view", groupDTOMapper);
 	}
 
 	@Override
 	public List<GroupDTO> searchGroupInfo(String email) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
