@@ -4,14 +4,15 @@ import java.util.List;
 
 public class Group {
 	private String name;
-	private List<Member> members;
+	private List<Friend> participants;
 	
 	public Group() {
 	}
-	
-	public Group(String name, List<Member> members) {
+
+	public Group(String name, List<Friend> participants) {
+		super();
 		this.name = name;
-		this.members = members;
+		this.participants = participants;
 	}
 
 	public String getName() {
@@ -22,16 +23,16 @@ public class Group {
 		this.name = name;
 	}
 
-	public List<Member> getMembers() {
-		return members;
+	public List<Friend> getParticipants() {
+		return participants;
 	}
 
-	public void setMembers(List<Member> members) {
-		this.members = members;
+	public void setParticipants(List<Friend> participants) {
+		this.participants = participants;
 	}
 
 	@Override
 	public String toString() {
-		return "Group [name=" + name + ", members=" + members + "]";
+		return "Group [name=" + name + ", participants=" + participants + "]";
 	}
 }

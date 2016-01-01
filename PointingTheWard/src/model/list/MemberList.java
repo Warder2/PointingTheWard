@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.beans.Member;
+import model.beans.Transportation;
 /**
  * 회원을 List로 가지고 있는 클래스
  * @author SEONGBONG
@@ -146,7 +147,7 @@ public class MemberList {
 		return false;
 	}
 
-	public boolean modifyMemberTransportation(Member member, String transportation) {
+	public boolean modifyMemberTransportation(Member member, Transportation transportation) {
 
 		Member m = searchMember(member);
 
