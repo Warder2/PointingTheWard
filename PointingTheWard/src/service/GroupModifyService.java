@@ -1,8 +1,8 @@
 package service;
 
-import model.List.MemberList;
 import model.beans.Group;
 import model.beans.Member;
+import model.list.MemberList;
 import service.abstracts.AbstractGroupService;
 import service.interfaces.GroupModifiable;
 

@@ -2,8 +2,8 @@ package service.interfaces;
 
 import java.util.List;
 
-import model.List.Calendar;
-import model.List.WardList;
+import model.list.Calendar;
+import model.list.WardList;
 
 public interface WardRecommendable {
 	/**

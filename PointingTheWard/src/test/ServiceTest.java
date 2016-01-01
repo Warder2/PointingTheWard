@@ -23,6 +23,7 @@ public class ServiceTest {
 	}
 	
 	//1
+	@Test
 	public void memberSignUp(){
 		System.out.println("memberSignUp");
 		Service service = context.getBean("memberSignUpService",Service.class);
@@ -263,6 +264,7 @@ public class ServiceTest {
 		service.execute(request);
 	}
 	//22
+	
 	public void wardRecommendService(){
 		System.out.println("wardRecommendService");
 	}

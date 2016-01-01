@@ -1,8 +1,8 @@
 package service.interfaces;
 
-import model.List.MemberList;
 import model.beans.Group;
 import model.beans.Member;
+import model.list.MemberList;
 
 public interface GroupModifiable {
 	public boolean modifyGroupName(String name, String newName);

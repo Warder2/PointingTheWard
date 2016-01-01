@@ -1,6 +1,6 @@
 package service.abstracts;
 
-import model.List.GroupList;
+import model.list.GroupList;
 import service.Service;
 
 public abstract class AbstractGroupService implements Service{

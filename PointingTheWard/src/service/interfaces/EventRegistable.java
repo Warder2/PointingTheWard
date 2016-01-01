@@ -1,7 +1,7 @@
 package service.interfaces;
 
-import model.List.MemberList;
 import model.beans.Event;
+import model.list.MemberList;
 
 public interface EventRegistable {
 	public boolean registEvent(Event event);
