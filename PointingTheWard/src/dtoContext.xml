@@ -6,7 +6,7 @@
                http://www.springframework.org/schema/mvc
                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-		<!-- dto  beans -->
+	<!-- dto  beans -->
 
 
 	<bean id="eventDTO" 			class="persistance.dto.EventDTO" />
@@ -16,7 +16,22 @@
 	<bean id="memberDTO"			 class="persistance.dto.MemberDTO" />
 	<bean id="groupParticipantDTO"	 class="persistance.dto.GroupParticipantDTO" />
 
+	<!-- viewdto  beans -->
 
+	<bean id="eventParticipantInfoViewDTO" 		class="persistance.viewdto.EventParticipantInfoViewDTO" />
+	<bean id="eventParticipantViewDTO" 			class="persistance.viewdto.EventParticipantViewDTO" />
+	<bean id="eventViewDTO" 					class="persistance.viewdto.EventViewDTO" />
 
+	<bean id="friendInfoViewDTO" 				class="persistance.viewdto.FriendInfoViewDTO" />
+	<bean id="friendViewDTO" 					class="persistance.viewdto.FriendViewDTO" />
+
+	<bean id="groupParticipantInfoViewDTO" 		class="persistance.viewdto.GroupParticipantInfoViewDTO" />
+	<bean id="groupParticipantViewDTO" 			class="persistance.viewdto.GroupParticipantViewDTO" />
+	<bean id="groupViewDTO" 					class="persistance.viewdto.GroupViewDTO" />
+
+	<bean id="memberOViewDTO" 					class="persistance.viewdto.MemberOViewDTO" />
+	<bean id="memberPViewDTO" 					class="persistance.viewdto.MemberPViewDTO" />
+	<bean id="memberViewDTO" 					class="persistance.viewdto.MemberViewDTO" />
+	
 </beans>
 
