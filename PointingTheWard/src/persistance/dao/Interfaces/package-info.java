@@ -5,4 +5,4 @@
  * @author SEONGBONG
  *
  */
-package persistance.daoImpl;
+package persistance.dao.Interfaces;
