@@ -62,30 +62,34 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void modifyMemberOp(String email, String name, String location, Transportation transportation) {
-		template.update("update member_view set name='?', location='?', transportation='?' where email='?'",
+		template.update("update member_o_view set name='?', location='?', transportation='?' where email='?'",
 				name, location, transportation.getStr(), email);
 	}
 
 	@Override
 	public void modifyMember(MemberDTO member) {
-		
+		modifyMember(member.getEmail(), member.getPwd(), member.getName(), member.getLocation(), member.getTransportaion());
 	}
 
 	@Override
 	public void modifyMember(String email, String pwd, String name, String location, Transportation transportation) {
-		
+		template.update("update member_view set name='?', pwd='?', location ='?', transportation='?' where email='?'",
+				name, pwd, location, transportation.getStr(), email);
 	}
 
 	@Override
 	public void modifyMemberLocation(String email, String location) {
-		// TODO Auto-generated method stub
-		
+		template.update("update member_o_view set location='?' where email='?'", location, email);
+	}
+	
+	@Override
+	public void modifyTransportation(String email, Transportation transportation) {
+		template.update("update member_o_view set transportation='?' where email='?'", transportation.getStr(), email);
 	}
 
 	@Override
 	public List<MemberDTO> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return template.query("select * from member_view", memberDTOMapper);
 	}
 
 	@Override
@@ -96,7 +100,6 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public List<MemberDTO> searchMembers(String... emails) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

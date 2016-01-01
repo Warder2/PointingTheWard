@@ -31,6 +31,9 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean id="memberDao" class="persistance.dao.impl.MemberDAOImpl">
-		<property name="template" ref="jdcbTemplate"></property>
+		<property name="template" ref="jdcbTemplate"/>
+	</bean>
+	<bean id="groupDao" class="persistance.dao.impl.GroupDAOImpl">
+		<property name="template" ref="jdcbTemplate"/>
 	</bean>
 </beans>

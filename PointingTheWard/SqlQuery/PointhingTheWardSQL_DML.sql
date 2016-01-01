@@ -27,7 +27,7 @@ update member_p_view set name='name2', pwd='pwd2' where email='email';
 select * from member_o_view;
 select * from member_o_view where email='email';
 
-update member_view
+update member_o_view
 set name='name', location ='location', transportation='driving'
 where email='email';
 

@@ -15,4 +15,6 @@ public interface MemberModifyDAO {
 	void modifyMember(String email, String pwd, String name, String location, Transportation transportation);
 	//modify member(location)
 	void modifyMemberLocation(String email, String location);
+	//modify transportation
+	void modifyTransportation(String email, Transportation transportation);
 }
