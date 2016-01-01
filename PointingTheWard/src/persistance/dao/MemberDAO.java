@@ -6,6 +6,6 @@ import persistance.dao.Interfaces.MemberSearchDAO;
 import persistance.dao.Interfaces.MemberSignInDAO;
 import persistance.dao.Interfaces.MemberSignUpDAO;
 
-public class MemberDAO implements MemberDropoutDAO,MemberModifyDAO,MemberSearchDAO,MemberSignInDAO,MemberSignUpDAO{
+public class MemberDAO implements MemberDropoutDAO,MemberModifyDAO,MemberSearchDAO,MemberSignUpDAO{
 
 }

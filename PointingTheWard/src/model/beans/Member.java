@@ -5,10 +5,10 @@ public class Member {
 	private String email;
 	private String pwd;
 	private String location;
-	private String transportaion;
+	private Transportation transportaion;
 	public Member() {
 	}
-	public Member(String name, String email, String pwd, String location, String transportaion) {
+	public Member(String name, String email, String pwd, String location, Transportation transportaion) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -40,10 +40,10 @@ public class Member {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getTransportaion() {
+	public Transportation getTransportaion() {
 		return transportaion;
 	}
-	public void setTransportaion(String transportaion) {
+	public void setTransportaion(Transportation transportaion) {
 		this.transportaion = transportaion;
 	}
 	@Override
