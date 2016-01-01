@@ -1,17 +1,18 @@
 package persistance.dto;
 
+import model.beans.Transportation;
+
 public class MemberDTO {
 	private String email;
 	private String name;
 	private String pwd;
 	private String location;
-	private String transportaion;
+	private Transportation transportaion;
 
 	public MemberDTO() {
-		this("email", "name", "pwd", "location", "transportation");
 	}
 
-	public MemberDTO(String email, String name, String pwd, String location, String transportaion) {
+	public MemberDTO(String email, String name, String pwd, String location, Transportation transportaion) {
 		this.email = email;
 		this.name = name;
 		this.pwd = pwd;
@@ -51,11 +52,11 @@ public class MemberDTO {
 		this.location = location;
 	}
 
-	public String getTransportaion() {
+	public Transportation getTransportaion() {
 		return transportaion;
 	}
 
-	public void setTransportaion(String transportaion) {
+	public void setTransportaion(Transportation transportaion) {
 		this.transportaion = transportaion;
 	}
 

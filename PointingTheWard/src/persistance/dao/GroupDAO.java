@@ -5,6 +5,5 @@ import persistance.dao.Interfaces.GroupDeleteDAO;
 import persistance.dao.Interfaces.GroupModifyDAO;
 import persistance.dao.Interfaces.GroupSearchDAO;
 
-public class GroupDAO implements GroupCreateDAO,GroupDeleteDAO,GroupModifyDAO,GroupSearchDAO{
-
+public interface GroupDAO extends GroupCreateDAO,GroupDeleteDAO,GroupModifyDAO,GroupSearchDAO{
 }

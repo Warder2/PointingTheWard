@@ -1,9 +1,7 @@
 package persistance.viewdto;
 
 public class MemberPViewDTO {
-
-			
-		private String emial;
+		private String email;
 		private String pwd;
 		private String name;
 		
@@ -11,19 +9,19 @@ public class MemberPViewDTO {
 			
 		}
 
-		public MemberPViewDTO(String emial, String pwd, String name) {
+		public MemberPViewDTO(String email, String pwd, String name) {
 			super();
-			this.emial = emial;
+			this.email = email;
 			this.pwd = pwd;
 			this.name = name;
 		}
 
-		public String getEmial() {
-			return emial;
+		public String getEmail() {
+			return email;
 		}
 
-		public void setEmial(String emial) {
-			this.emial = emial;
+		public void setEmail(String email) {
+			this.email = email;
 		}
 
 		public String getPwd() {
@@ -44,7 +42,7 @@ public class MemberPViewDTO {
 
 		@Override
 		public String toString() {
-			return "MemberPViewDTO [emial=" + emial + ", pwd=" + pwd + ", name=" + name + "]";
+			return "MemberPViewDTO [email=" + email + ", name=" + name + "]";
 		}
 		
 }

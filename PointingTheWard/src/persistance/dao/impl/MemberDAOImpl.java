@@ -1,31 +1,14 @@
 package persistance.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
-import model.beans.Member;
 import model.beans.Transportation;
 import persistance.dao.MemberDAO;
+import persistance.dto.MemberDTO;
+import persistance.viewdto.MemberOViewDTO;
 
 public class MemberDAOImpl implements MemberDAO{
-	private JdbcTemplate template;
-	private	RowMapper<Member> mapper = new RowMapper<Member>() {
-		
-		@Override
-		public Member mapRow(ResultSet rs, int index) throws SQLException {
-			Member member = new Member();
-			member.setEmail(rs.getString("email"));
-			return member;
-		}
-	};
-	public void setTemplate(JdbcTemplate template){
-		this.template = template;
-	}
-	
+
 	@Override
 	public void dropOutAll() {
 		// TODO Auto-generated method stub
@@ -51,25 +34,25 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void modifyMemberOp(Member member) {
+	public void modifyMemberOp(MemberOViewDTO member) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modifyMember(String email, String name, String location, String transportation) {
+	public void modifyMember(String email, String name, String location, Transportation transportation) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modifyMember(Member member) {
+	public void modifyMember(MemberDTO member) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modifyMember(String email, String pwd, String name, String location, String transportation) {
+	public void modifyMember(String email, String pwd, String name, String location, Transportation transportation) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -81,31 +64,67 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public List<Member> searchAll() {
+	public List<MemberDTO> searchAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Member searchMember(String email) {
-		Object[] args = {email};
-		return (Member) template.query("sql", args, mapper);
-	}
-
-	@Override
-	public List<Member> searchMembers(String... emails) {
+	public MemberDTO searchMember(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Member> searchMemberByName(String name) {
+	public List<MemberDTO> searchMembers(String... emails) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void signUpMember(Member member) {
+	public List<MemberDTO> searchMembers(List<String> emails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberDTO> searchMemberByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberOViewDTO> searchMemberOpAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberOViewDTO searchMemberOp(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberOViewDTO> searchMemberOps(String... emails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberOViewDTO> searchMemberOps(List<String> emails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberOViewDTO> searchMemberOpByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void signUpMember(MemberDTO member) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -117,13 +136,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void signUpMembers(Member... members) {
+	public void signUpMembers(MemberDTO... members) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void signUpMembers(List<Member> members) {
+	public void signUpMembers(List<MemberDTO> members) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,6 +1,6 @@
 package persistance.viewdto;
 
-public class MemberViewDATO {
+public class MemberViewDTO {
 
 	
 	private String email;
@@ -9,11 +9,11 @@ public class MemberViewDATO {
 	private String location;
 	private String transportation;
 	
-	public MemberViewDATO(){
+	public MemberViewDTO(){
 		
 	}
 
-	public MemberViewDATO(String email, String name, String pwd, String location, String transportation) {
+	public MemberViewDTO(String email, String name, String pwd, String location, String transportation) {
 		super();
 		this.email = email;
 		this.name = name;
