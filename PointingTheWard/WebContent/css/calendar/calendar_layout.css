@@ -1,0 +1,37 @@
+@MEDIA screen and (max-width: 767px) {
+	input.calendarControlBtn {
+		display: none;
+	}
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+	input.calendarControlBtn {
+		display: none;
+	}
+}
+
+@MEDIA screen and (min-width: 960px) {
+	input.calendarControlBtn, a#registEventBtn {
+		float: right;
+		margin-left: 1%;
+	}
+	input.calendarControlBtn {
+		margin-top: 2%;
+	}
+}
+a#registEventBtn {
+	float: right;
+	margin-left: 1%;
+}
+table#calendarTable{
+	width: 100%;
+}
+
+table#calendarTable td {
+	width: 5%;
+	text-align: center;
+}
+
+a.dayBlocks>label {
+	padding: 10% 10% 10% 10%;
+}

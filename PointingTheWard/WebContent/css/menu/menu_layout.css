@@ -1,0 +1,22 @@
+@MEDIA screen and (max-width: 767px) {
+	input#sideMenuBtn{
+		padding: 0.5% 5% 0.5% 5%;
+	}
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+}
+
+@MEDIA screen and (min-width: 960px) {
+	
+}
+div#headerDiv{
+	display: block;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 1%;
+}
+
+input#sideMenuBtn{
+	padding: 1% 5% 1% 5%;
+}
