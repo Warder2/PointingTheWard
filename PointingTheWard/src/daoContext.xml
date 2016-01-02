@@ -39,5 +39,9 @@
 	<bean id="FriendDao" class="persistance.dao.impl.FriendDAOImpl">
 		<property name="template" ref="jdcbTemplate"/>
 	</bean>
+	
+	<bean id="EventDao" class="persistance.dao.impl.EventDAOImpl">
+		<property name="template" ref="jdcbTemplate"/>
+	</bean>
 
 </beans>

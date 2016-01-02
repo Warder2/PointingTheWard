@@ -13,6 +13,18 @@ public class EventDTO {
 	public EventDTO() {
 		this(0, "title" , "start Date", "end Date", "start time", "end time", "content", "location");
 	}
+	
+	public EventDTO(String title, String sDate, String eDate, String sTime, String eTime, String content,
+			String place) {
+		super();
+		this.title = title;
+		this.sDate = sDate;
+		this.eDate = eDate;
+		this.sTime = sTime;
+		this.eTime = eTime;
+		this.content = content;
+		this.place = place;
+	}
 
 	public EventDTO(int code, String title, String sDate, String eDate, String sTime, String eTime, String content,
 			String place) {

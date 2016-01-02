@@ -67,12 +67,14 @@ public class EventDAOImpl implements EventDAO{
 		public EventParticipantInfoViewDTO mapRow(ResultSet rs, int index) throws SQLException {
 			EventParticipantInfoViewDTO eventParticipantInfoViewDTO = new EventParticipantInfoViewDTO();
 			
+			eventParticipantInfoViewDTO.setEventCode(rs.getInt("e_code"));
+			eventParticipantInfoViewDTO.setEmail(rs.getString("email"));
 			eventParticipantInfoViewDTO.setTitle(rs.getString("title"));
+			eventParticipantInfoViewDTO.seteDate(rs.getString("e_date"));
+			eventParticipantInfoViewDTO.setsDate(rs.getString("s_date"));
+			eventParticipantInfoViewDTO.seteTime(rs.getString("e_time"));
+			eventParticipantInfoViewDTO.setsTime(rs.getString("s_time"));
 			eventParticipantInfoViewDTO.setContent(rs.getString("content"));
-			eventParticipantInfoViewDTO.seteDate(rs.getString("eDate"));
-			eventParticipantInfoViewDTO.setsDate(rs.getString("sDate"));
-			eventParticipantInfoViewDTO.seteTime(rs.getString("eTime"));
-			eventParticipantInfoViewDTO.setsTime(rs.getString("sTime"));
 			eventParticipantInfoViewDTO.setPlace(rs.getString("place"));
 			return eventParticipantInfoViewDTO;
 		}
@@ -83,33 +85,40 @@ public class EventDAOImpl implements EventDAO{
 	}
 	
 	@Override
-	public void eventRegist(String email, Event event) {
+	public void eventRegist(String email, EventDTO event) {
 		// TODO Auto-generated method stub
-		eventRegist(email, event);
+		eventRegist(email, event.getTitle(), event.getContent(), event.getsDate() ,event.geteDate() , event.getsTime() , event.geteTime(), event.getPlace() );
 	}
 
 	@Override
-	public void eventRegist(String email,String title, String content, String sDate, String eDate, String sTime, String eTime,
-			Place place, List<Member> participants) {
-		template.update("insert into event_view(e_code, title, s_date, e_date, s_time, e_time, content, place values(event_sequence.nextval, ?, ?, ?, ?, ?, ?, ?)"
+	public void eventRegist(String email,String title, String content, String sDate, String eDate, String sTime, String eTime,String place) {
+		template.update("insert into event_view(e_code, title, s_date, e_date, s_time, e_time, content, place) values(event_sequence.nextval, ?, ?, ?, ?, ?, ?, ?)"
 														,title,sDate,eDate,sTime,eTime,content,place);
 		//시발??코드값 어케 뽑음 ...	-> 트리거로 처리
 	}
+
 	
 	@Override
-	public List<EventParticipantInfoViewDTO> eventSearch(String email) {
+	public EventViewDTO eventSearchCode(int eventCode){
 		
-		String sql1 = "select * from event_participant_Info_view where email = ?";
-		List<EventParticipantInfoViewDTO> epiList = template.query(sql1, eventParticipantInfoViewDTOMapper, email);
+		String q = "select * from event_view where e_code = ?";
+		return template.queryForObject(q, eventViewDTOMapper, eventCode);
+	}
+	
+	
+	@Override
+	public List<EventParticipantInfoViewDTO> eventSearchMail(String email) {
 		
-		return null;
+		String sql = "select * from e_participant_info_view where email = ?";
+		List<EventParticipantInfoViewDTO> epiList = template.query(sql, eventParticipantInfoViewDTOMapper, email);
+		
+		return epiList;
 	}
 
 	@Override
 	public List<EventParticipantInfoViewDTO> eventSearchTitle(String email, String title) {
-		// title 중복되지 않나
 
-		String sql1 = "select * from event_participant_Info_view where email = ? and title=?";
+		String sql1 = "select * from e_participant_Info_view where email = ? and title=?";
 		return template.query(sql1, eventParticipantInfoViewDTOMapper, email, title);
 
 	}
@@ -118,7 +127,7 @@ public class EventDAOImpl implements EventDAO{
 	public List<EventParticipantInfoViewDTO> eventSearchDate(String email, String sDate, String eDate) {
 		// TODO Auto-generated method stub
 		
-		String sql1 = "select * from event_participant_Info_view where email = ? and s_date=? and eDate=?";
+		String sql1 = "select * from e_participant_Info_view where email = ? and s_date=? and eDate=?";
 		return template.query(sql1, eventParticipantInfoViewDTOMapper, email, sDate , eDate);
 
 	}
@@ -127,7 +136,7 @@ public class EventDAOImpl implements EventDAO{
 	public List<EventParticipantInfoViewDTO> eventSearchTime(String email, String sTime, String eTime) {
 		// TODO Auto-generated method stub
 		
-		String sql1 = "select * from event_participant_Info_view where email = ? and time=? and time=?";
+		String sql1 = "select * from event_participant_Info_view where email = ? and s_time=? and d_time=?";
 		return template.query(sql1, eventParticipantInfoViewDTOMapper, email, sTime , eTime);
 	}
 
@@ -138,45 +147,20 @@ public class EventDAOImpl implements EventDAO{
 		return template.query(sql1, eventParticipantInfoViewDTOMapper, email, content);
 	}
 
+	
 	@Override
 	public void eventModify(String email, Event event, Event newEvent) {
 		
 		
 	}
-
-	
 	
 	@Override
 	public void eventDelete(String email) {
 		// TODO Auto-generated method stub
-		String q = "delete from event_participant_view where email='?'";
+		String q = "delete from e_participant_view where email=?";
 		template.update(q,email);
 		
 		//event_view 도 삭제 -> 트리거 처리 
-	}
-
-	@Override
-	public void eventDeleteDate(String email, String sDate, String eDate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eventDeleteTime(String email, String sTime, String eTime) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eventDelete(String email, String sDate, String eDate, String sTime, String eTime) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eventDelete(String email, String title) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
