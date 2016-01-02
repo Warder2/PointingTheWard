@@ -143,5 +143,19 @@ select * from e_participant_info_view;
 select * from e_participant_info_view where email='email';
 select * from e_participant_info_view where email='email' and e_code=1;
 
-select event_sequence.nextval from dual;
-select event_sequence.currval from dual;
+
+create trigger member_delete_trigger
+before delete on member_view
+declare
+begin
+	delete from friend_view where email=:old.email or f_email=:old.email;
+	if exists(select email from e_participant_view where e_code=(select e_code from e_participant_view where email=:old.email))
+	then
+	else delete from event_view where e_code=(select e_code from e_participant_view where email=:old.email); 
+	end if;
+	if exists(select email from g_participant_view where g_code=(select g_code from g_participant_view where email=:old.email))
+	then
+	else delete from group_view where g_code=(select g_code from g_participant_view where email=:old.email);
+	end if;
+	delete from g_participant_view where email=:old.email;
+end;

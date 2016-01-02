@@ -176,7 +176,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void signUpMember(String email, String name, String pwd, String location, Transportation transportation) {
-		template.update("insert into member_view(email, name, pwd, location, transportation) values(?,?,?,?,?)", email, name, pwd, location, transportation);
+		template.update("insert into member_view(email, name, pwd, location, transportation) values(?,?,?,?,?)", email, name, pwd, location, transportation.getStr());
 	}
 
 	@Override
