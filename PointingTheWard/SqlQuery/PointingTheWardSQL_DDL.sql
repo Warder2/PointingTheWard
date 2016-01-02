@@ -50,7 +50,8 @@ create table g_participant_tb(
 	g_code NUMBER NOT NULL,
 	email VARCHAR2(255) NOT NULL,
 	FOREIGN KEY(g_code) REFERENCES group_tb(g_code),
-	FOREIGN KEY(email) REFERENCES member_tb(email)
+	FOREIGN KEY(email) REFERENCES member_tb(email),
+	PRIMARY KEY(g_code, email)
 );
 
 create view g_participant_view(g_code, email)
@@ -85,7 +86,8 @@ create table e_participant_tb(
 	e_code NUMBER NOT NULL,
 	email VARCHAR2(255) NOT NULL,
 	FOREIGN KEY(e_code) REFERENCES event_tb(e_code),
-	FOREIGN KEY(email) REFERENCES member_tb(email)
+	FOREIGN KEY(email) REFERENCES member_tb(email),
+	PRIMARY KEY(e_code, email)
 );
 
 create view e_participant_view

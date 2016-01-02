@@ -144,18 +144,42 @@ select * from e_participant_info_view where email='email';
 select * from e_participant_info_view where email='email' and e_code=1;
 
 
-create trigger member_delete_trigger
-before delete on member_view
-declare
-begin
-	delete from friend_view where email=:old.email or f_email=:old.email;
+CREATE OR REPLACE trigger member_delete_trigger
+before DELETE ON member_tb
+FOR EACH ROW
+BEGIN
+	delete from FRIEND_view where email = :old.email or f_email = :old.email
+	
+END;
+
+
 	if exists(select email from e_participant_view where e_code=(select e_code from e_participant_view where email=:old.email))
 	then
-	else delete from event_view where e_code=(select e_code from e_participant_view where email=:old.email); 
-	end if;
+	else delete from event_view where e_code=(select e_code from e_participant_view where email=:old.email)
+	end if
+	
 	if exists(select email from g_participant_view where g_code=(select g_code from g_participant_view where email=:old.email))
 	then
-	else delete from group_view where g_code=(select g_code from g_participant_view where email=:old.email);
-	end if;
-	delete from g_participant_view where email=:old.email;
-end;
+	else delete from group_view where g_code=(select g_code from g_participant_view where email=:old.email)
+	end if
+	
+	delete from g_participant_view where email=:old.email
+	
+	
+insert into member_view(email, name, pwd, location, transportation) 
+values('email', 'name', 'pwd', 'location', 'transit');
+insert into member_view(email, name, pwd, location, transportation) 
+values('email1', 'name1', 'pwd1', 'location1', 'transit');
+insert into member_view(email, name, pwd, location, transportation) 
+values('email2', 'name2', 'pwd2', 'location2', 'driving');
+
+
+insert into friend_view(email, f_email) values('email', 'email2');
+insert into friend_view(email, f_email) values('email', 'email1');
+
+select * from member_view;
+select * from friend_view;
+
+delete from member_view;
+
+select * from all_triggers;
