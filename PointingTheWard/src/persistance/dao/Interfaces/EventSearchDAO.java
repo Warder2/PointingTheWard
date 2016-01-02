@@ -2,18 +2,21 @@ package persistance.dao.Interfaces;
 
 import java.util.List;
 
-import model.beans.Event;
 import persistance.viewdto.EventParticipantInfoViewDTO;
+import persistance.viewdto.EventParticipantViewDTO;
 import persistance.viewdto.EventViewDTO;
 
 public interface EventSearchDAO {
 
 	
-	public EventViewDTO eventSearchCode(int eventCode);
-	public List<EventParticipantInfoViewDTO> eventSearchMail(String email);
-	public List<EventParticipantInfoViewDTO> eventSearchTitle(String email, String title);
-	public List<EventParticipantInfoViewDTO> eventSearchDate(String email, String sDate , String eDate);
-	public List<EventParticipantInfoViewDTO> eventSearchTime(String email, String sTime , String eTime);
-	public List<EventParticipantInfoViewDTO> eventSearchContent(String email , String content);
 	
+	public EventViewDTO eventSearchCode(int eventCode);
+	
+	public List<EventParticipantInfoViewDTO> eventParticipantInfoSearch(String email, int eventCode);
+	public List<EventParticipantInfoViewDTO> eventParticipantInfoSearchMail(String email);
+	public List<EventParticipantInfoViewDTO> eventParticipantInfoSearchCode(int eventCode);
+	
+	public List<EventParticipantViewDTO> eventParticipantSearchMail(String email);
+	public List<EventParticipantViewDTO> eventParticipantSearchCode(int eventCode);
+	public List<EventParticipantViewDTO> eventParticipantSearch(String email, int eventCode);
 }

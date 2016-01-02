@@ -52,21 +52,17 @@ public class EventDAOTest {
 
 	public void insertEvent(){
 		
-			System.out.println("sival : " + events[0]);
-			eventDAO.eventRegist("email1",events[0]);
 			
 	}
 	public void searchEvent() {
-		List<EventParticipantInfoViewDTO> list = eventDAO.eventSearchMail("email");
 		
-		for(EventParticipantInfoViewDTO dto : list)
-			System.out.println("출력해라 : "  + dto);
 	}
 	
-	@Test
 	public void deleteEvent(){
 		
-		eventDAO.eventDelete("email");
 	}
 
+	public void modifyEvent(){
+		
+	}
 }
