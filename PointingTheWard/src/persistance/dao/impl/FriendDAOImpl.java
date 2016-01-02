@@ -52,8 +52,8 @@ public class FriendDAOImpl implements FriendDAO {
 	@Override
 	public void addtionFriend(String email, String friendEmail) {
 		// TODO Auto-generated method stub
-		String insertFriendSql="insert into friend_view(email, f_email) values('?', '?')";
-		template.update(insertFriendSql, email,friendEmail);
+		String insertFriendSql="insert into friend_view(email, f_email) values(?, ?)";
+		template.update(insertFriendSql, new Object[]{email, friendEmail});
 		
 	}
 
