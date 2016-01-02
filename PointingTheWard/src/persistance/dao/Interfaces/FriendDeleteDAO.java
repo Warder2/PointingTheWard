@@ -4,26 +4,26 @@ import java.util.List;
 
 public interface FriendDeleteDAO {
 	/**
-	 * 모든 친구 삭제
-	 * @param email
+	 * 특정 회원의 친구들을 모두 삭제
+	 * @param email 회원이메일
 	 */
 	public void deleteFriendAll(String email);
 	/**
-	 * 이메일로 친구 삭제
-	 * @param email
-	 * @param femail
+	 * 특정 친구를 삭제
+	 * @param email 회원이메일
+	 * @param friendEmail 삭제할 친구이메일
 	 */
-	public void deleteFriend(String email,String femail);
+	public void deleteFriendEmail(String email,String friendEmail);
 	/**
-	 * 이름으로 친구들 삭제
-	 * @param email
-	 * @param femail
+	 * 친구들을 삭제
+	 * @param email 회원이메일
+	 * @param friendEmail 삭제할 친구들의 이메일들
 	 */
-	public void deleteFriendName(String email,List<String> fName);
+	public void deleteFriends(String email,List<String> friendEmails);
 	/**
-	 * 이름으로 친구들 삭제
-	 * @param email
-	 * @param fName
+	 * 친구들을 삭제
+	 * @param email 회원이메일
+	 * @param friendEmail 삭제할 친구들의 이메일들
 	 */
-	public void deleteFriendName(String email,String... fName);
+	public void deleteFriends(String email,String... friendEmails);
 }

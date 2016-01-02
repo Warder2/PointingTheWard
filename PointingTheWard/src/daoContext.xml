@@ -36,4 +36,8 @@
 	<bean id="groupDao" class="persistance.dao.impl.GroupDAOImpl">
 		<property name="template" ref="jdcbTemplate"/>
 	</bean>
+	<bean id="FriendDao" class="persistance.dao.impl.FriendDAOImpl">
+		<property name="template" ref="jdcbTemplate"/>
+	</bean>
+
 </beans>
