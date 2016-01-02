@@ -19,7 +19,8 @@ CREATE TABLE friend_tb(
 	email VARCHAR2(255) NOT NULL,
 	f_email VARCHAR2(255) NOT NULL,
 	FOREIGN KEY(email) REFERENCES member_tb(email),
-	FOREIGN KEY(f_email) REFERENCES member_tb(email)
+	FOREIGN KEY(f_email) REFERENCES member_tb(email),
+	PRIMARY KEY(email, f_email)
 );
 
 create view friend_view(email, f_email)
