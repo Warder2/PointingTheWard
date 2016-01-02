@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.FriendDAO;
 import persistance.viewdto.FriendInfoViewDTO;
@@ -66,6 +67,7 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
+	@Transactional
 	public void addtionFriends(String email, List<String> friendEmails) {
 		// TODO Auto-generated method stub
 		for(String friendEmail : friendEmails){
@@ -75,20 +77,16 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Override
 	public void deleteFriendAll(String email) {
-		// TODO Auto-generated method stub
-	
-		String deleteFriendSql ="delete from friend_view where email=?";
-		template.update(deleteFriendSql, email);
+		template.update("delete from friend_view where email=?", email);
 	}
 
 	@Override
 	public void deleteFriendEmail(String email, String friendEmail) {
-		// TODO Auto-generated method stub
-		String deleteFriendSql="delete from friend_view where email=? and f_email=?";
-		template.update(deleteFriendSql, email,friendEmail);
+		template.update("delete from friend_view where email=? and f_email=?", email,friendEmail);
 	}
 
 	@Override
+	@Transactional	//트랜젝션이 이루어져야 하니까 추가
 	public void deleteFriends(String email, List<String> friendEmails) {
 		// TODO Auto-generated method stub
 		for(String friendEmail: friendEmails){
@@ -97,6 +95,7 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
+	@Transactional
 	public void deleteFriends(String email, String... friendEmails) {
 		// TODO Auto-generated method stub
 		for(String friendEmail: friendEmails){
@@ -123,18 +122,12 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Override
 	public List<FriendInfoViewDTO> searchFriendsInfoAll() {
-		// TODO Auto-generated method stub
-		String searchSql="select * from friend_info_view";
-				
-		return template.query(searchSql, friendInfoViewDTOMapper);
+		return template.query("select * from friend_info_view", friendInfoViewDTOMapper);
 	}
 
 	@Override
 	public List<FriendInfoViewDTO> searchFriendsInfoEmail(String email) {
-		// TODO Auto-generated method stub
-		String searchSql="select * from friend_info_view where email=?";
-		
-		return template.query(searchSql, new Object[]{email}, friendInfoViewDTOMapper);
+		return template.query("select * from friend_info_view where email=?", friendInfoViewDTOMapper, email);
 	}
 
 	@Override
