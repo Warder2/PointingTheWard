@@ -148,11 +148,9 @@ CREATE OR REPLACE trigger member_delete_trigger
 before DELETE ON member_tb
 FOR EACH ROW
 BEGIN
-	delete from FRIEND_view where email = :old.email or f_email = :old.email
+	delete from FRIEND_view where email = :old.email or f_email = :old.email;
 	
 END;
-
-
 	if exists(select email from e_participant_view where e_code=(select e_code from e_participant_view where email=:old.email))
 	then
 	else delete from event_view where e_code=(select e_code from e_participant_view where email=:old.email)
@@ -164,6 +162,8 @@ END;
 	end if
 	
 	delete from g_participant_view where email=:old.email
+
+
 	
 	
 insert into member_view(email, name, pwd, location, transportation) 
