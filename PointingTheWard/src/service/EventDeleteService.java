@@ -26,13 +26,7 @@ public class EventDeleteService extends AbstractCalendarService implements Event
 	}
 
 	@Override
-	public boolean deleteEventDate(String sDate, String eDate) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteEventDateTime(String sDate, String eDate, String sTime, String eTime) {
+	public boolean deleteEventEmail(String email) {
 		// TODO Auto-generated method stub
 		return false;
 	}

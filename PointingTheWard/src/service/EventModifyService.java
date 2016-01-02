@@ -17,81 +17,83 @@ public class EventModifyService extends AbstractCalendarService implements Event
 	}
 
 	@Override
-	public boolean modifyEvent(Event event, Event newEvent) {
+	public boolean modifyEvent(String email, Event event, Event newEvent) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventTitle(Event event, String newTitle) {
+	public boolean modifyEventTitle(String email, Event event, String newTitle) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventTitle(String sDate, String eDate, String sTime, String eTime, String newTitle) {
+	public boolean modifyEventTitle(String email, String sDate, String eDate, String sTime, String eTime,
+			String newTitle) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventDate(Event event, String newSdate, String newEdate) {
+	public boolean modifyEventDate(String email, Event event, String newSdate, String newEdate) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventDate(String sDate, String eDate, String sTime, String eTime, String newSdate,
-			String newEdate) {
+	public boolean modifyEventDate(String email, String sDate, String eDate, String sTime, String eTime,
+			String newSdate, String newEdate) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventDateTime(Event event, String newStime, String newEtime) {
+	public boolean modifyEventDateTime(String email, Event event, String newStime, String newEtime) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventDateTime(String sDate, String eDate, String sTime, String eTime, String newSdate,
-			String newEdate) {
+	public boolean modifyEventDateTime(String email, String sDate, String eDate, String sTime, String eTime,
+			String newSdate, String newEdate) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventContent(Event event, String newContent) {
+	public boolean modifyEventContent(String email, Event event, String newContent) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventContent(String sDate, String eDate, String sTime, String eTime, String newContent) {
+	public boolean modifyEventContent(String email, String sDate, String eDate, String sTime, String eTime,
+			String newContent) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventPlace(Event event, Place place) {
+	public boolean modifyEventPlace(String email, Event event, Place place) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventPlace(String sDate, String eDate, String sTime, String eTime, Place place) {
+	public boolean modifyEventPlace(String email, String sDate, String eDate, String sTime, String eTime, Place place) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventParticipants(Event event, List<Member> participants) {
+	public boolean modifyEventParticipants(String email, Event event, List<Member> participants) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean modifyEventParticipants(String sDate, String eDate, String sTime, String eTime,
+	public boolean modifyEventParticipants(String email, String sDate, String eDate, String sTime, String eTime,
 			List<Member> participants) {
 		// TODO Auto-generated method stub
 		return false;

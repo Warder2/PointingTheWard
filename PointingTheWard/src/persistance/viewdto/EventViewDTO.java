@@ -2,6 +2,7 @@ package persistance.viewdto;
 
 public class EventViewDTO {
 	private int code;
+	private String title;
 	private String sDate;
 	private String eDate;
 	private String sTime;
@@ -13,9 +14,10 @@ public class EventViewDTO {
 		super();
 	}
 
-	public EventViewDTO(int code, String sDate, String eDate, String sTime, String eTime, String content,
+	public EventViewDTO(int code, String title, String sDate, String eDate, String sTime, String eTime, String content,
 			String place) {
 		super();
+		this.title =title;
 		this.code = code;
 		this.sDate = sDate;
 		this.eDate = eDate;
@@ -81,10 +83,19 @@ public class EventViewDTO {
 		this.place = place;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Override
 	public String toString() {
-		return "EventViewDTO [code=" + code + ", sDate=" + sDate + ", eDate=" + eDate + ", sTime=" + sTime + ", eTime="
-				+ eTime + ", content=" + content + ", place=" + place + "]";
+		return "EventViewDTO [code=" + code + ", title=" + title + ", sDate=" + sDate + ", eDate=" + eDate + ", sTime="
+				+ sTime + ", eTime=" + eTime + ", content=" + content + ", place=" + place + "]";
 	}
+
 
 }

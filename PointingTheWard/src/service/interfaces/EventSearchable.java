@@ -1,11 +1,11 @@
 package service.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.beans.Event;
 import model.beans.Member;
 import model.beans.Place;
+import persistance.viewdto.EventViewDTO;
 
 public interface EventSearchable {
 	public Event searchEvent(Event event);
