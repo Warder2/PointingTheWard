@@ -1,6 +1,10 @@
 @MEDIA screen and (max-width: 767px) {
-	input#sideMenuBtn{
+	input#sideMenuBtn {
 		padding: 0.5% 5% 0.5% 5%;
+		width: 20%;
+	}
+	div#sideMenuDiv {
+		width: 30%;
 	}
 }
 
@@ -8,15 +12,33 @@
 }
 
 @MEDIA screen and (min-width: 960px) {
-	
+	div#sideMenuDiv {
+		width: 20%;
+	}
 }
-div#headerDiv{
+
+div#headerDiv {
 	display: block;
 	padding-top: 1%;
 	padding-bottom: 1%;
 	padding-left: 1%;
 }
 
-input#sideMenuBtn{
+input#sideMenuBtn {
 	padding: 1% 5% 1% 5%;
+}
+
+div#sideMenuDiv {
+	padding-top: 1%;
+	padding-bottom: 100%;
+}
+
+ul#sideMenus {
+	width: 100%;
+	padding-left: 0%;
+}
+
+ul#sideMenus>li {
+	text-align: left;
+	width: 100%;
 }

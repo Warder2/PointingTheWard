@@ -1,13 +1,19 @@
 @IMPORT url("menu_layout.css");
 
 @MEDIA screen and (max-width: 767px) {
+	ul#sideMenus a{
+		font-size: 50%;
+	}
 }
 
 @MEDIA screen and (min-width: 768px) and (max-width:959px) {
 }
 
 @MEDIA screen and (min-width: 960px) {
-	
+	ul#sideMenus a{
+		font-size: 150%;
+		cursor: pointer;
+	}
 }
 
 div#headerDiv{
@@ -24,4 +30,22 @@ input#sideMenuBtn{
 	background-size: 100%;
 	padding: 1% 5% 1% 5%;
 	cursor: pointer;
+}
+
+div#sideMenuDiv{
+	background-color: #969696;
+}
+
+ul#sideMenus{
+	list-style: none;
+}
+
+ul#sideMenus > li{
+	border-top-style: solid;
+	border-width: thin;
+	text-align: center;
+}
+ul#sideMenus a{
+	text-decoration: none;
+	color: black;
 }

@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="css/calendar/calendar_style.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script type="text/javascript" src="js/calendar.js"></script>
+<script type="text/javascript" src="js/calendar/calendar.js"></script>
 <script type="text/javascript">
 	var calendar = new Calendar();
 	calendar.setDay(1);
