@@ -1,10 +1,10 @@
 @MEDIA screen and (max-width: 767px) {
 	input#sideMenuBtn {
-		padding: 0.5% 5% 0.5% 5%;
 		width: 20%;
 	}
-	div#sideMenuDiv {
-		width: 30%;
+	header#mainHeader>a#mainLogo {
+		left: 25%;
+		top: 15%;
 	}
 }
 
@@ -12,34 +12,26 @@
 }
 
 @MEDIA screen and (min-width: 960px) {
-	div#sideMenuDiv {
-		width: 20%;
+	header#mainHeader>a#mainLogo {
+		left: 15%;
+		top: 30%;
 	}
 }
 
-div#headerDiv {
-	display: block;
-	padding-top: 1%;
-	padding-bottom: 1%;
-	padding-left: 1%;
+html {
+	margin: 0 auto;
 }
 
-input#sideMenuBtn {
-	padding: 1% 5% 1% 5%;
+header#mainHeader {
+	position: relative;
 }
 
-div#sideMenuDiv {
-	padding-top: 1%;
-	padding-bottom: 100%;
-	width: 20%;
+header#mainHeader>input#sideMenuBtn {
+	position: absolute;
+	left: 3%;
+	top: 20%;
 }
 
-ul#sideMenus {
-	width: 100%;
-	padding-left: 0%;
-}
-
-ul#sideMenus>li {
-	text-align: left;
-	width: 100%;
+header#mainHeader>a#mainLogo {
+	position: absolute;
 }

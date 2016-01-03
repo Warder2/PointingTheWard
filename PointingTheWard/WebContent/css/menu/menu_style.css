@@ -1,8 +1,11 @@
 @IMPORT url("menu_layout.css");
 
 @MEDIA screen and (max-width: 767px) {
-	ul#sideMenus a{
-		font-size: 50%;
+	header#mainHeader {
+		height: 30px;
+	}
+	input#sideMenuBtn {
+		padding: 0.5% 5% 0.5% 5%;
 	}
 }
 
@@ -10,42 +13,40 @@
 }
 
 @MEDIA screen and (min-width: 960px) {
-	ul#sideMenus a{
-		font-size: 150%;
-		cursor: pointer;
+	html{
+		width: 80%;
+	}
+	header#mainHeader {
+		height: 40px;
+	}
+	input#sideMenuBtn {
+		padding: 1% 5% 1% 5%;
 	}
 }
 
-div#headerDiv{
-	display: block;
-	background-color: #C73DA3;
+header#mainHeader{
+	background-color: #828282;
 	padding-top: 1%;
 	padding-bottom: 1%;
 	padding-left: 1%;
+	width: 100%;
+}
+
+section{
+	background-color: #282828;
 }
 
 input#sideMenuBtn{
 	background-image: url("../../img/menu/menu_btn_img.png");
 	background-position: center;
 	background-size: 100%;
-	padding: 1% 5% 1% 5%;
 	cursor: pointer;
 }
 
-div#sideMenuDiv{
-	background-color: #969696;
-}
 
-ul#sideMenus{
-	list-style: none;
-}
 
-ul#sideMenus > li{
-	border-top-style: solid;
-	border-width: thin;
-	text-align: center;
-}
-ul#sideMenus a{
-	text-decoration: none;
-	color: black;
+
+
+section{
+	background-color: blue;
 }

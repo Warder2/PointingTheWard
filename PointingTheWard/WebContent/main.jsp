@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,31 +13,26 @@
 		$('input#sideMenuBtn').click(function(){
 			$('div#sideMenuDiv').toggle();
 		});
-		$.ajax({
-			type:'get',
-			url: 'calendar.jsp', 
-			success: function(data){ 
-				$('section').html(data);
-			} 
-		}); 
-		
 	});
 </script>
 </head>
 <body>
-	<div id="headerDiv">
+	<header id="mainHeader">
 		<input id="sideMenuBtn" type="button"/>
+		<a id="mainLogo">PointingTheWard</a>
+	</header>
+	<div id="content">
+		<aside>
+			<div id="sideMenuDiv">
+				<ul id="sideMenus">
+					<li><a>회원정보</a></li>
+					<li><a>친구목록</a></li>
+					<li><a>일정정보</a></li>
+				</ul>
+			</div>
+		</aside>
+		<section>
+		</section>
 	</div>
-	<aside>
-	<div id="sideMenuDiv" hidden>
-		<ul id="sideMenus">
-			<li><a>회원정보</a></li>
-			<li><a>친구목록</a></li>
-			<li><a>일정정보</a></li>
-		</ul>
-	</div>
-	</aside>
-	<section>
-	</section>
 </body>
 </html>
