@@ -42,3 +42,6 @@ input#sideMenuBtn{
 	background-size: 100%;
 	cursor: pointer;
 }
+ul#sideMenus{
+	list-style: none;
+}
