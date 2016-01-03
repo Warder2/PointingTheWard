@@ -177,8 +177,18 @@ values('email2', 'name2', 'pwd2', 'location2', 'driving');
 insert into friend_view(email, f_email) values('email', 'email2');
 insert into friend_view(email, f_email) values('email', 'email1');
 
+insert into event_view(e_code, title, s_date, e_date, s_time, e_time, content, place)
+values(event_sequence.nextval, 'title', '2016-01-01', '2016-01-02', '13:00', '15:00', 'content', 'place');
+
+insert into e_participant_view(e_code, email)
+values(0, 'email');
+
+select count(*) from e_participant_view where e_code=0
+
 select * from member_view;
 select * from friend_view;
+select * from event_view;
+select * from e_participant_view;
 
 delete from member_view;
 
