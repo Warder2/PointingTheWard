@@ -17,10 +17,10 @@
 </script>
 </head>
 <body>
-	<header id="mainHeader">
+	<div id="mainHeader">
 		<input id="sideMenuBtn" type="button"/>
 		<a id="mainLogo">PointingTheWard</a>
-	</header>
+	</div>
 	<div id="content">
 		<aside>
 			<div id="sideMenuDiv">

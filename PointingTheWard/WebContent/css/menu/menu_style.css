@@ -1,7 +1,7 @@
 @IMPORT url("menu_layout.css");
 
 @MEDIA screen and (max-width: 767px) {
-	header#mainHeader {
+	div#mainHeader {
 		height: 30px;
 	}
 	input#sideMenuBtn {
@@ -16,7 +16,7 @@
 	html{
 		width: 80%;
 	}
-	header#mainHeader {
+	div#mainHeader {
 		height: 40px;
 	}
 	input#sideMenuBtn {
@@ -24,7 +24,7 @@
 	}
 }
 
-header#mainHeader{
+div#mainHeader{
 	background-color: #828282;
 	padding-top: 1%;
 	padding-bottom: 1%;
@@ -41,12 +41,4 @@ input#sideMenuBtn{
 	background-position: center;
 	background-size: 100%;
 	cursor: pointer;
-}
-
-
-
-
-
-section{
-	background-color: blue;
 }
