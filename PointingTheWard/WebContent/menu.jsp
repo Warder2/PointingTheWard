@@ -13,7 +13,7 @@
 	src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('input#sideMenuBtn').click(function() {
+		$('img#sideMenuBtn').click(function() {
 			$('div#sideMenuDiv').toggle();
 		});
 	});
@@ -21,14 +21,16 @@
 </head>
 <body>
 	<div id="mainHeader">
-		<input id="sideMenuBtn" type="button" /> 
-		<a id="mainLogo">PointingTheWard</a>
+		<img id="sideMenuBtn" src="img/menu/menu_btn_img.png" /> 
+		<a id="logo" href="#">
+			<img alt="" src="img/menu/logo.png">
+		</a>
 	</div>
 	<div id="sideMenuDiv">
 		<ul id="sideMenus">
-			<li><a>회원정보</a></li>
-			<li><a>친구목록</a></li>
-			<li><a>일정정보</a></li>
+			<li><a href="#">회원정보</a></li>
+			<li><a href="#">친구목록</a></li>
+			<li><a href="#">일정정보</a></li>
 		</ul>
 	</div>
 </body>

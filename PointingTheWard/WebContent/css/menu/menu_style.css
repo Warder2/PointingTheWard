@@ -4,8 +4,14 @@
 	div#mainHeader {
 		height: 30px;
 	}
-	input#sideMenuBtn {
+	img#sideMenuBtn {
 		padding: 0.5% 5% 0.5% 5%;
+	}
+	div#mainHeader>a#logo img {
+		width: 80%;
+	}
+	div#sideMenuDiv {
+		width: 40%;
 	}
 }
 
@@ -13,18 +19,21 @@
 }
 
 @MEDIA screen and (min-width: 960px) {
-	html{
+	html {
 		width: 80%;
 	}
 	div#mainHeader {
 		height: 40px;
 	}
-	input#sideMenuBtn {
+	img#sideMenuBtn {
 		padding: 1% 5% 1% 5%;
+	}
+	div#sideMenuDiv {
+		width: 20%;
 	}
 }
 
-div#mainHeader{
+div#mainHeader {
 	background-color: #828282;
 	padding-top: 1%;
 	padding-bottom: 1%;
@@ -32,16 +41,38 @@ div#mainHeader{
 	width: 100%;
 }
 
-section{
-	background-color: #282828;
-}
-
-input#sideMenuBtn{
-	background-image: url("../../img/menu/menu_btn_img.png");
-	background-position: center;
-	background-size: 100%;
+img#sideMenuBtn {
+	height: 60%;
 	cursor: pointer;
 }
-ul#sideMenus{
-	list-style: none;
+
+a#logo>img {
+	
 }
+
+/* side menu style start */
+div#sideMenuDiv {
+	display: none; 
+	background-color : #bebebe;
+	padding-bottom: 100%;
+}
+
+ul#sideMenus {
+	list-style: none;
+	text-align: center;
+	padding-left: 0;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+}
+
+ul#sideMenus>li {
+	border-top-style: solid;
+	border-top-width: thin;
+	background-color: #828282;
+}
+
+ul#sideMenus>li a {
+	text-decoration: none;
+	color: black;
+}
+/* side menu style end */
