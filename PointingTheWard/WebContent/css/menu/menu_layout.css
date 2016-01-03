@@ -31,6 +31,7 @@ input#sideMenuBtn {
 div#sideMenuDiv {
 	padding-top: 1%;
 	padding-bottom: 100%;
+	width: 20%;
 }
 
 ul#sideMenus {

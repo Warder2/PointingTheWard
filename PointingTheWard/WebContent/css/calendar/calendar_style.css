@@ -52,12 +52,11 @@ a.dayBlocks {
 
 table#calendarTable>thead {
 	background-color: #C73DA3;
-	outline-style: solid;
-	outline-color: #C73DA3;
 }
 
 tr#calendarHead>td, tr#calendarDayHead>td {
 	outline-style: solid;
+	outline-width: thin;
 	outline-color: #C73DA3;
 }
 
