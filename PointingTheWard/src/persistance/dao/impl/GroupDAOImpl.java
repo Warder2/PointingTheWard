@@ -8,9 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.beans.Friend;
-import model.beans.Group;
 import persistance.dao.GroupDAO;
+import persistance.dto.FriendDTO;
 import persistance.dto.GroupDTO;
 import persistance.dto.GroupParticipantInfoDTO;
 
@@ -45,7 +44,7 @@ public class GroupDAOImpl implements GroupDAO{
 	}
 
 	@Override
-	public void createGroup(Group group) {
+	public void createGroup(GroupDTO group) {
 		
 	}
 	
@@ -93,7 +92,7 @@ public class GroupDAOImpl implements GroupDAO{
 	}
 
 	@Override
-	public void modifyGroup(int gCode, Group group) {
+	public void modifyGroup(int gCode, GroupDTO group) {
 		modifyGroup(gCode, group.getName());
 	}
 
@@ -116,24 +115,24 @@ public class GroupDAOImpl implements GroupDAO{
 	}
 
 	@Override
-	public void addFriend(int gCode, Friend friend) {
+	public void addFriend(int gCode, FriendDTO friend) {
 		addFriend(gCode, friend.getEmail());
 	}
 
 	@Override
 	@Transactional
-	public void addFriends(int gCode, Friend... friends) {
+	public void addFriends(int gCode, FriendDTO... friends) {
 		// TODO Auto-generated method stub
-		for(Friend friend : friends){
+		for(FriendDTO friend : friends){
 			addFriend(gCode, friend);
 		}
 	}
 
 	@Override
 	@Transactional
-	public void addFriends(int gCode, List<Friend> friends) {
+	public void addFriends(int gCode, List<FriendDTO> friends) {
 		// TODO Auto-generated method stub
-		for(Friend friend : friends){
+		for(FriendDTO friend : friends){
 			addFriend(gCode, friend);
 		}
 	}

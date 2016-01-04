@@ -9,28 +9,27 @@ import org.springframework.jdbc.core.RowMapper;
 
 import persistance.dao.EventDAO;
 import persistance.dto.EventDTO;
+import persistance.dto.EventParticipantDTO;
 import persistance.dto.EventParticipantInfoDTO;
-import persistance.viewdto.EventParticipantDTO;
-import persistance.viewdto.EventViewDTO;
 
 public class EventDAOImpl implements EventDAO {
 
 	private JdbcTemplate template;
 
-	private RowMapper<EventViewDTO> eventViewDTOMapper = new RowMapper<EventViewDTO>() {
+	private RowMapper<EventDTO> EventDTOMapper = new RowMapper<EventDTO>() {
 
-		public EventViewDTO mapRow(ResultSet rs, int index) throws SQLException {
-			EventViewDTO eventViewDTO = new EventViewDTO();
+		public EventDTO mapRow(ResultSet rs, int index) throws SQLException {
+			EventDTO EventDTO = new EventDTO();
 
-			eventViewDTO.setCode(rs.getInt("code"));
-			eventViewDTO.setTitle(rs.getString("title"));
-			eventViewDTO.setContent(rs.getString("content"));
-			eventViewDTO.seteDate(rs.getString("eDate"));
-			eventViewDTO.setsDate(rs.getString("sDate"));
-			eventViewDTO.seteTime(rs.getString("eTime"));
-			eventViewDTO.setsTime(rs.getString("sTime"));
-			eventViewDTO.setPlace(rs.getString("place"));
-			return eventViewDTO;
+			EventDTO.setCode(rs.getInt("code"));
+			EventDTO.setTitle(rs.getString("title"));
+			EventDTO.setContent(rs.getString("content"));
+			EventDTO.seteDate(rs.getString("eDate"));
+			EventDTO.setsDate(rs.getString("sDate"));
+			EventDTO.seteTime(rs.getString("eTime"));
+			EventDTO.setsTime(rs.getString("sTime"));
+			EventDTO.setPlace(rs.getString("place"));
+			return EventDTO;
 		}
 	};
 
@@ -126,10 +125,10 @@ public class EventDAOImpl implements EventDAO {
 	// event search
 
 	@Override
-	public EventViewDTO eventSearchCode(int eventCode) {
+	public EventDTO eventSearchCode(int eventCode) {
 
 		String q = "select * from event_view where e_code = ?";
-		return template.queryForObject(q, eventViewDTOMapper, eventCode);
+		return template.queryForObject(q, EventDTOMapper, eventCode);
 
 	}
 

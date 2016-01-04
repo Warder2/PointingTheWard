@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.FriendDAO;
+import persistance.dto.FriendDTO;
 import persistance.dto.FriendInfoDTO;
-import persistance.viewdto.FriendViewDTO;
 
 public class FriendDAOImpl implements FriendDAO {
 	private JdbcTemplate template;
@@ -23,16 +23,16 @@ public class FriendDAOImpl implements FriendDAO {
 		this.template = template;
 	}
 
-	public RowMapper<FriendViewDTO> friendViewDTOMapper = new RowMapper<FriendViewDTO>() {
+	public RowMapper<FriendDTO> FriendDTOMapper = new RowMapper<FriendDTO>() {
 
 		@Override
-		public FriendViewDTO mapRow(ResultSet rs, int rowNumber) throws SQLException {
+		public FriendDTO mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			// TODO Auto-generated method stub
-			FriendViewDTO friendViewDTO = new FriendViewDTO();
-			friendViewDTO.setEmail(rs.getString("email"));
-			friendViewDTO.setfEmail(rs.getString("f_email"));
+			FriendDTO FriendDTO = new FriendDTO();
+			FriendDTO.setEmail(rs.getString("email"));
+			FriendDTO.setFriendEmail(rs.getString("f_email"));
 			
-			return friendViewDTO;
+			return FriendDTO;
 		}	
 	};
 	public RowMapper<FriendInfoDTO> friendInfoViewDTOMapper = new RowMapper<FriendInfoDTO>() {
@@ -104,20 +104,20 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public List<FriendViewDTO> searchFriendAll() {
+	public List<FriendDTO> searchFriendAll() {
 		// TODO Auto-generated method stub
 		String searchSql="select * from friend_view";
-		return template.query(searchSql, friendViewDTOMapper);
+		return template.query(searchSql, FriendDTOMapper);
 		
 	}
 
 	@Override
-	public List<FriendViewDTO> searchFriends(String email) {
+	public List<FriendDTO> searchFriends(String email) {
 		// TODO Auto-generated method stub
 		String searchSql="select * from friend_view where email=?";
-		//List<FriendViewDTO> friendViewDTOs = new ArrayList<FriendViewDTO>();
+		//List<FriendDTO> FriendDTOs = new ArrayList<FriendDTO>();
 			
-		return template.query(searchSql, new Object[]{email}, friendViewDTOMapper);
+		return template.query(searchSql, new Object[]{email}, FriendDTOMapper);
 	}
 
 	@Override
