@@ -61,7 +61,15 @@ public class EventDAOTest {
 		}
 		
 	}
-	
+	public void eventSearch2(){
+		List<EventDTO> events = eventDAO.eventSearch(new EventDTO("바뀐 제목","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"));
+		System.out.println(events.size());
+		for(EventDTO event : events){
+			Assert.notNull(event);
+			System.out.println(event);
+		}
+		eventSearch();
+	}
 	public void eventSearchCode(){
 		EventDTO event = eventDAO.eventSearchCode(1);
 		Assert.notNull(event);
@@ -111,14 +119,14 @@ public class EventDAOTest {
 	}
 	
 	public void eventParticipantInfoSearchCode(){
-		List<EventParticipantInfoDTO> events = eventDAO.eventParticipantInfoSearchCode(1);
+		List<EventParticipantInfoDTO> events = eventDAO.eventParticipantInfoSearchCode(8);
 		System.out.println(events.size());
 		for(EventParticipantInfoDTO event : events){
 			Assert.notNull(event);
 			System.out.println(event);
 		}
 	}
-	@Test
+	
 	public void eventModify(){
 		eventDAO.eventModify(new EventDTO(2,"바뀐 제목","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"), new EventDTO("바뀐 제목","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"));
 		eventSearch();
@@ -126,6 +134,26 @@ public class EventDAOTest {
 	
 	public void eventModifyCode(){
 		eventDAO.eventModifyCode(1, new EventDTO("바뀐 제목","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"));
+		eventSearch();
+	}
+	
+	public void eventRegist(){
+		eventDAO.eventRegist(new EventDTO("추가 일정념","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"));
+		eventSearch();
+	}
+	
+	public void eventRegist2(){
+		eventDAO.eventRegist("추가 일정념","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염");
+		eventSearch();
+	}
+
+	public void eventParticipantRegist(){
+		eventDAO.eventParticipantRegist("SB", new EventDTO(8,"추가 일정념2","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"));
+		eventParticipantInfoSearchCode();
+	}
+	 @Test
+	public void eventDelete(){
+		eventDAO.eventDelete(8);
 		eventSearch();
 	}
 	

@@ -24,5 +24,6 @@ public interface EventSearchDAO {
 
 	public List<EventParticipantInfoDTO> eventParticipantInfoSearchCode(int eventCode);
 
+	public List<EventDTO> eventSearch(EventDTO event);
 	
 }

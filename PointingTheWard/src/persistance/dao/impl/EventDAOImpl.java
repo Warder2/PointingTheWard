@@ -139,7 +139,19 @@ public class EventDAOImpl implements EventDAO {
 		return template.queryForObject(q, EventDTOMapper, eventCode);
 
 	}
-
+	@Override
+	public List<EventDTO> eventSearch(EventDTO event) {
+		String q = "select * from event_view where "
+				+ "title = ? and "
+				+ "s_date = ? and "
+				+ "e_date = ? and "
+				+ "s_time = ? and "
+				+ "e_time = ? and "
+				+ "content = ? and "
+				+ "place = ? ";
+		
+		return template.query(q, EventDTOMapper, event.getTitle(),event.getsDate(),event.geteDate(),event.getsTime(),event.geteTime(),event.getContent(),event.getPlace());
+	}
 	// eventParticipant Info search
 
 	@Override
@@ -219,6 +231,8 @@ public class EventDAOImpl implements EventDAO {
 		
 		return template.query(q, EventDTOMapper);
 	}
+
+	
 
 
 }
