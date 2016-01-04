@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import persistance.dao.FriendDAO;
+import persistance.dto.FriendDTO;
 import persistance.dto.FriendInfoDTO;
-import persistance.viewdto.FriendViewDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/daoContext.xml")
@@ -91,21 +91,21 @@ public class FriendDAOTest {
 	}
 	
 	public void searchFriend() {
-		List<FriendViewDTO> friends = friendDao.searchFriendAll();
+		List<FriendDTO> friends = friendDao.searchFriendAll();
 
 		Assert.notNull(friends);
 		System.out.println("friendSearch : " + friends.size());
-		for (FriendViewDTO friend : friends) {
+		for (FriendDTO friend : friends) {
 			System.out.println(friend);
 		}
 	}
 	
 	public void searchFriends(){
 		System.out.println("searchFriends");
-		List<FriendViewDTO> friends = friendDao.searchFriends("email");
+		List<FriendDTO> friends = friendDao.searchFriends("email");
 		Assert.notNull(friends);
 		System.out.println("friendSearch : " + friends.size());
-		for (FriendViewDTO friend : friends) {
+		for (FriendDTO friend : friends) {
 			System.out.println(friend);
 		}
 	}
