@@ -8,17 +8,21 @@ import persistance.dto.EventParticipantInfoDTO;
 
 public interface EventSearchDAO {
 
+	public List<EventDTO> eventSearchAll();
+	
 	public EventDTO eventSearchCode(int eventCode);
-
-	public List<EventParticipantInfoDTO> eventParticipantInfoSearch(String email, int eventCode);
-
-	public List<EventParticipantInfoDTO> eventParticipantInfoSearchMail(String email);
-
-	public List<EventParticipantInfoDTO> eventParticipantInfoSearchCode(int eventCode);
 
 	public List<EventParticipantDTO> eventParticipantSearchMail(String email);
 
 	public List<EventParticipantDTO> eventParticipantSearchCode(int eventCode);
 
-	public List<EventParticipantDTO> eventParticipantSearch(String email, int eventCode);
+	public EventParticipantDTO eventParticipantSearch(String email, int eventCode);
+	
+	public List<EventParticipantInfoDTO> eventParticipantInfoSearchMail(String email);
+	
+	public EventParticipantInfoDTO eventParticipantInfoSearch(String email, int eventCode);
+
+	public List<EventParticipantInfoDTO> eventParticipantInfoSearchCode(int eventCode);
+
+	
 }

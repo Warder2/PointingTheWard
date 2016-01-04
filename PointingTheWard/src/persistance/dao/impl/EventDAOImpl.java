@@ -21,14 +21,15 @@ public class EventDAOImpl implements EventDAO {
 		public EventDTO mapRow(ResultSet rs, int index) throws SQLException {
 			EventDTO EventDTO = new EventDTO();
 
-			EventDTO.setCode(rs.getInt("code"));
+			EventDTO.setCode(rs.getInt("e_code"));
 			EventDTO.setTitle(rs.getString("title"));
+			EventDTO.seteDate(rs.getString("e_Date"));
+			EventDTO.setsDate(rs.getString("s_Date"));
+			EventDTO.seteTime(rs.getString("e_Time"));
+			EventDTO.setsTime(rs.getString("s_Time"));
 			EventDTO.setContent(rs.getString("content"));
-			EventDTO.seteDate(rs.getString("eDate"));
-			EventDTO.setsDate(rs.getString("sDate"));
-			EventDTO.seteTime(rs.getString("eTime"));
-			EventDTO.setsTime(rs.getString("sTime"));
 			EventDTO.setPlace(rs.getString("place"));
+			
 			return EventDTO;
 		}
 	};
@@ -38,7 +39,7 @@ public class EventDAOImpl implements EventDAO {
 		public EventParticipantDTO mapRow(ResultSet rs, int index) throws SQLException {
 			EventParticipantDTO eventPArticipantViewDTO = new EventParticipantDTO();
 
-			eventPArticipantViewDTO.setCode(rs.getInt("code"));
+			eventPArticipantViewDTO.setCode(rs.getInt("e_code"));
 			eventPArticipantViewDTO.setEmail(rs.getString("email"));
 			return eventPArticipantViewDTO;
 		}
@@ -99,27 +100,34 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public void eventModify(EventDTO oldEvent, EventDTO newEvent) {
-
+		// TODO Auto-generated method stub
+				String q = 
+						"update event_view set "
+						+ "title=?, "
+						+ "s_date=?, "
+						+ "e_date=?, "
+						+ "s_time=?, "
+						+ "e_time=?, "
+						+ "content=?, "
+						+ "place=?"
+						+ "where e_code= ?";
+				template.update(q,newEvent.getTitle(),newEvent.getsDate(),newEvent.geteDate(),newEvent.getsTime(),newEvent.geteTime(),newEvent.getContent(),newEvent.getPlace(),oldEvent.getCode());
 	}
 
 	@Override
-	public void eventModify(int eventCode, EventDTO newEvent) {
+	public void eventModifyCode(int eventCode, EventDTO newEvent) {
 		// TODO Auto-generated method stub
-
-	}
-
-	// eventParticipant Modify
-
-	@Override
-	public void eventParticipantModify(String email, EventDTO newEvent) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void eventParticipantModift(String email, int eventCode) {
-		// TODO Auto-generated method stub
-
+		String q = 
+				"update event_view set "
+				+ "title=?, "
+				+ "s_date=?, "
+				+ "e_date=?, "
+				+ "s_time=?, "
+				+ "e_time=?, "
+				+ "content=?, "
+				+ "place=?"
+				+ "where e_code= ?";
+		template.update(q,newEvent.getTitle(),newEvent.getsDate(),newEvent.geteDate(),newEvent.getsTime(),newEvent.geteTime(),newEvent.getContent(),newEvent.getPlace(),eventCode);
 	}
 
 	// event search
@@ -135,10 +143,10 @@ public class EventDAOImpl implements EventDAO {
 	// eventParticipant Info search
 
 	@Override
-	public List<EventParticipantInfoDTO> eventParticipantInfoSearch(String email, int eventCode) {
+	public EventParticipantInfoDTO eventParticipantInfoSearch(String email, int eventCode) {
 
 		String q = "select * from e_participant_info_view where email=? and e_code=?";
-		return template.query(q, eventParticipantInfoViewDTOMapper, email, eventCode);
+		return template.queryForObject(q, eventParticipantInfoViewDTOMapper, email, eventCode);
 	}
 
 	@Override
@@ -172,9 +180,9 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public List<EventParticipantDTO> eventParticipantSearch(String email, int eventCode) {
+	public EventParticipantDTO eventParticipantSearch(String email, int eventCode) {
 		String q = "select * from e_participant_view where e_code=? and email=?";
-		return template.query(q, eventParticipantViewDTOMapper, eventCode, email);
+		return template.queryForObject(q, eventParticipantViewDTOMapper, eventCode,email);
 	}
 
 	// event regist
@@ -202,6 +210,14 @@ public class EventDAOImpl implements EventDAO {
 	public void eventParticipantRegist(String email, EventDTO event) {
 		String q = "insert into e_participant_view(email,e_code) values(?,?)";
 		template.update(q,email,event.getCode());
+	}
+
+	@Override
+	public List<EventDTO> eventSearchAll() {
+		// TODO Auto-generated method stub
+		String q = "select * from event_view";
+		
+		return template.query(q, EventDTOMapper);
 	}
 
 
