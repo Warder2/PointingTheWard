@@ -67,7 +67,7 @@ select * from group_view where name='name';
 
 update group_view set name='name1' where g_code=0;
 
-delete from group_view where g_code=0;
+delete from group_view where G_CODE=0;
 
 insert into group_view(g_code, name, owner)
 values(group_sequence.nextval, 'name', 'email');

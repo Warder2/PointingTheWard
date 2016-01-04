@@ -1,12 +1,17 @@
 package controller;
 
 import org.springframework.context.support.AbstractXmlApplicationContext;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import command.MemberCommand;
 import model.beans.Member;
+import persistance.dto.MemberDTO;
 import service.Service;
 import service.ServiceRequest;
 
@@ -15,15 +20,26 @@ public class MemberController {
 	private AbstractXmlApplicationContext context;
 
 	@RequestMapping(value={"/memberSignUp"})
-	public ModelAndView memberSignUp(@RequestParam(value="signUp") Member member){
+	public ModelAndView memberSignUp(@ModelAttribute("memberCommand") MemberCommand memberCommand){
 		System.out.println("memberSignUp");
 		Service service = context.getBean("memberSignUpService",Service.class);
+		
 		//1. 유효성 체크
 		//2. Member type으로 casting
 		//3. service execute
+		Member member = new Member();
+		//member.setEmail(memberCommand.getEmail());
+		//여기서 set
+		
 		ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
 		serviceRequest.addObject("memberInfo", member);
-		service.execute(serviceRequest);
+		try{
+			service.execute(serviceRequest);
+		}catch(DuplicateKeyException dke){
+			//이미 있을때
+		}catch(DataIntegrityViolationException dive){
+			//무결성 걸렸을 때
+		}
 		
 		ModelAndView view = new ModelAndView();
 		view.setViewName("");//jsp명
