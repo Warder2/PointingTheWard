@@ -1,0 +1,28 @@
+
+.panel, .flip {
+    padding: 5px;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+}
+
+.panel {
+	margin : 0 auto;
+    display: none;
+}
+
+.time, .name {
+	width: 30%;
+	text-align: center;
+}
+
+.title, .mail{
+	text-align: left;
+}
+
+img{
+	width:300px;
+	height:200px;
+	margin 0 auto;
+	
+	
+}

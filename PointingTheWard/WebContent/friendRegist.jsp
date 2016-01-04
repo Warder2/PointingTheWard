@@ -37,8 +37,7 @@
 			<h2>Friends List</h2>
 
 			<c:forEach var="group" items="${gList}" varStatus="status">
-				<div class="flip">
-					<input type="checkbox">${group.name}</div>
+				<div class="flip"><input type="checkbox">${group.name}</div>
 				<div class="panel" id="${status.index}">
 					<c:forEach var="friend" items="${group.fList}">
 						<fieldset>
@@ -58,9 +57,7 @@
 
 
 
-			<div class="flip">
-				<input type="checkbox">멀티방
-			</div>
+			<div class="flip"><input type="checkbox">멀티방</div>
 			<div class="panel" id="0">
 				<fieldset>
 					<legend>장해</legend>
@@ -72,9 +69,7 @@
 				</fieldset>
 			</div>
 
-			<div class="flip">
-				<input type="checkbox">고3방
-			</div>
+			<div class="flip"><input type="checkbox">고3방</div>
 			<div class="panel" id="1">
 				<fieldset>
 					<legend>대지니</legend>
@@ -96,10 +91,8 @@
 			</fieldset>
 
 			<p class="submit">
-				<input type="submit" id="delete" name="commit" value="delete"><input
-					type="submit" name="commit" value="Check"><input
-					type="submit" name="commit" value="G-Add"> <input
-					type="submit" name="commit" value="search">
+				<input type="submit" id="delete" name="commit" value="Check"><input
+					type="submit" name="commit" value="Back">
 			</p>
 		</div>
 	</div>
