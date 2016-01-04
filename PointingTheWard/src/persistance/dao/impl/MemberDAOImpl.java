@@ -13,6 +13,7 @@ import model.beans.Transportation;
 import persistance.dao.MemberDAO;
 import persistance.dto.MemberDTO;
 import persistance.dto.MemberODTO;
+import persistance.dto.MemberPDTO;
 
 public class MemberDAOImpl implements MemberDAO{
 	private JdbcTemplate template;
@@ -66,7 +67,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void modifyMemberPwd(String email, String pwd) {
-		template.update("update member_p_view set pwd=? where email=?",  pwd, email);
+		template.update("update member_view set pwd=? where email=?",  pwd, email);
 	}
 
 	@Override
@@ -76,7 +77,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void modifyMemberOp(String email, String name, String location, Transportation transportation) {
-		template.update("update member_o_view set name=?, location=?, transportation=? where email=?",
+		template.update("update member_view set name=?, location=?, transportation=? where email=?",
 				name, location, transportation.getStr(), email);
 	}
 
@@ -93,12 +94,12 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void modifyMemberLocation(String email, String location) {
-		template.update("update member_o_view set location=? where email=?", location, email);
+		template.update("update member_view set location=? where email=?", location, email);
 	}
 	
 	@Override
 	public void modifyTransportation(String email, Transportation transportation) {
-		template.update("update member_o_view set transportation=? where email=?", transportation.getStr(), email);
+		template.update("update member_view set transportation=? where email=?", transportation.getStr(), email);
 	}
 
 	@Override
@@ -167,6 +168,20 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public List<MemberODTO> searchMemberOpByName(String name) {
 		return template.query("select * from member_o_view where name=?", memberOViewDTOMapper, name);
+	}
+	
+	@Override
+	public MemberPDTO searchMemberP(String email) {
+		return template.queryForObject("select * from member_p_view where email=?", new RowMapper<MemberPDTO>(){
+			@Override
+			public MemberPDTO mapRow(ResultSet rs, int index) throws SQLException {
+				MemberPDTO memberPDTO = new MemberPDTO();
+				memberPDTO.setEmail(rs.getString("email"));
+				memberPDTO.setPwd(rs.getString("pwd"));
+				memberPDTO.setName(rs.getString("name"));
+				return memberPDTO;
+			}
+		}, email);
 	}
 
 	@Override
