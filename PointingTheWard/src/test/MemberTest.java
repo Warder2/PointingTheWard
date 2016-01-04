@@ -1,10 +1,13 @@
 package test;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,9 +50,15 @@ public class MemberTest {
 		Assert.isTrue(members[0].equals(memberDTO));
 	}
 	
+	@Test
+	public void signUpMembers(){
+		System.out.println("signUpMembers");
+		memberDao.signUpMembers(members);
+	}
+	
 	@Test(expected=DuplicateKeyException.class)
-	public void signUpDuplicate(){
-		System.out.println("signUpDuplicate");
+	public void signUpDuplicateException(){
+		System.out.println("signUpDuplicateException");
 		
 		memberDao.signUpMember(members[0]);
 		memberDao.signUpMember(members[0]);
@@ -67,10 +76,28 @@ public class MemberTest {
 	
 	@Test(expected=EmptyResultDataAccessException.class)
 	public void searchMemberEmpty(){
-		System.out.println("searchMember");
+		System.out.println("searchMemberEmpty");
 		
 		MemberDTO memberDTO = memberDao.searchMember(members[0].getEmail());
 		
 		Assert.notNull(memberDTO);
+	}
+	
+	@Test
+	public void searchMembers(){
+		System.out.println("searchMembers");
+		
+		signUpMembers();
+		
+		List<MemberDTO> list = memberDao.searchMembers(members[0].getEmail(), members[1].getEmail(), members[2].getEmail());
+		Assert.notEmpty(list);
+		System.out.println(list);
+	}
+	
+	@Test
+	public void deleteMember(){
+		System.out.println("deleteMember");
+		
+		
 	}
 }

@@ -163,7 +163,8 @@ END;
 	
 	delete from g_participant_view where email=:old.email
 
-
+drop trigger member_delete_trigger;
+drop trigger e_participant_delete_trigger;
 	
 	
 insert into member_view(email, name, pwd, location, transportation) 
