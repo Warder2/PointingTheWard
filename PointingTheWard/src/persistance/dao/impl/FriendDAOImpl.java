@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.FriendDAO;
-import persistance.viewdto.FriendInfoViewDTO;
+import persistance.dto.FriendInfoDTO;
 import persistance.viewdto.FriendViewDTO;
 
 public class FriendDAOImpl implements FriendDAO {
@@ -35,12 +35,12 @@ public class FriendDAOImpl implements FriendDAO {
 			return friendViewDTO;
 		}	
 	};
-	public RowMapper<FriendInfoViewDTO> friendInfoViewDTOMapper = new RowMapper<FriendInfoViewDTO>() {
+	public RowMapper<FriendInfoDTO> friendInfoViewDTOMapper = new RowMapper<FriendInfoDTO>() {
 
 		@Override
-		public FriendInfoViewDTO mapRow(ResultSet rs, int rowNumber) throws SQLException {
+		public FriendInfoDTO mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			// TODO Auto-generated method stub
-			FriendInfoViewDTO friendInfoViewDTO = new FriendInfoViewDTO();
+			FriendInfoDTO friendInfoViewDTO = new FriendInfoDTO();
 			friendInfoViewDTO.setEmail(rs.getString("email"));
 			friendInfoViewDTO.setfEmail(rs.getString("f_email"));
 			friendInfoViewDTO.setfName(rs.getString("f_name"));
@@ -121,17 +121,17 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public List<FriendInfoViewDTO> searchFriendsInfoAll() {
+	public List<FriendInfoDTO> searchFriendsInfoAll() {
 		return template.query("select * from friend_info_view", friendInfoViewDTOMapper);
 	}
 
 	@Override
-	public List<FriendInfoViewDTO> searchFriendsInfoEmail(String email) {
+	public List<FriendInfoDTO> searchFriendsInfoEmail(String email) {
 		return template.query("select * from friend_info_view where email=?", friendInfoViewDTOMapper, email);
 	}
 
 	@Override
-	public FriendInfoViewDTO searchFriendInfoEmail(String email, String friendEmail) {
+	public FriendInfoDTO searchFriendInfoEmail(String email, String friendEmail) {
 		// TODO Auto-generated method stub
 		String searchSql = "select * from friend_info_view where email=? and f_email=?";
 		

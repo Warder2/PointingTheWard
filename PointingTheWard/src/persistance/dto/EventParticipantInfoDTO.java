@@ -1,7 +1,8 @@
-package persistance.viewdto;
+package persistance.dto;
 
-public class EventViewDTO {
-	private int code;
+public class EventParticipantInfoDTO {
+	private int eventCode;
+	private String email;
 	private String title;
 	private String sDate;
 	private String eDate;
@@ -10,15 +11,16 @@ public class EventViewDTO {
 	private String content;
 	private String place;
 
-	public EventViewDTO() {
+	public EventParticipantInfoDTO() {
 		super();
 	}
 
-	public EventViewDTO(int code, String title, String sDate, String eDate, String sTime, String eTime, String content,
-			String place) {
+	public EventParticipantInfoDTO(int eventCode, String email, String title, String sDate, String eDate,
+			String sTime, String eTime, String content, String place) {
 		super();
-		this.title =title;
-		this.code = code;
+		this.eventCode = eventCode;
+		this.email = email;
+		this.title = title;
 		this.sDate = sDate;
 		this.eDate = eDate;
 		this.sTime = sTime;
@@ -27,12 +29,28 @@ public class EventViewDTO {
 		this.place = place;
 	}
 
-	public int getCode() {
-		return code;
+	public int getEventCode() {
+		return eventCode;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
+	public void setEventCode(int eventCode) {
+		this.eventCode = eventCode;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getsDate() {
@@ -83,19 +101,10 @@ public class EventViewDTO {
 		this.place = place;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	@Override
 	public String toString() {
-		return "EventViewDTO [code=" + code + ", title=" + title + ", sDate=" + sDate + ", eDate=" + eDate + ", sTime="
-				+ sTime + ", eTime=" + eTime + ", content=" + content + ", place=" + place + "]";
+		return "EventParticipantInfoViewDTO [eventCode=" + eventCode + ", email=" + email + ", title=" + title
+				+ ", sDate=" + sDate + ", eDate=" + eDate + ", sTime=" + sTime + ", eTime=" + eTime + ", content="
+				+ content + ", place=" + place + "]";
 	}
-
-
 }

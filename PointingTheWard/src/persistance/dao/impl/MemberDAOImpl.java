@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.beans.Transportation;
 import persistance.dao.MemberDAO;
 import persistance.dto.MemberDTO;
-import persistance.viewdto.MemberOViewDTO;
+import persistance.dto.MemberODTO;
 
 public class MemberDAOImpl implements MemberDAO{
 	private JdbcTemplate template;
@@ -29,11 +29,11 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 	};
 	
-	private RowMapper<MemberOViewDTO> memberOViewDTOMapper = new RowMapper<MemberOViewDTO>() {
+	private RowMapper<MemberODTO> memberOViewDTOMapper = new RowMapper<MemberODTO>() {
 		
 		@Override
-		public MemberOViewDTO mapRow(ResultSet rs, int index) throws SQLException {
-			MemberOViewDTO memberOViewDTO = new MemberOViewDTO();
+		public MemberODTO mapRow(ResultSet rs, int index) throws SQLException {
+			MemberODTO memberOViewDTO = new MemberODTO();
 			memberOViewDTO.setEmail(rs.getString("email"));
 			memberOViewDTO.setName(rs.getString("name"));
 			memberOViewDTO.setLocation(rs.getString("location"));
@@ -70,7 +70,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void modifyMemberOp(MemberOViewDTO member) {
+	public void modifyMemberOp(MemberODTO member) {
 		modifyMemberOp(member.getEmail(), member.getName(), member.getLocation(), member.getTransportation());
 	}
 
@@ -136,19 +136,19 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public List<MemberOViewDTO> searchMemberOpAll() {
+	public List<MemberODTO> searchMemberOpAll() {
 		return template.query("select * from member_o_view", memberOViewDTOMapper);
 	}
 
 	@Override
-	public MemberOViewDTO searchMemberOp(String email) {
+	public MemberODTO searchMemberOp(String email) {
 		return template.queryForObject("select * from member_o_view where email=?", memberOViewDTOMapper, email);
 	}
 
 	@Override
 	@Transactional
-	public List<MemberOViewDTO> searchMemberOps(String... emails) {
-		List<MemberOViewDTO> oViewDTOs = new ArrayList<MemberOViewDTO>();
+	public List<MemberODTO> searchMemberOps(String... emails) {
+		List<MemberODTO> oViewDTOs = new ArrayList<MemberODTO>();
 		for(String email : emails){
 			oViewDTOs.add(searchMemberOp(email));
 		}
@@ -156,8 +156,8 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public List<MemberOViewDTO> searchMemberOps(List<String> emails) {
-		List<MemberOViewDTO> oViewDTOs = new ArrayList<MemberOViewDTO>();
+	public List<MemberODTO> searchMemberOps(List<String> emails) {
+		List<MemberODTO> oViewDTOs = new ArrayList<MemberODTO>();
 		for(String email : emails){
 			oViewDTOs.add(searchMemberOp(email));
 		}
@@ -165,7 +165,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public List<MemberOViewDTO> searchMemberOpByName(String name) {
+	public List<MemberODTO> searchMemberOpByName(String name) {
 		return template.query("select * from member_o_view where name=?", memberOViewDTOMapper, name);
 	}
 

@@ -1,8 +1,8 @@
-package persistance.viewdto;
+package persistance.dto;
 
 import model.beans.Transportation;
 
-public class MemberOViewDTO {
+public class MemberODTO {
 	
 		private String email;
 		private String name;
@@ -10,12 +10,12 @@ public class MemberOViewDTO {
 		private Transportation transportation;
 		
 		
-		public MemberOViewDTO(){
+		public MemberODTO(){
 			
 		}
 
 
-		public MemberOViewDTO(String email, String name, String location, Transportation transportation) {
+		public MemberODTO(String email, String name, String location, Transportation transportation) {
 			super();
 			this.email = email;
 			this.name = name;

@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import persistance.dao.FriendDAO;
-import persistance.viewdto.FriendInfoViewDTO;
+import persistance.dto.FriendInfoDTO;
 import persistance.viewdto.FriendViewDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -112,27 +112,27 @@ public class FriendDAOTest {
 	
 	public void searchFriendsInfoAll(){
 		System.out.println("searchFriends");
-		List<FriendInfoViewDTO> friends = friendDao.searchFriendsInfoAll();
+		List<FriendInfoDTO> friends = friendDao.searchFriendsInfoAll();
 		Assert.notNull(friends);
 		System.out.println("friendSearch : " + friends.size());
-		for (FriendInfoViewDTO friend : friends) {
+		for (FriendInfoDTO friend : friends) {
 			System.out.println(friend);
 		}
 	}
 	
 	public void searchFriendsInfoEmail(){
 		System.out.println("searchFriendsInfoEmail");
-		List<FriendInfoViewDTO> friends = friendDao.searchFriendsInfoEmail("email");
+		List<FriendInfoDTO> friends = friendDao.searchFriendsInfoEmail("email");
 		Assert.notNull(friends);
 		System.out.println("friendSearch : " + friends.size());
-		for (FriendInfoViewDTO friend : friends) {
+		for (FriendInfoDTO friend : friends) {
 			System.out.println(friend);
 		}
 	}
 	@Test
 	public void searchFriendInfoEmail(){
 		System.out.println("searchFriendInfoEmail");
-		FriendInfoViewDTO friendInfo = friendDao.searchFriendInfoEmail("email", "email1");
+		FriendInfoDTO friendInfo = friendDao.searchFriendInfoEmail("email", "email1");
 		Assert.notNull(friendInfo);
 		System.out.println(friendInfo);
 	}

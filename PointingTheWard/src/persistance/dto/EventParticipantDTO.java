@@ -1,30 +1,38 @@
-package persistance.viewdto;
+package persistance.dto;
 
-public class EventParticipantViewDTO {
+public class EventParticipantDTO {
 	private int code;
 	private String email;
-	public EventParticipantViewDTO() {
-		super();
+
+	public EventParticipantDTO() {
+		this(0, "email");
 	}
-	public EventParticipantViewDTO(int code, String email) {
+
+	public EventParticipantDTO(int code, String email) {
 		super();
 		this.code = code;
 		this.email = email;
 	}
+
 	public int getCode() {
 		return code;
 	}
+
 	public void setCode(int code) {
 		this.code = code;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	@Override
 	public String toString() {
-		return "EventParticipantViewDTO [code=" + code + ", email=" + email + "]";
+		return "EventParticipant [code=" + code + ", email=" + email + "]";
 	}
+
 }

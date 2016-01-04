@@ -12,7 +12,7 @@ import model.beans.Friend;
 import model.beans.Group;
 import persistance.dao.GroupDAO;
 import persistance.dto.GroupDTO;
-import persistance.viewdto.GroupParticipantInfoViewDTO;
+import persistance.dto.GroupParticipantInfoDTO;
 
 public class GroupDAOImpl implements GroupDAO{
 	private JdbcTemplate template;
@@ -26,11 +26,11 @@ public class GroupDAOImpl implements GroupDAO{
 			return groupDTO;
 		}
 	};
-	private RowMapper<GroupParticipantInfoViewDTO> groupParticipantInfoViewDTOMapper = new RowMapper<GroupParticipantInfoViewDTO>() {
+	private RowMapper<GroupParticipantInfoDTO> groupParticipantInfoViewDTOMapper = new RowMapper<GroupParticipantInfoDTO>() {
 		
 		@Override
-		public GroupParticipantInfoViewDTO mapRow(ResultSet rs, int index) throws SQLException {
-			GroupParticipantInfoViewDTO groupParticipantInfoViewDTO = new GroupParticipantInfoViewDTO();
+		public GroupParticipantInfoDTO mapRow(ResultSet rs, int index) throws SQLException {
+			GroupParticipantInfoDTO groupParticipantInfoViewDTO = new GroupParticipantInfoDTO();
 			groupParticipantInfoViewDTO.setGroupCode(rs.getInt("g_code"));
 			groupParticipantInfoViewDTO.setEmail(rs.getString("email"));
 			groupParticipantInfoViewDTO.setGroupName(rs.getString("name"));
@@ -149,12 +149,12 @@ public class GroupDAOImpl implements GroupDAO{
 	}
 
 	@Override
-	public List<GroupParticipantInfoViewDTO> searchGroupParticipants(int gCode) {
+	public List<GroupParticipantInfoDTO> searchGroupParticipants(int gCode) {
 		return template.query("select * from g_participant_info_view where g_code=?", groupParticipantInfoViewDTOMapper);
 	}
 
 	@Override
-	public GroupParticipantInfoViewDTO searchGroupParticipant(int gCode, String email) {
+	public GroupParticipantInfoDTO searchGroupParticipant(int gCode, String email) {
 		// TODO Auto-generated method stub
 		return template.queryForObject("select * from g_participant_info_view where email=? and g_code=?", groupParticipantInfoViewDTOMapper, email, gCode);
 	}

@@ -13,8 +13,8 @@ import model.beans.Transportation;
 import persistance.dao.EventDAO;
 import persistance.dao.MemberDAO;
 import persistance.dto.EventDTO;
+import persistance.dto.EventParticipantInfoDTO;
 import persistance.dto.MemberDTO;
-import persistance.viewdto.EventParticipantInfoViewDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/daoContext.xml")
@@ -23,16 +23,16 @@ public class EventDAOTest {
 	@Autowired
 	private EventDAO eventDAO;
 	private EventDTO[] events;
-	private EventParticipantInfoViewDTO[] eventparticipants;
+	private EventParticipantInfoDTO[] eventparticipants;
 	private MemberDTO[] members;
 	private MemberDAO memberDao;
 
 		@Before
 		public void setUp(){
-			eventparticipants = new EventParticipantInfoViewDTO[]{
-					new EventParticipantInfoViewDTO(1,"email1", "title", "sDate" , "eDate" , "sTime" , "eTime" , "content", "place"),
-					new EventParticipantInfoViewDTO(2,"email1","title2", "sDate" , "eDate" , "sTime" , "eTime" , "content", "place"),
-					new EventParticipantInfoViewDTO(3,"email3","title3", "sDate" , "eDate" , "sTime" , "eTime" , "content", "place"),
+			eventparticipants = new EventParticipantInfoDTO[]{
+					new EventParticipantInfoDTO(1,"email1", "title", "sDate" , "eDate" , "sTime" , "eTime" , "content", "place"),
+					new EventParticipantInfoDTO(2,"email1","title2", "sDate" , "eDate" , "sTime" , "eTime" , "content", "place"),
+					new EventParticipantInfoDTO(3,"email3","title3", "sDate" , "eDate" , "sTime" , "eTime" , "content", "place"),
 					
 			};
 			

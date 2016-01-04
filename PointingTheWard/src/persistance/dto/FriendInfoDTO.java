@@ -1,16 +1,16 @@
-package persistance.viewdto;
+package persistance.dto;
 
-public class FriendInfoViewDTO {
+public class FriendInfoDTO {
 	private String email;
 	private String fEmail;
 	private String fName;
 	private String fLocation;
 	private String fTransportation;
 	
-	public FriendInfoViewDTO(){
+	public FriendInfoDTO(){
 		
 	}
-	public FriendInfoViewDTO(String email, String fEmail, String fName, String fLocation, String fTransportation) {
+	public FriendInfoDTO(String email, String fEmail, String fName, String fLocation, String fTransportation) {
 		super();
 		this.email = email;
 		this.fEmail = fEmail;

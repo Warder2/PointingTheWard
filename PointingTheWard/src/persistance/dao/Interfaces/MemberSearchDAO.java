@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.beans.Member;
 import persistance.dto.MemberDTO;
-import persistance.viewdto.MemberOViewDTO;
+import persistance.dto.MemberODTO;
 
 public interface MemberSearchDAO {
 	//search all
@@ -18,9 +18,9 @@ public interface MemberSearchDAO {
 	List<MemberDTO> searchMemberByName(String name);
 	
 	//search memberOp
-	List<MemberOViewDTO> searchMemberOpAll();
-	MemberOViewDTO searchMemberOp(String email);
-	List<MemberOViewDTO> searchMemberOps(String... emails);
-	List<MemberOViewDTO> searchMemberOps(List<String> emails);
-	List<MemberOViewDTO> searchMemberOpByName(String name);
+	List<MemberODTO> searchMemberOpAll();
+	MemberODTO searchMemberOp(String email);
+	List<MemberODTO> searchMemberOps(String... emails);
+	List<MemberODTO> searchMemberOps(List<String> emails);
+	List<MemberODTO> searchMemberOpByName(String name);
 }

@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import persistance.dao.EventDAO;
 import persistance.dto.EventDTO;
-import persistance.viewdto.EventParticipantInfoViewDTO;
-import persistance.viewdto.EventParticipantViewDTO;
+import persistance.dto.EventParticipantInfoDTO;
+import persistance.viewdto.EventParticipantDTO;
 import persistance.viewdto.EventViewDTO;
 
 public class EventDAOImpl implements EventDAO {
@@ -34,10 +34,10 @@ public class EventDAOImpl implements EventDAO {
 		}
 	};
 
-	private RowMapper<EventParticipantViewDTO> eventParticipantViewDTOMapper = new RowMapper<EventParticipantViewDTO>() {
+	private RowMapper<EventParticipantDTO> eventParticipantViewDTOMapper = new RowMapper<EventParticipantDTO>() {
 
-		public EventParticipantViewDTO mapRow(ResultSet rs, int index) throws SQLException {
-			EventParticipantViewDTO eventPArticipantViewDTO = new EventParticipantViewDTO();
+		public EventParticipantDTO mapRow(ResultSet rs, int index) throws SQLException {
+			EventParticipantDTO eventPArticipantViewDTO = new EventParticipantDTO();
 
 			eventPArticipantViewDTO.setCode(rs.getInt("code"));
 			eventPArticipantViewDTO.setEmail(rs.getString("email"));
@@ -45,10 +45,10 @@ public class EventDAOImpl implements EventDAO {
 		}
 	};
 
-	private RowMapper<EventParticipantInfoViewDTO> eventParticipantInfoViewDTOMapper = new RowMapper<EventParticipantInfoViewDTO>() {
+	private RowMapper<EventParticipantInfoDTO> eventParticipantInfoViewDTOMapper = new RowMapper<EventParticipantInfoDTO>() {
 
-		public EventParticipantInfoViewDTO mapRow(ResultSet rs, int index) throws SQLException {
-			EventParticipantInfoViewDTO eventParticipantInfoViewDTO = new EventParticipantInfoViewDTO();
+		public EventParticipantInfoDTO mapRow(ResultSet rs, int index) throws SQLException {
+			EventParticipantInfoDTO eventParticipantInfoViewDTO = new EventParticipantInfoDTO();
 
 			eventParticipantInfoViewDTO.setEventCode(rs.getInt("e_code"));
 			eventParticipantInfoViewDTO.setEmail(rs.getString("email"));
@@ -136,14 +136,14 @@ public class EventDAOImpl implements EventDAO {
 	// eventParticipant Info search
 
 	@Override
-	public List<EventParticipantInfoViewDTO> eventParticipantInfoSearch(String email, int eventCode) {
+	public List<EventParticipantInfoDTO> eventParticipantInfoSearch(String email, int eventCode) {
 
 		String q = "select * from e_participant_info_view where email=? and e_code=?";
 		return template.query(q, eventParticipantInfoViewDTOMapper, email, eventCode);
 	}
 
 	@Override
-	public List<EventParticipantInfoViewDTO> eventParticipantInfoSearchMail(String email) {
+	public List<EventParticipantInfoDTO> eventParticipantInfoSearchMail(String email) {
 
 		String q = "select * from e_participant_info_view where email=?";
 		return template.query(q, eventParticipantInfoViewDTOMapper, email);
@@ -151,7 +151,7 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public List<EventParticipantInfoViewDTO> eventParticipantInfoSearchCode(int eventCode) {
+	public List<EventParticipantInfoDTO> eventParticipantInfoSearchCode(int eventCode) {
 
 		String q = "select * from e_participant_info_view where e_code=?";
 		return template.query(q, eventParticipantInfoViewDTOMapper, eventCode);
@@ -161,19 +161,19 @@ public class EventDAOImpl implements EventDAO {
 	// eventParticipant search
 
 	@Override
-	public List<EventParticipantViewDTO> eventParticipantSearchMail(String email) {
+	public List<EventParticipantDTO> eventParticipantSearchMail(String email) {
 		String q = "select * from e_participant_view where email=?";
 		return template.query(q, eventParticipantViewDTOMapper, email);
 	}
 
 	@Override
-	public List<EventParticipantViewDTO> eventParticipantSearchCode(int eventCode) {
+	public List<EventParticipantDTO> eventParticipantSearchCode(int eventCode) {
 		String q = "select * from e_participant_view where e_code=?";
 		return template.query(q, eventParticipantViewDTOMapper, eventCode);
 	}
 
 	@Override
-	public List<EventParticipantViewDTO> eventParticipantSearch(String email, int eventCode) {
+	public List<EventParticipantDTO> eventParticipantSearch(String email, int eventCode) {
 		String q = "select * from e_participant_view where e_code=? and email=?";
 		return template.query(q, eventParticipantViewDTOMapper, eventCode, email);
 	}

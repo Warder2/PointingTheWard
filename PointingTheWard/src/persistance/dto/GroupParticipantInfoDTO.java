@@ -1,6 +1,6 @@
-package persistance.viewdto;
+package persistance.dto;
 
-public class GroupParticipantInfoViewDTO {
+public class GroupParticipantInfoDTO {
 	private String email;
 	private String name;
 	private String location;
@@ -8,11 +8,11 @@ public class GroupParticipantInfoViewDTO {
 	private int groupCode;
 	private String groupName;
 
-	public GroupParticipantInfoViewDTO() {
+	public GroupParticipantInfoDTO() {
 		super();
 	}
 
-	public GroupParticipantInfoViewDTO(String email, String name, String location, String transportation, int groupCode,
+	public GroupParticipantInfoDTO(String email, String name, String location, String transportation, int groupCode,
 			String groupName) {
 		super();
 		this.email = email;
