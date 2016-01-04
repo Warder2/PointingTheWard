@@ -145,24 +145,6 @@ select * from e_participant_info_view where email='email';
 select * from e_participant_info_view where email='email' and e_code=1;
 
 
-CREATE OR REPLACE trigger member_delete_trigger
-before DELETE ON member_tb
-FOR EACH ROW
-BEGIN
-	delete from FRIEND_view where email = :old.email or f_email = :old.email;
-	
-END;
-	if exists(select email from e_participant_view where e_code=(select e_code from e_participant_view where email=:old.email))
-	then
-	else delete from event_view where e_code=(select e_code from e_participant_view where email=:old.email)
-	end if
-	
-	if exists(select email from g_participant_view where g_code=(select g_code from g_participant_view where email=:old.email))
-	then
-	else delete from group_view where g_code=(select g_code from g_participant_view where email=:old.email)
-	end if
-	
-	delete from g_participant_view where email=:old.email
 
 drop trigger member_delete_trigger;
 drop trigger e_participant_delete_trigger;
