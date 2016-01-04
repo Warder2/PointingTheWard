@@ -6,7 +6,7 @@ import persistance.dto.GroupDTO;
 
 public interface GroupModifyDAO {
 	//modify group
-	void modifyGroup(int gCode, GroupDTO group);
+	void modifyGroup(GroupDTO group);
 	void modifyGroup(int gCode, String name);
 	
 	//그룹원 추가

@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.GroupDAO;
 import persistance.dto.FriendDTO;
@@ -22,6 +21,7 @@ public class GroupDAOImpl implements GroupDAO{
 			GroupDTO groupDTO = new GroupDTO();
 			groupDTO.setCode(rs.getInt("g_code"));
 			groupDTO.setName(rs.getString("name"));
+			groupDTO.setOwner(rs.getString("owner"));
 			return groupDTO;
 		}
 	};
@@ -30,11 +30,12 @@ public class GroupDAOImpl implements GroupDAO{
 		@Override
 		public GroupParticipantInfoDTO mapRow(ResultSet rs, int index) throws SQLException {
 			GroupParticipantInfoDTO groupParticipantInfoViewDTO = new GroupParticipantInfoDTO();
-			groupParticipantInfoViewDTO.setGroupCode(rs.getInt("g_code"));
+			groupParticipantInfoViewDTO.setGCode(rs.getInt("g_code"));
 			groupParticipantInfoViewDTO.setEmail(rs.getString("email"));
-			groupParticipantInfoViewDTO.setGroupName(rs.getString("name"));
+			groupParticipantInfoViewDTO.setGName(rs.getString("name"));
 			groupParticipantInfoViewDTO.setLocation(rs.getString("location"));
 			groupParticipantInfoViewDTO.setTransportation(rs.getString("transportation"));
+			groupParticipantInfoViewDTO.setOwner(rs.getString("owner"));
 			return groupParticipantInfoViewDTO;
 		}
 	};
@@ -44,118 +45,140 @@ public class GroupDAOImpl implements GroupDAO{
 	}
 
 	@Override
-	public void createGroup(GroupDTO group) {
-		
-	}
-	
-	@Override
-	public void createGroup(String name, String... ids) {
-		
-	}
-
-	@Override
-	public void createGroup(String name, List<String> ids) {
-		template.update("insert into group_view(g_code, name) values(group_sequence.nextval, ?)", name);
-		for(String id : ids){
-			template.update("insert into g_participant_view(g_code, email) values(?, ?)", id);
-		}
-	}
-	
-	@Override
 	public void deleteGroupAll() {
-		template.update("delete from group_view");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void deleteGroup(int gCode) {
-		template.update("delete from group_view where gCode=?", gCode);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void deleteGroup(int gCode, String email) {
-		template.update("delete from group_view where gCode=? and email=?", gCode, email);
+	public void deleteGroups(String owner) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	@Transactional
-	public void deleteGroups(String email, int... gCodes) {
-		for(int gCode : gCodes){
-			template.update("delete from g_participant_view where email=? and g_code=?", email, gCode);
-		}
+	public void deleteGroups(int... gCodes) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void deleteGroups(String email, List<Integer> gCodes) {
-		for(int gCode : gCodes){
-			template.update("delete from g_participant_view where email=? and g_code=?", email, gCode);
-		}
+	public void deleteGroups(List<Integer> gCodes) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void modifyGroup(int gCode, GroupDTO group) {
-		modifyGroup(gCode, group.getName());
+	public void deleteGroups(String owner, int... gCodes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteGroups(String owner, List<Integer> gCodes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteGroupParticipant(int gCode, String email) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteGroupParticipants(int gCode, String... emails) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteGroupParticipants(int gCode, List<String> emails) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modifyGroup(GroupDTO group) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void modifyGroup(int gCode, String name) {
-		template.update("update g_participant_view set name=? where g_code=?", name, gCode);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void addFriend(int gCode, String email) {
-		template.update("insert into g_participant_view(g_code, email) values(?, ?)", gCode, email);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	@Transactional
 	public void addFriends(int gCode, String... emails) {
-		for(String email : emails){
-			addFriend(gCode, email);
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void addFriend(int gCode, FriendDTO friend) {
-		addFriend(gCode, friend.getEmail());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	@Transactional
 	public void addFriends(int gCode, FriendDTO... friends) {
 		// TODO Auto-generated method stub
-		for(FriendDTO friend : friends){
-			addFriend(gCode, friend);
-		}
+		
 	}
 
 	@Override
-	@Transactional
 	public void addFriends(int gCode, List<FriendDTO> friends) {
 		// TODO Auto-generated method stub
-		for(FriendDTO friend : friends){
-			addFriend(gCode, friend);
-		}
+		
 	}
 
 	@Override
-	public List<GroupDTO> searchGroupInfoAll() {
+	public List<GroupDTO> searchGroupAll() {
 		return template.query("select * from group_view", groupDTOMapper);
 	}
 
 	@Override
-	public List<GroupDTO> searchGroupInfo(String email) {
-		return template.query("select * from group_view where email=?", groupDTOMapper, email);
+	public List<GroupDTO> searchGroup(String owner) {
+		return template.query("select * from group_view where owner=?", groupDTOMapper, owner);
 	}
 
 	@Override
-	public List<GroupParticipantInfoDTO> searchGroupParticipants(int gCode) {
-		return template.query("select * from g_participant_info_view where g_code=?", groupParticipantInfoViewDTOMapper);
+	public GroupDTO searchGroup(int gCode) {
+		return template.queryForObject("select * from group_view where g_code=?", groupDTOMapper, gCode);
+	}
+
+	@Override
+	public List<GroupDTO> searchGroupByName(String name, String owner) {
+		return template.query("select * from group_view name=? and owner=?", groupDTOMapper, name, owner);
 	}
 
 	@Override
 	public GroupParticipantInfoDTO searchGroupParticipant(int gCode, String email) {
-		// TODO Auto-generated method stub
-		return template.queryForObject("select * from g_participant_info_view where email=? and g_code=?", groupParticipantInfoViewDTOMapper, email, gCode);
+		return template.queryForObject("select * from g_participant_info_view where g_code=? and email=?", groupParticipantInfoViewDTOMapper, gCode, email);
 	}
 
+	@Override
+	public List<GroupParticipantInfoDTO> searchGroupParticipants(int gCode) {
+		return template.query("select * from g_participant_info_view where g_code", groupParticipantInfoViewDTOMapper, gCode);
+	}
+
+	@Override
+	public void createGroup(String owner, String name) {
+		template.update("insert into group_view(g_code, name, owner) values(group_sequence.nextval, ?, ?)", name, owner);
+	}
+	
 }

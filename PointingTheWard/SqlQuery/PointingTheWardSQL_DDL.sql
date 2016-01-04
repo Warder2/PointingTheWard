@@ -40,7 +40,9 @@ nocycle;
 
 create table group_tb(
 	g_code NUMBER PRIMARY KEY,
-	name VARCHAR2(255) NOT NULL
+	name VARCHAR2(255) NOT NULL,
+	owner VARCHAR2(255) NOT NULL,
+	FOREIGN KEY(owner) REFERENCES member_tb(email)
 );
 
 create view group_view
@@ -57,8 +59,8 @@ create table g_participant_tb(
 create view g_participant_view(g_code, email)
 as select * from g_participant_tb with check option;
 
-create view g_participant_info_view(email, name, location, transportation, g_code, g_name)
-as select g_p.email, m.name, m.location, m.transportation, g.g_code, g.name from g_participant_tb g_p, group_tb g, member_tb m
+create view g_participant_info_view(email, name, location, transportation, g_code, g_name, owner)
+as select g_p.email, m.name, m.location, m.transportation, g.g_code, g.name, g.owner from g_participant_tb g_p, group_tb g, member_tb m
 where g_p.g_code=g.g_code and g_p.email=m.email with read only;
 
 create sequence event_sequence

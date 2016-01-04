@@ -7,9 +7,15 @@ public interface GroupDeleteDAO {
 	void deleteGroupAll();
 	//delete group
 	void deleteGroup(int gCode);
-	//그룹 탈퇴
-	void deleteGroup(int gCode, String email);
 	//delete groups
-	void deleteGroups(String email, int... gCodes);
-	void deleteGroups(String email, List<Integer> gCodes);
+	void deleteGroups(String owner);
+	void deleteGroups(int... gCodes);
+	void deleteGroups(List<Integer> gCodes);
+	void deleteGroups(String owner, int... gCodes);
+	void deleteGroups(String owner, List<Integer> gCodes);
+	
+	//그룹 탈퇴
+	void deleteGroupParticipant(int gCode, String email);
+	void deleteGroupParticipants(int gCode, String... emails);
+	void deleteGroupParticipants(int gCode, List<String> emails);
 }
