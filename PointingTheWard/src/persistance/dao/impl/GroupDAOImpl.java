@@ -46,13 +46,12 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public void deleteGroupAll() {
-		// TODO Auto-generated method stub
-		
+		template.update("delete from g_participant_view");
+		template.update("delete from group_view");
 	}
 
 	@Override
 	public void deleteGroup(int gCode) {
-		// TODO Auto-generated method stub
 		
 	}
 

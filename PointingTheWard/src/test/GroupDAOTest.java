@@ -1,21 +1,35 @@
 package test;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import persistance.dao.GroupDAO;
-import persistance.dto.GroupDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/daoContext.xml")
 public class GroupDAOTest {
 	@Autowired
 	private GroupDAO groupDAO;
-	private GroupDTO groups;
 	
 	@Before
-	public void setUp(){}
+	public void setUp(){
+	}
+	
+	@Before
+	@After
+	public void deleteAll(){
+		groupDAO.deleteGroupAll();
+	}
+	
+	@Test
+	public void createGroup(){
+		System.out.println("createGroup");
+		groupDAO.createGroup("email", "group1");
+		groupDAO.search
+	}
 }

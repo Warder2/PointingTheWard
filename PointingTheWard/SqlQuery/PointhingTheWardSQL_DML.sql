@@ -58,11 +58,11 @@ select * from friend_info_view where email='email' and f_email='email1';
 
 
 insert into group_view(g_code, name, owner)
-values(group_sequence.nextval, 'name', 'owner');
+values(group_sequence.nextval, 'name', 'email');
 
 select * from group_view;
 select * from group_view where g_code=0;
-select * from group_view where owner='owner';
+select * from group_view where owner='email';
 select * from group_view where name='name';
 
 update group_view set name='name1' where g_code=0;
@@ -70,9 +70,9 @@ update group_view set name='name1' where g_code=0;
 delete from group_view where g_code=0;
 
 insert into group_view(g_code, name, owner)
-values(group_sequence.nextval, 'name', 'owner');
+values(group_sequence.nextval, 'name', 'email');
 insert into group_view(g_code, name, owner)
-values(group_sequence.nextval, 'name1', 'owner');
+values(group_sequence.nextval, 'name1', 'email');
 
 
 
@@ -96,8 +96,8 @@ insert into g_participant_view(g_code, email)
 values(1, 'email');
 
 select * from g_participant_info_view;
-select * from g_participant_info_view where g_name='name' and owner='owner';
-select * from g_participant_info_view where owner='owner';
+select * from g_participant_info_view where g_name='name' and owner='email';
+select * from g_participant_info_view where owner='email';
 select * from g_participant_info_view where email='email' and g_name='name';
 select * from g_participant_info_view where email='email';
 select * from g_participant_info_view where g_code=1;
