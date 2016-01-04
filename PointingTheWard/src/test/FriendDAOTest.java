@@ -30,7 +30,7 @@ public class FriendDAOTest {
 		friendsEmail1.add("email2");
 		friendsEmail2 = new String[] { "email1", "email2" };
 	}
-
+	
 	public void addtionFriend() {
 		System.out.println("addtionFriend");
 		friendDao.addtionFriend("email", "email2");
@@ -46,7 +46,7 @@ public class FriendDAOTest {
 		// DeadlockLoserDataAccessException -현재 프로세스가 교착 상태
 		searchFriend();
 	}
-
+	
 	public void addtionFriends1() {
 		System.out.println("addtionFriends");
 		for (String friendEmail : friendsEmail1) {
@@ -62,7 +62,7 @@ public class FriendDAOTest {
 		}
 		searchFriend();
 	}
-
+	
 	public void deleteFriendAll() {
 		System.out.println("friendsAdd");
 		friendDao.deleteFriendAll("email");
@@ -97,6 +97,7 @@ public class FriendDAOTest {
 			System.out.println(friend);
 		}
 	}
+	
 	
 	public void searchFriends(){
 		System.out.println("searchFriends");

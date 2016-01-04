@@ -54,7 +54,7 @@ public class FriendDAOImpl implements FriendDAO {
 	public void addtionFriend(String email, String friendEmail) {
 		// TODO Auto-generated method stub
 		String insertFriendSql="insert into friend_view(email, f_email) values(?, ?)";
-		template.update(insertFriendSql, new Object[]{email, friendEmail});
+		template.update(insertFriendSql, email, friendEmail);
 		
 	}
 
@@ -116,8 +116,7 @@ public class FriendDAOImpl implements FriendDAO {
 		// TODO Auto-generated method stub
 		String searchSql="select * from friend_view where email=?";
 		//List<FriendDTO> FriendDTOs = new ArrayList<FriendDTO>();
-			
-		return template.query(searchSql, new Object[]{email}, FriendDTOMapper);
+		return template.query(searchSql, FriendDTOMapper, email);
 	}
 
 	@Override
@@ -135,6 +134,6 @@ public class FriendDAOImpl implements FriendDAO {
 		// TODO Auto-generated method stub
 		String searchSql = "select * from friend_info_view where email=? and f_email=?";
 		
-		return template.queryForObject(searchSql, new Object[]{email,friendEmail}, friendInfoViewDTOMapper);
+		return template.queryForObject(searchSql, friendInfoViewDTOMapper,email,friendEmail);
 	}
 }
