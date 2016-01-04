@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.GroupDAO;
 import persistance.dto.FriendDTO;
@@ -52,97 +53,58 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public void deleteGroup(int gCode) {
-		
+		template.update("delete from group_view where g_code=?", gCode);
 	}
 
 	@Override
 	public void deleteGroups(String owner) {
-		// TODO Auto-generated method stub
-		
+		template.update("delete from group_view where owner=?", owner);
 	}
 
 	@Override
+	@Transactional
 	public void deleteGroups(int... gCodes) {
-		// TODO Auto-generated method stub
-		
+		for(int gCode : gCodes){
+			deleteGroup(gCode);
+		}
 	}
 
 	@Override
+	@Transactional
 	public void deleteGroups(List<Integer> gCodes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteGroups(String owner, int... gCodes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteGroups(String owner, List<Integer> gCodes) {
-		// TODO Auto-generated method stub
-		
+		for(int gCode : gCodes){
+			deleteGroup(gCode);
+		}
 	}
 
 	@Override
 	public void deleteGroupParticipant(int gCode, String email) {
-		// TODO Auto-generated method stub
-		
+		template.update("delete from g_participant_view where g_code=? and email=?", gCode, email);
 	}
 
 	@Override
+	@Transactional
 	public void deleteGroupParticipants(int gCode, String... emails) {
-		// TODO Auto-generated method stub
-		
+		for(String email : emails){
+			deleteGroupParticipant(gCode, email);
+		}
 	}
 
 	@Override
 	public void deleteGroupParticipants(int gCode, List<String> emails) {
-		// TODO Auto-generated method stub
-		
+		for(String email : emails){
+			deleteGroupParticipant(gCode, email);
+		}
 	}
 
 	@Override
 	public void modifyGroup(GroupDTO group) {
-		// TODO Auto-generated method stub
-		
+		modifyGroup(group.getCode(), group.getName());
 	}
 
 	@Override
 	public void modifyGroup(int gCode, String name) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFriend(int gCode, String email) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFriends(int gCode, String... emails) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFriend(int gCode, FriendDTO friend) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFriends(int gCode, FriendDTO... friends) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFriends(int gCode, List<FriendDTO> friends) {
-		// TODO Auto-generated method stub
-		
+		template.update("update group_view set name=? where g_code=?", name, gCode);
 	}
 
 	@Override
@@ -162,7 +124,7 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public List<GroupDTO> searchGroupByName(String name, String owner) {
-		return template.query("select * from group_view name=? and owner=?", groupDTOMapper, name, owner);
+		return template.query("select * from group_view where name=? and owner=?", groupDTOMapper, name, owner);
 	}
 
 	@Override
@@ -172,12 +134,47 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public List<GroupParticipantInfoDTO> searchGroupParticipants(int gCode) {
-		return template.query("select * from g_participant_info_view where g_code", groupParticipantInfoViewDTOMapper, gCode);
+		return template.query("select * from g_participant_info_view where g_code=?", groupParticipantInfoViewDTOMapper, gCode);
 	}
 
 	@Override
 	public void createGroup(String owner, String name) {
 		template.update("insert into group_view(g_code, name, owner) values(group_sequence.nextval, ?, ?)", name, owner);
+	}
+
+	@Override
+	public void createGroupParticipant(int gCode, String email) {
+		template.update("");
+	}
+
+	@Override
+	public void createGroupParticipants(int gCode, String... emails) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createGroupParticipant(int gCode, List<String> emails) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createGroupParticipant(int gCode, FriendDTO friend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createGroupParticipants(int gCode, FriendDTO... friends) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createGroupParticipants(int gCode, List<FriendDTO> friends) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
