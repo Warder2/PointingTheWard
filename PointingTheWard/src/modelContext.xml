@@ -17,4 +17,10 @@
 	
 	<bean id="certificationCodeCreator" class="model.certification.CertificationCodeCreator"/>
 	<bean id="emailSender" class="model.mail.EmailSender"/>
+	
+	<!-- open data -->
+	<bean id="requestInfo" class="model.openData.RequestInfo"/>
+	
+	<bean id="googleDistansMatrixDataGetter" class="model.openData.GoogleDistansMatrixDataGetter"/>
+	<bean id="storeZoneDataGetter" class="model.openData.StoreZoneDataGetter"/>
 </beans>
