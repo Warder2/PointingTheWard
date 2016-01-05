@@ -6,7 +6,6 @@ public class Place {
 	private Point point;
 	
 	public Place() {
-		super();
 	}
 	public Place(String name, Point point) {
 		super();
