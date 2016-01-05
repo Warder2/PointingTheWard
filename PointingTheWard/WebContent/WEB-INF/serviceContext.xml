@@ -6,6 +6,7 @@
                http://www.springframework.org/schema/mvc
                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<import resource="modelContext.xml"/>
+	<import resource="daoContext.xml"/>
 	
 	<!-- service Request Bean -->
 	<bean id="serviceRequest" class="service.ServiceRequestImpl" scope="prototype"></bean>

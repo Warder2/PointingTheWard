@@ -20,7 +20,7 @@
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/signUp</url-pattern>
-    <url-pattern>/sendCertificationCode</url-pattern>
+    <url-pattern>/certification</url-pattern>
   </servlet-mapping>
   
   <filter>

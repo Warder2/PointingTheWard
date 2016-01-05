@@ -10,15 +10,38 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('input#certificationBtn').click(function(){
+			$(this).val('re send');
 			$.ajax({
-				url: 'sendCertificationCode',
+				url: 'certification',
 				type: 'GET',
 				data: {
 					email: $('input#email').val()},
 				success: function(data){
-					if(data != 'false'){
-						var domain = data.split('@')[1];
+					if(data.result){
+						$('p#certificationArea').prop('hidden', false);
+						var domain = data.email.split('@')[1];
 						window.open('http://www.' + domain, '', '', '');
+					}else{
+						alert(data.message);
+					}
+				}
+			});
+		});
+		
+		$('input#certificationConfirmBtn').click(function(){
+			$.ajax({
+				url: 'certification',
+				type: 'POST',
+				data: {code: $('input#certificationConfirm').val()},
+				success: function(data){
+					if(data == true){
+						$('.memberInfoInputs').prop('readonly', false);
+						$('select#transpoartion').prop('hidden', false);
+						$('input#email').prop('readonly', true);
+						$('p#certificationArea').prop('hidden', true);
+						$('input#certificationBtn').prop('hidden', true);
+					}else{
+						alert('mismatched code');
 					}
 				}
 			});
@@ -32,45 +55,43 @@
 	<div class="container">
 		<div class="component">
 			<h1>Sign Up</h1>
-			<form id="signUpMember" method="post" action="signUp">
+			<form id="signUpMemberRequest" method="post" action="signUp">
 				<p>
 					<input type="email" id="email" name="email" value="" placeholder="e-mail">
 					<input type="button" id="certificationBtn" value="send">
 				</p>
-				<p>
-					<input type="password" name="pwd" value=""
-						placeholder="Password" required>
+				<p id="certificationArea" hidden>
+					<input type="text" id="certificationConfirm" name="certificationConfirm" value="" placeholder="certification code">
+					<input type="button" id="certificationConfirmBtn" value="confirm">
 				</p>
 				<p>
-					<input type="password" name="pwdCheck" value=""
-						placeholder="Password Check" required>
+					<input type="password" name="pwd" value="" class="memberInfoInputs" placeholder="Password" required readonly>
 				</p>
-
 				<p>
-					<input type="text" name="name" value="" placeholder="Name" required>
+					<input type="password" name="pwdCheck" class="memberInfoInputs" value="" placeholder="Password Check" required readonly>
 				</p>
 
 				<p>
-					<input type="text" name="location" value="" placeholder="location" required><input
-						type="submit" name="commit" value="check" required>
+					<input type="text" name="name" value="" class="memberInfoInputs" placeholder="Name" required readonly>
+				</p>
+
+				<p>
+					<input type="text" name="location" value="" class="memberInfoInputs" placeholder="location" required readonly>
 				</p>
 
 				<p class="contact-input">
-					<label for="select" class="select"> <select name="subject"
-						id="select" required>
-							<option value="" selected>Choose Transportation…</option>
-							<option value="1">My Car</option>
-							<option value="1">Bus</option>
-							<option value="1">Subway</option>
-							<option value="1">축지법</option>
-							<option value="1">낙타</option>
-					</select>
+					<label for="select" class="select"> 
+						<select name="transpoartion" id="transpoartion" required hidden>
+								<option value="" selected>Choose Transportation…</option>
+								<option value="transit">transit</option>
+								<option value="driving">driving</option>
+						</select>
 					</label>
 				</p>
 
 				<p class="submit">
-					<input type="submit" name="commit" value="Sign Up"> <input
-						type="submit" name="commit" value="Cancel">
+					<input type="submit" name="commit" value="Sign Up"> 
+					<input type="submit" name="commit" value="Cancel">
 				</p>
 			</form>
 		</div>

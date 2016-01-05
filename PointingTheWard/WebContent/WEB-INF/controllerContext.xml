@@ -6,7 +6,13 @@
 					http://www.springframework.org/schema/mvc
 					http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
-	<!-- <import resource="serviceContext.xml"/> -->
+	<import resource="serviceContext.xml"/>
 	
 	<bean id="memberController" class="controller.MemberController"/>
+	<bean id="groupController" class="controller.GroupController"/>
+	<bean id="calendarController" class="controller.CalendarController"/>
+	
+	
+	<!-- command objects -->
+	<bean id="signUpMemberRequest" class="command.SignUpMemberRequest" scope="prototype"/>
 </beans>

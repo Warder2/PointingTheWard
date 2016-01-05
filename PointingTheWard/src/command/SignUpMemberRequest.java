@@ -4,17 +4,20 @@ public class SignUpMemberRequest {
 	private String email;
 	private String name;
 	private String pwd;
+	private String pwdCheck;
 	private String location;
 	private String transportation;
 	
 	public SignUpMemberRequest() {
 	}
 
-	public SignUpMemberRequest(String email, String name, String pwd, String location, String transportation) {
+	public SignUpMemberRequest(String email, String name, String pwd, String pwdCheck, String location,
+			String transportation) {
 		super();
 		this.email = email;
 		this.name = name;
 		this.pwd = pwd;
+		this.pwdCheck = pwdCheck;
 		this.location = location;
 		this.transportation = transportation;
 	}
@@ -43,6 +46,14 @@ public class SignUpMemberRequest {
 		this.pwd = pwd;
 	}
 
+	public String getPwdCheck() {
+		return pwdCheck;
+	}
+
+	public void setPwdCheck(String pwdCheck) {
+		this.pwdCheck = pwdCheck;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -61,8 +72,63 @@ public class SignUpMemberRequest {
 
 	@Override
 	public String toString() {
-		return "MemberCommand [email=" + email + ", name=" + name + ", pwd=" + pwd + ", location=" + location
-				+ ", transportation=" + transportation + "]";
+		return "SignUpMemberRequest [email=" + email + ", name=" + name + ", pwd=" + pwd + ", pwdCheck=" + pwdCheck
+				+ ", location=" + location + ", transportation=" + transportation + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
+		result = prime * result + ((pwdCheck == null) ? 0 : pwdCheck.hashCode());
+		result = prime * result + ((transportation == null) ? 0 : transportation.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SignUpMemberRequest other = (SignUpMemberRequest) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (pwd == null) {
+			if (other.pwd != null)
+				return false;
+		} else if (!pwd.equals(other.pwd))
+			return false;
+		if (pwdCheck == null) {
+			if (other.pwdCheck != null)
+				return false;
+		} else if (!pwdCheck.equals(other.pwdCheck))
+			return false;
+		if (transportation == null) {
+			if (other.transportation != null)
+				return false;
+		} else if (!transportation.equals(other.transportation))
+			return false;
+		return true;
+	}
+
 }

@@ -13,9 +13,6 @@ package service;
 
 
 public interface ServiceRequest {
-	enum RequestState{
-		isSuccess
-	};
 	public <T>T getObject(String key);
 	public void addObject(String key, Object value);
 	public <T>T removeObject(String key);
