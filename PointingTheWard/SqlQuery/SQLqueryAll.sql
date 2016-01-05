@@ -122,7 +122,7 @@ FT.F_EMAIL = MT.EMAIL;
 
 CREATE VIEW GROUP_VIEW
 AS 
-SELECT * FROM GROUP_TB with check option;;
+SELECT * FROM GROUP_TB with check option;
 
 CREATE VIEW EVENT_VIEW
 AS
@@ -160,18 +160,7 @@ values('nj186@naver.com', '장해', '1111', '수원시 인계동 무궁화 아�
 insert into member_tb(email, name, pwd, location, transportation) 
 values('akjin47@naver.com', '대진', '1111', '인천광역시 연수구 옥련동 럭키아파트', 'transit');
 
-insert into FRIEND_TB(EMAIL,F_EMAIL)
-VALUES('SB','DJ');
-insert into FRIEND_TB(EMAIL,F_EMAIL)
-VALUES('SB','JH');
-insert into FRIEND_TB(EMAIL,F_EMAIL)
-VALUES('DJ','SB');
-insert into FRIEND_TB(EMAIL,F_EMAIL)
-VALUES('DJ','JH');
-insert into FRIEND_TB(EMAIL,F_EMAIL)
-VALUES('JH','SB');
-insert into FRIEND_TB(EMAIL,F_EMAIL)
-VALUES('JH','DJ');
+
 
 
 insert into group_tb(g_code, name, owner)
