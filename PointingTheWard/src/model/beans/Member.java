@@ -5,16 +5,16 @@ public class Member {
 	private String email;
 	private String pwd;
 	private String location;
-	private Transportation transportaion;
+	private Transportation transportation;
 	public Member() {
 	}
-	public Member(String name, String email, String pwd, String location, Transportation transportaion) {
+	public Member(String name, String email, String pwd, String location, Transportation transportation) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.pwd = pwd;
 		this.location = location;
-		this.transportaion = transportaion;
+		this.transportation = transportation;
 	}
 	public String getName() {
 		return name;
@@ -40,15 +40,15 @@ public class Member {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Transportation getTransportaion() {
-		return transportaion;
+	public Transportation getTransportation() {
+		return transportation;
 	}
-	public void setTransportaion(Transportation transportaion) {
-		this.transportaion = transportaion;
+	public void setTransportation(Transportation transportation) {
+		this.transportation = transportation;
 	}
 	@Override
 	public String toString() {
 		return "Member [name=" + name + ", email=" + email + ", location=" + location
-				+ ", transportaion=" + transportaion + "]";
+				+ ", transportaion=" + transportation + "]";
 	}
 }

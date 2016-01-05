@@ -17,7 +17,9 @@
 	
 	<!-- 페이지 메핑 정의 -->
 	<mvc:view-controller path="/signUpPage" view-name="signUp"/>
-
+	<mvc:view-controller path="/signInPage" view-name="signIn"/>
+	<mvc:view-controller path="/mainPage" view-name="main"/>
+	<mvc:view-controller path="/memberInfoPage" view-name="memberInfo"/>
 	
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	

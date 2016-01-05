@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +26,6 @@ import command.SignUpMemberRequest;
 import model.beans.Member;
 import model.beans.SignInInfo;
 import model.beans.Transportation;
-import model.certification.CertificationCodeCreator;
-import model.mail.EmailSendable;
 import service.Service;
 import service.ServiceRequest;
 import validation.ValdateAction;
@@ -53,7 +53,7 @@ public class MemberController {
 			member.setName(signUpMemberRequest.getName());
 			member.setPwd(signUpMemberRequest.getPwd());
 			member.setLocation(signUpMemberRequest.getLocation());
-			member.setTransportaion(Transportation.valueOfByStr(signUpMemberRequest.getTransportation()));
+			member.setTransportation(Transportation.valueOfByStr(signUpMemberRequest.getTransportation()));
 			
 			Service service = context.getBean("memberSignUpService",Service.class);
 			ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
@@ -64,7 +64,7 @@ public class MemberController {
 				synchronized (session) {
 					session.setAttribute("email", member.getEmail());
 				}
-				modelAndView.setViewName("calendar");
+				modelAndView.setViewName("main");
 			}catch(DuplicateKeyException dke){
 				//이미 있을때
 			}catch(DataIntegrityViolationException dive){
@@ -112,7 +112,7 @@ public class MemberController {
 				synchronized (session) {
 					session.setAttribute("email", signInInfo.getEmail());
 				}
-				modelAndView.setViewName("calendar");
+				modelAndView.setViewName("main");
 			}catch(NullPointerException nullPointerException){
 				System.out.println("NullPointerException");
 				System.out.println(nullPointerException.getMessage());
@@ -137,18 +137,49 @@ public class MemberController {
 		}
 		return modelAndView;
 	}
-//	
-//	@RequestMapping(value={"/memberSearch"})
-//	public ModelAndView memberSearch(@RequestParam(value="search") Member member){
-//		System.out.println("memberSearch");
-//		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(servletContext);
-//		Service service = context.getBean("memberSearch",Service.class);
-//		
-//		
-//		ModelAndView view = new ModelAndView();
-//		view.setViewName("");//jsp명
-//		return view;
-//	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value={"/memberSearch"}, method=RequestMethod.GET)
+	public @ResponseBody <T> T memberSearch(HttpServletRequest servletRequest, HttpSession session){
+		System.out.println("memberSearch");
+		
+		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
+		
+		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+		String name = servletRequest.getParameter("name");
+		if(name != null){
+			request.addObject("name", name);
+		}else{
+			String email = servletRequest.getParameter("email");
+			if(email == null){
+				synchronized (session) {
+					email = (String) session.getAttribute("email");
+				}
+			}
+			request.addObject("email", email);
+		}
+		Service service = context.getBean("memberSearchService",Service.class);
+		T result = null;
+		try{
+			service.execute(request);
+			Member member = request.getObject("member");
+			List<Member> members = request.getObject("members");
+			if(member != null){
+				result = (T) member;
+			}else if(members != null){
+				result = (T) members;
+			}
+		}catch(NullPointerException nullPointerException){
+			System.out.println(nullPointerException.getMessage());
+			nullPointerException.printStackTrace();
+		}catch(EmptyResultDataAccessException emptyResultDataAccessException){
+			System.out.println(emptyResultDataAccessException.getMessage());
+			emptyResultDataAccessException.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 //	@RequestMapping(value={"/memberModify"})
 //	public ModelAndView memberModify(@RequestParam(value="modify") Member member){
 //		System.out.println("memberModify");

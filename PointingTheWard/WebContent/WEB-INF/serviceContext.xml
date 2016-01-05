@@ -29,7 +29,9 @@
 
 	<bean id="memberDropoutService" class="service.MemberDropoutService" />
 	<bean id="memberModifyService" class="service.MemberModifyService" />
-	<bean id="memberSearchService" class="service.MemberSearchService" />
+	<bean id="memberSearchService" class="service.MemberSearchService" >
+		<property name="memberDao" ref="memberDao"/>
+	</bean>
 	<bean id="memberSignInService" class="service.MemberSignInService" >
 		<property name="memberDao" ref="memberDao"/>
 	</bean>

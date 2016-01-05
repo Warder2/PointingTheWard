@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +36,7 @@
 				data: {code: $('input#certificationConfirm').val()},
 				success: function(data){
 					if(data == true){
-						$('.memberInfoInputs').prop('readonly', false);
-						$('select#transportation').prop('hidden', false);
+						$('.memberInfoInputs').prop('disabled', false);
 						$('input#email').prop('readonly', true);
 						$('p#certificationArea').prop('hidden', true);
 						$('input#certificationBtn').prop('hidden', true);
@@ -65,33 +65,33 @@
 					<input type="button" id="certificationConfirmBtn" value="confirm">
 				</p>
 				<p>
-					<input type="password" name="pwd" value="" class="memberInfoInputs" placeholder="Password" required readonly>
+					<input type="password" name="pwd" value="" class="memberInfoInputs" placeholder="Password" required disabled>
 				</p>
 				<p>
-					<input type="password" name="pwdCheck" class="memberInfoInputs" value="" placeholder="Password Check" required readonly>
-				</p>
-
-				<p>
-					<input type="text" name="name" value="" class="memberInfoInputs" placeholder="Name" required readonly>
+					<input type="password" name="pwdCheck" class="memberInfoInputs" value="" placeholder="Password Check" required disabled>
 				</p>
 
 				<p>
-					<input type="text" name="location" value="" class="memberInfoInputs" placeholder="location" required readonly>
+					<input type="text" name="name" value="" class="memberInfoInputs" placeholder="Name" required disabled>
+				</p>
+
+				<p>
+					<input type="text" name="location" value="" class="memberInfoInputs" placeholder="location" required disabled>
 				</p>
 
 				<p class="contact-input">
-						<select name="transportation" id="transportation" required hidden>
-								<option value="" selected>Choose Transportation…</option>
-								<option value="transit">transit</option>
-								<option value="driving">driving</option>
-						</select>
-					<!-- <label for="select" class="select"> 
-					</label> -->
+					<select name="transportation" id="transportation" class="memberInfoInputs" required disabled>
+							<option value="" selected>Choose Transportation…</option>
+							<option value="transit">transit</option>
+							<option value="driving">driving</option>
+					</select>
 				</p>
 
 				<p class="submit">
-					<input type="submit" name="commit" value="Sign Up"> 
-					<input type="submit" name="commit" value="Cancel">
+					<input type="submit" value="Sign Up"> 
+					<a href="<c:url value="/signInPage"/>">
+						<input type="button" value="Cancel">
+					</a>
 				</p>
 			</form>
 		</div>

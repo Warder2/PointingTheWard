@@ -152,7 +152,7 @@ public class MemberList {
 		Member m = searchMember(member);
 
 		if (m != null) {
-			m.setTransportaion(transportation);
+			m.setTransportation(transportation);
 			return true;
 		}
 		return false;

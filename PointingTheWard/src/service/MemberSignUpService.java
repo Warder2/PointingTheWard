@@ -26,7 +26,7 @@ public class MemberSignUpService extends AbstractMemberService implements Member
 
 	@Override
 	public void signUp(Member member) {
-		signUp(member.getEmail(), member.getName(), member.getPwd(), member.getLocation(), member.getTransportaion());
+		signUp(member.getEmail(), member.getName(), member.getPwd(), member.getLocation(), member.getTransportation());
 	}
 
 	@Override

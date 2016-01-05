@@ -25,7 +25,7 @@ public class MemberDAOImpl implements MemberDAO{
 			memberDTO.setName(rs.getString("name"));
 			memberDTO.setPwd(rs.getString("pwd"));
 			memberDTO.setLocation(rs.getString("location"));
-			memberDTO.setTransportaion(Transportation.valueOfByStr(rs.getString("transportation")));
+			memberDTO.setTransportation(Transportation.valueOfByStr(rs.getString("transportation")));
 			return memberDTO;
 		}
 	};
@@ -83,7 +83,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void modifyMember(MemberDTO member) {
-		modifyMember(member.getEmail(), member.getPwd(), member.getName(), member.getLocation(), member.getTransportaion());
+		modifyMember(member.getEmail(), member.getPwd(), member.getName(), member.getLocation(), member.getTransportation());
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public void signUpMember(MemberDTO member) {
-		signUpMember(member.getEmail(), member.getName(), member.getPwd(), member.getLocation(), member.getTransportaion());
+		signUpMember(member.getEmail(), member.getName(), member.getPwd(), member.getLocation(), member.getTransportation());
 	}
 
 	@Override

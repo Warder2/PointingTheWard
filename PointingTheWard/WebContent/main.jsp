@@ -68,6 +68,9 @@
 </script>
 </head>
 <body>
+	<header>
+		<c:import url="menu.jsp"/>
+	</header>
 	<div id="calendar_div">
 		<table id="calendarTable">
 			<thead>

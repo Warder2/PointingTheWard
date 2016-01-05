@@ -190,7 +190,7 @@ public class MemberTest {
 		signUp();
 		memberDao.modifyTransportation(members[0].getEmail(), Transportation.DRIVING);
 		
-		Assert.isTrue(!members[0].getTransportaion().equals(memberDao.searchMember(members[0].getEmail()).getTransportaion()));
+		Assert.isTrue(!members[0].getTransportation().equals(memberDao.searchMember(members[0].getEmail()).getTransportation()));
 	}
 	
 	@Test

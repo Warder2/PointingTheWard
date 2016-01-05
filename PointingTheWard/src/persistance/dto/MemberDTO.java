@@ -7,17 +7,17 @@ public class MemberDTO {
 	private String name;
 	private String pwd;
 	private String location;
-	private Transportation transportaion;
+	private Transportation transportation;
 
 	public MemberDTO() {
 	}
 
-	public MemberDTO(String email, String name, String pwd, String location, Transportation transportaion) {
+	public MemberDTO(String email, String name, String pwd, String location, Transportation transportation) {
 		this.email = email;
 		this.name = name;
 		this.pwd = pwd;
 		this.location = location;
-		this.transportaion = transportaion;
+		this.transportation = transportation;
 	}
 
 	public String getEmail() {
@@ -52,18 +52,17 @@ public class MemberDTO {
 		this.location = location;
 	}
 
-	public Transportation getTransportaion() {
-		return transportaion;
+	public Transportation getTransportation() {
+		return transportation;
 	}
-
-	public void setTransportaion(Transportation transportaion) {
-		this.transportaion = transportaion;
+	
+	public void setTransportation(Transportation transportation) {
+		this.transportation = transportation;
 	}
-
 	@Override
 	public String toString() {
 		return "MemberDTO [email=" + email + ", name=" + name + ", pwd=" + pwd + ", location=" + location
-				+ ", transportaion=" + transportaion + "]";
+				+ ", transportation=" + transportation + "]";
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class MemberDTO {
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
-		result = prime * result + ((transportaion == null) ? 0 : transportaion.hashCode());
+		result = prime * result + ((transportation == null) ? 0 : transportation.hashCode());
 		return result;
 	}
 
@@ -107,7 +106,7 @@ public class MemberDTO {
 				return false;
 		} else if (!pwd.equals(other.pwd))
 			return false;
-		if (transportaion != other.transportaion)
+		if (transportation != other.transportation)
 			return false;
 		return true;
 	}

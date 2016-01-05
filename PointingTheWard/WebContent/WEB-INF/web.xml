@@ -22,9 +22,13 @@
     <url-pattern>/signUp</url-pattern>
     <url-pattern>/signIn</url-pattern>
     <url-pattern>/certification</url-pattern>
-    
+  	<url-pattern>/memberSearch</url-pattern>
+  	  
     <!-- request page url -->
     <url-pattern>/signUpPage</url-pattern>
+    <url-pattern>/signInPage</url-pattern>
+  	<url-pattern>/mainPage</url-pattern>
+  	<url-pattern>/memberInfoPage</url-pattern>
   </servlet-mapping>
   
   <filter>
