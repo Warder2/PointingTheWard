@@ -20,7 +20,11 @@
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/signUp</url-pattern>
+    <url-pattern>/signIn</url-pattern>
     <url-pattern>/certification</url-pattern>
+    
+    <!-- request page url -->
+    <url-pattern>/signUpPage</url-pattern>
   </servlet-mapping>
   
   <filter>

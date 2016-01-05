@@ -10,6 +10,7 @@ public class NonValidatedEmailFormEception extends RuntimeException{
 	public NonValidatedEmailFormEception() {
 	}
 	public NonValidatedEmailFormEception(String emailForm) {
+		this("nonvalidated email form", emailForm);
 	}
 	public NonValidatedEmailFormEception(String message, String emailForm) {
 		super(message);

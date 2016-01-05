@@ -36,7 +36,7 @@
 				success: function(data){
 					if(data == true){
 						$('.memberInfoInputs').prop('readonly', false);
-						$('select#transpoartion').prop('hidden', false);
+						$('select#transportation').prop('hidden', false);
 						$('input#email').prop('readonly', true);
 						$('p#certificationArea').prop('hidden', true);
 						$('input#certificationBtn').prop('hidden', true);
@@ -80,13 +80,13 @@
 				</p>
 
 				<p class="contact-input">
-					<label for="select" class="select"> 
-						<select name="transpoartion" id="transpoartion" required hidden>
+						<select name="transportation" id="transportation" required hidden>
 								<option value="" selected>Choose Transportation…</option>
 								<option value="transit">transit</option>
 								<option value="driving">driving</option>
 						</select>
-					</label>
+					<!-- <label for="select" class="select"> 
+					</label> -->
 				</p>
 
 				<p class="submit">

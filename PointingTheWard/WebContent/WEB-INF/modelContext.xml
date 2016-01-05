@@ -7,19 +7,20 @@
                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
 	<!-- model beans -->
-	<bean id="event"		class="model.beans.Event"/>
-	<bean id="friend"		class="model.beans.Friend"/>
-	<bean id="group"		class="model.beans.Group"/>
-	<bean id="member"		class="model.beans.Member"/>
-	<bean id="place"		class="model.beans.Place"/>
-	<bean id="point"		class="model.beans.Point"/>
-	<bean id="ward"			class="model.beans.Ward"/>
-	
+	<bean id="event"		class="model.beans.Event" scope="prototype"/>
+	<bean id="friend"		class="model.beans.Friend" scope="prototype"/>
+	<bean id="group"		class="model.beans.Group" scope="prototype"/>
+	<bean id="member"		class="model.beans.Member" scope="prototype"/>
+	<bean id="place"		class="model.beans.Place" scope="prototype"/>
+	<bean id="point"		class="model.beans.Point" scope="prototype"/>
+	<bean id="ward"			class="model.beans.Ward" scope="prototype"/>
+	<bean id="signInInfo" class="model.beans.SignInInfo" scope="prototype"/>
+		
 	<bean id="certificationCodeCreator" class="model.certification.CertificationCodeCreator"/>
 	<bean id="emailSender" class="model.mail.EmailSender"/>
 	
 	<!-- open data -->
-	<bean id="requestInfo" class="model.openData.RequestInfo"/>
+	<bean id="requestInfo" class="model.openData.RequestInfo" scope="request"/>
 	
 	<bean id="googleDistansMatrixDataGetter" class="model.openData.GoogleDistansMatrixDataGetter"/>
 	<bean id="storeZoneDataGetter" class="model.openData.StoreZoneDataGetter"/>

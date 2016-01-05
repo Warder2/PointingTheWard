@@ -1,5 +1,5 @@
 package service.interfaces;
 
 public interface MemberSignInable {
-	public boolean signIn(String email,String pwd);
+	public void signIn(String email,String pwd);
 }

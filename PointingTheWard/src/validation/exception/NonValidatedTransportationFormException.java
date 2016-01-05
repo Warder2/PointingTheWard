@@ -11,6 +11,7 @@ public class NonValidatedTransportationFormException extends RuntimeException{
 	public NonValidatedTransportationFormException() {
 	}
 	public NonValidatedTransportationFormException(String transportationForm) {
+		this("nonvalidated transportation", transportationForm);
 	}
 	public NonValidatedTransportationFormException(String message, String transportationForm) {
 		super(message);

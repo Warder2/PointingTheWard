@@ -15,4 +15,7 @@
 	
 	<!-- command objects -->
 	<bean id="signUpMemberRequest" class="command.SignUpMemberRequest" scope="prototype"/>
+	
+	<!-- validatoin -->
+	<bean id="memberValidator" class="validation.MemberValidator"/>
 </beans>

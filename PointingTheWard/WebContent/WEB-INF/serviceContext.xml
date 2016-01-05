@@ -30,8 +30,12 @@
 	<bean id="memberDropoutService" class="service.MemberDropoutService" />
 	<bean id="memberModifyService" class="service.MemberModifyService" />
 	<bean id="memberSearchService" class="service.MemberSearchService" />
-	<bean id="memberSignInService" class="service.MemberSignInService" />
-	<bean id="memberSignUpService" class="service.MemberSignUpService" />
+	<bean id="memberSignInService" class="service.MemberSignInService" >
+		<property name="memberDao" ref="memberDao"/>
+	</bean>
+	<bean id="memberSignUpService" class="service.MemberSignUpService" >
+		<property name="memberDao" ref="memberDao"/>
+	</bean>
 
 	<bean id="placeDeleteService" class="service.PlaceDeleteService" />
 	<bean id="placeModifyService" class="service.PlaceModifyService" />

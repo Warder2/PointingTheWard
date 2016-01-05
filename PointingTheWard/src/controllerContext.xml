@@ -11,4 +11,7 @@
 	<bean id="memberController" class="controller.MemberController"/>
 	<bean id="groupController" class="controller.GroupController"/>
 	<bean id="calendarController" class="controller.CalendarController"/>
+	
+	<!-- validation -->
+	<bean id="memberValidator" class="validation.MemberValidator"/>
 </beans>

@@ -48,15 +48,15 @@
 	<!-- dto  beans -->
 
 
-	<bean id="memberDTO"			 class="persistance.dto.MemberDTO" />
-	<bean id="memberODTO" class="persistance.dto.MemberODTO"/>
-	<bean id="memberPDTO" class="persistance.dto.MemberPDTO"/>
-	<bean id="eventDTO" 			class="persistance.dto.EventDTO" />
-	<bean id="eventParticipantDTO" 	class="persistance.dto.EventParticipantDTO" />
-	<bean id="eventParticipantInfoDTO" 	class="persistance.dto.EventParticipantInfoDTO" />
-	<bean id="friendDTO" 			class="persistance.dto.FriendDTO" />
-	<bean id="friendInfoDTO" 			class="persistance.dto.FriendInfoDTO" />
-	<bean id="groupDTO" 			class="persistance.dto.GroupDTO" />
-	<bean id="groupParticipantDTO"	 class="persistance.dto.GroupParticipantDTO" />
-	<bean id="groupParticipantInfoDTO"	 class="persistance.dto.GroupParticipantInfoDTO" />
+	<bean id="memberDTO"			 class="persistance.dto.MemberDTO" scope="prototype"/>
+	<bean id="memberODTO" class="persistance.dto.MemberODTO" scope="prototype"/>
+	<bean id="memberPDTO" class="persistance.dto.MemberPDTO" scope="prototype"/>
+	<bean id="eventDTO" 			class="persistance.dto.EventDTO" scope="prototype"/>
+	<bean id="eventParticipantDTO" 	class="persistance.dto.EventParticipantDTO" scope="prototype"/>
+	<bean id="eventParticipantInfoDTO" 	class="persistance.dto.EventParticipantInfoDTO" scope="prototype"/>
+	<bean id="friendDTO" 			class="persistance.dto.FriendDTO" scope="prototype"/>
+	<bean id="friendInfoDTO" 			class="persistance.dto.FriendInfoDTO" scope="prototype"/>
+	<bean id="groupDTO" 			class="persistance.dto.GroupDTO" scope="prototype"/>
+	<bean id="groupParticipantDTO"	 class="persistance.dto.GroupParticipantDTO" scope="prototype"/>
+	<bean id="groupParticipantInfoDTO"	 class="persistance.dto.GroupParticipantInfoDTO" scope="prototype"/>
 </beans>

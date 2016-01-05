@@ -3,16 +3,12 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.el.lang.FunctionMapperImpl.Function;
-import org.codehaus.jackson.map.util.JSONPObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,56 +19,124 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import command.SignInRequest;
 import command.SignUpMemberRequest;
 import model.beans.Member;
+import model.beans.SignInInfo;
+import model.beans.Transportation;
 import model.certification.CertificationCodeCreator;
 import model.mail.EmailSendable;
 import service.Service;
 import service.ServiceRequest;
 import validation.ValdateAction;
+import validation.Validator;
 import validation.exception.NonValidatedEmailFormEception;
+import validation.exception.NonValidatedTransportationFormException;
+import validation.exception.PwdMisMatchedException;
 
 @Controller
 public class MemberController {
 	
-	@RequestMapping(value={"/signUp"})
-	public String memberSignUp(@ModelAttribute("signUpMember") SignUpMemberRequest memberCommand){
+	@RequestMapping(value={"/signUp"}, method=RequestMethod.POST)
+	public ModelAndView memberSignUp(@ModelAttribute("signUpMemberRequest") SignUpMemberRequest signUpMemberRequest, HttpSession session){
 		System.out.println("memberSignUp");
+		ModelAndView modelAndView = new ModelAndView();
 		
-		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(servletContext);
-		Service service = context.getBean("memberSignUpService",Service.class);
+		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
 		
-		//1. 유효성 체크
-		//2. Member type으로 casting
-		//3. service execute
-		Member member = new Member();
-		//member.setEmail(memberCommand.getEmail());
-		//여기서 set
-		
-		ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
-		serviceRequest.addObject("memberInfo", member);
+		Validator validator = context.getBean("memberValidator", Validator.class);
 		try{
-			service.execute(serviceRequest);
-		}catch(DuplicateKeyException dke){
-			//이미 있을때
-		}catch(DataIntegrityViolationException dive){
-			//무결성 걸렸을 때
+			validator.validate(signUpMemberRequest, SignUpMemberRequest.class);
+	
+			Member member = context.getBean("member", Member.class);
+			member.setEmail(signUpMemberRequest.getEmail());
+			member.setName(signUpMemberRequest.getName());
+			member.setPwd(signUpMemberRequest.getPwd());
+			member.setLocation(signUpMemberRequest.getLocation());
+			member.setTransportaion(Transportation.valueOfByStr(signUpMemberRequest.getTransportation()));
+			
+			Service service = context.getBean("memberSignUpService",Service.class);
+			ServiceRequest serviceRequest = context.getBean("serviceRequest", ServiceRequest.class);
+			serviceRequest.addObject("memberInfo", member);
+			try{
+				service.execute(serviceRequest);
+				
+				synchronized (session) {
+					session.setAttribute("email", member.getEmail());
+				}
+				modelAndView.setViewName("calendar");
+			}catch(DuplicateKeyException dke){
+				//이미 있을때
+			}catch(DataIntegrityViolationException dive){
+				//무결성 걸렸을 때
+			}
+		}catch(NullPointerException nullPointerException){
+			System.out.println("NullPointerException");
+			System.out.println(nullPointerException.getMessage());
+			nullPointerException.printStackTrace();
+		}catch(NonValidatedEmailFormEception emailFormEception){
+			System.out.println("NonValidatedEmailFormEception");
+			System.out.println(emailFormEception.getMessage());
+			emailFormEception.printStackTrace();
+		}catch(NonValidatedTransportationFormException transportationFormException){
+			System.out.println("NonValidatedEmailFormEception");
+			System.out.println(transportationFormException.getMessage());
+			transportationFormException.printStackTrace();
 		}
-		
-		return "";
+		return modelAndView;
 	}
-//	
-//	@RequestMapping(value={"/memberSignIn"})
-//	public ModelAndView memberSignIn(@RequestParam(value="SignIn") Member member){
-//		System.out.println("memberSignIn");
-//		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(servletContext);
-//		Service service = context.getBean("memberSignIn",Service.class);
-//		
-//		
-//		ModelAndView view = new ModelAndView();
-//		view.setViewName("");//jsp명
-//		return view;
-//	}
+	
+	
+	@RequestMapping(value={"/signIn"}, method=RequestMethod.POST)
+	public ModelAndView signIn(@ModelAttribute("signInRequest") SignInRequest signInRequest, HttpSession session){
+		System.out.println("signIn");
+		ModelAndView modelAndView = new ModelAndView();
+		try{
+			ValdateAction.checkEmailForm(signInRequest.getEmail());
+			
+			WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
+			
+			SignInInfo signInInfo = context.getBean("signInInfo", SignInInfo.class);
+			signInInfo.setEmail(signInRequest.getEmail());
+			signInInfo.setPwd(signInRequest.getPwd());
+			
+			Service service = context.getBean("memberSignInService",Service.class);
+			
+			ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+			
+			request.addObject("signInInfo", signInInfo);
+			
+			try{
+				service.execute(request);
+				
+				synchronized (session) {
+					session.setAttribute("email", signInInfo.getEmail());
+				}
+				modelAndView.setViewName("calendar");
+			}catch(NullPointerException nullPointerException){
+				System.out.println("NullPointerException");
+				System.out.println(nullPointerException.getMessage());
+				nullPointerException.printStackTrace();
+			}catch(EmptyResultDataAccessException emptyResultDataAccessException){
+				System.out.println("EmptyResultDataAccessException");
+				System.out.println(emptyResultDataAccessException.getMessage());
+				emptyResultDataAccessException.printStackTrace();
+			}catch(PwdMisMatchedException pwdMisMatchedException){
+				System.out.println("PwdMisMatchedException");
+				System.out.println(pwdMisMatchedException.getMessage());
+				pwdMisMatchedException.printStackTrace();
+			}
+		}catch(NullPointerException nullPointerException){
+			System.out.println("NullPointerException");
+			System.out.println(nullPointerException.getMessage());
+			nullPointerException.printStackTrace();
+		}catch(NonValidatedEmailFormEception emailFormEception){
+			System.out.println("NonValidatedEmailFormEception");
+			System.out.println(emailFormEception.getMessage());
+			emailFormEception.printStackTrace();
+		}
+		return modelAndView;
+	}
 //	
 //	@RequestMapping(value={"/memberSearch"})
 //	public ModelAndView memberSearch(@RequestParam(value="search") Member member){
@@ -110,14 +174,14 @@ public class MemberController {
 //	}
 	
 	@RequestMapping(value={"/certification"}, method=RequestMethod.GET)
-	public @ResponseBody Map<String, String> sendCertificationCode(HttpServletRequest servletRequest ,@RequestParam("email") String email, HttpSession session){
+	public @ResponseBody Map<String, String> sendCertificationCode(@RequestParam("email") String email, HttpSession session){
 		System.out.println("sendCertificationCode");
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try{
 			ValdateAction.checkEmailForm(email);
 			
-			WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(servletRequest.getServletContext());
+			WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
 			Service service = context.getBean("sendCertificationCodeService", Service.class);
 			ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
 			

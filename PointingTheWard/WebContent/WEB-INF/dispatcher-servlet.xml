@@ -9,11 +9,15 @@
 	<mvc:annotation-driven />
 	
 	<mvc:default-servlet-handler />
-
+	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<!-- 페이지 메핑 정의 -->
+	<mvc:view-controller path="/signUpPage" view-name="signUp"/>
+
 	
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	

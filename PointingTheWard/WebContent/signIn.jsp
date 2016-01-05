@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,23 +14,23 @@
 	<div class="container">
 		<div class="component">
 			<h1>Sign In  </h1>
-			<form method="post" action="index.html">
+			<form id="signInRequest" method="post" action="signIn">
 				<p>
-					<input type="email" name="login" value=""
-						placeholder="e-mail" required>
+					<input type="email" name="email" value="" placeholder="e-mail" required>
 				</p>
 				<p>
-					<input type="password" name="password" value=""
-						placeholder="Password" required>
+					<input type="password" name="pwd" value="" placeholder="Password" required>
 				</p>
 				<p class="remember_me">
-					<label> <input type="checkbox" name="remember_me"
-						id="remember_me"> Remember me on this computer
+					<label> 
+						<input type="checkbox" name="remember" id="remember"> Remember me on this computer
 					</label>
 				</p>
 				<p class="submit">
 					<input type="submit" name="commit" value="Sign In">
-					<input type="submit" name="commit" value="Sign Up">
+					<a href="<c:url value='/signUpPage'/>">
+						<input type="button" name="commit" value="Sign Up">
+					</a>
 				</p>
 			</form>
 		</div>

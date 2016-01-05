@@ -16,21 +16,21 @@ public class MemberSignUpService extends AbstractMemberService implements Member
 
 	@Override
 	public void execute(ServiceRequest request) {
-		// TODO Auto-generated method stub
 		Member member = request.getObject("memberInfo");
 		if (member != null) {
-			SignUp(member);
+			signUp(member);
+		}else{
+			throw new NullPointerException("member info is null");
 		}
 	}
 
 	@Override
-	public void SignUp(Member member) {
-		// TODO Auto-generated method stub
-		System.out.println(member);
+	public void signUp(Member member) {
+		signUp(member.getEmail(), member.getName(), member.getPwd(), member.getLocation(), member.getTransportaion());
 	}
 
 	@Override
-	public void SignUp(String email, String name, String pwd, String location, Transportation transportation) {
+	public void signUp(String email, String name, String pwd, String location, Transportation transportation) {
 		memberDao.signUpMember(new MemberDTO(email, name, pwd, location, transportation));
 	}
 

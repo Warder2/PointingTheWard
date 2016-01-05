@@ -1,12 +1,12 @@
-package model.beans;
+package command;
 
-public class LoginInfo {
+public class SignInRequest {
 	private String email;
 	private String pwd;
 	
-	public LoginInfo() {
+	public SignInRequest() {
 	}
-	public LoginInfo(String email, String pwd) {
+	public SignInRequest(String email, String pwd) {
 		this.email = email;
 		this.pwd = pwd;
 	}
@@ -24,7 +24,7 @@ public class LoginInfo {
 	}
 	@Override
 	public String toString() {
-		return "LoginInfo [email=" + email + ", pwd=" + pwd + "]";
+		return "LogInRequest [email=" + email + ", pwd=" + pwd + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -42,7 +42,7 @@ public class LoginInfo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LoginInfo other = (LoginInfo) obj;
+		SignInRequest other = (SignInRequest) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
