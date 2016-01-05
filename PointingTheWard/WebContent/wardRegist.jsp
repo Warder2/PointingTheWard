@@ -38,7 +38,9 @@
 				</p>
 				
 				<p>
-					기간 <input type="number" min="0" max="30">  시간 <input type="number" min="0" max="24" >
+					범위 <input type="number" min="0" max="20">
+					기간 <input type="number" min="0" max="30">  
+					시간 <input type="number" min="0" max="24" >
 				</p>
 
 				<p class="submit">

@@ -1,6 +1,8 @@
 package test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Before;
@@ -119,7 +121,6 @@ public class EventDAOTest {
 	}
 	
 	public void eventParticipantInfoSearchCode(){
-		List<EventParticipantInfoDTO> events = eventDAO.eventParticipantInfoSearchCode(8);
 		System.out.println(events.size());
 		for(EventParticipantInfoDTO event : events){
 			Assert.notNull(event);
@@ -151,11 +152,67 @@ public class EventDAOTest {
 		eventDAO.eventParticipantRegist("SB", new EventDTO(8,"추가 일정념2","시작날짜용","종료날짜용","시작시간용","종료시간용","냉무","장소염"));
 		eventParticipantInfoSearchCode();
 	}
-	 @Test
+
 	public void eventDelete(){
 		eventDAO.eventDelete(8);
 		eventSearch();
 	}
+	
+	public void eventSearchRangeDate(){
+		 List<EventDTO> eList = eventDAO.eventSearchRangeDate("2016-01-05","2016-01-06");
+		
+		 
+		 System.out.println(eList.size());
+		 
+		 for(EventDTO e : eList){
+			 System.out.println(e);
+		 }
+	}
+	
+	 public void eventSearchScope(){
+		 List<EventDTO> eList = eventDAO.eventSearchScope(20);
+		 for(EventDTO e : eList){
+			 System.out.println(e);
+		 }
+		 
+	 }
+	 public void eventSearchTime(){
+		 List<EventDTO> eList = eventDAO.eventSearchRangeTime("2016/01/07","5:00" , "22:00");
+		 for(EventDTO e : eList){
+			 System.out.println(e);
+		 }
+	 }
+	 @Test
+	 public void dateCompare(){
+		 String sDate = "17 - 00";
+		 String eDate = "18 - 30";
+		 
+		 String d1="16/12/31";
+		 
+		 
+		 SimpleDateFormat formatter = new SimpleDateFormat ("yy/MM/dd");
+		   Calendar rightNow = Calendar.getInstance();
+		   rightNow.add(Calendar.DATE, 7);
+		   String currentDate = formatter.format(rightNow.getTime());
+		   
+		 System.out.println(currentDate);
+		 
+		 if(sDate.compareTo(eDate) >0){
+			 System.out.println("sDate >> eDate");
+		 }
+		 else{
+			 System.out.println("sDate << eDate");
+		 }
+	 }
+	 
+	 public void possibleTime(){
+		 List<EventDTO> eList = eventDAO.eventSearchRangeTime("2016/01/07","5:00" , "22:00");
+		 for(EventDTO e : eList){
+			 System.out.println(e);
+		 }
+	 }
+	 
+	 
 	
 }
 

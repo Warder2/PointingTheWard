@@ -22,8 +22,14 @@ public interface EventSearchDAO {
 	
 	public EventParticipantInfoDTO eventParticipantInfoSearch(String email, int eventCode);
 
-	public List<EventParticipantInfoDTO> eventParticipantInfoSearchCode(int eventCode);
+	public EventParticipantInfoDTO eventParticipantInfoSearchCode(int eventCode);
 
 	public List<EventDTO> eventSearch(EventDTO event);
+	
+	public List<EventDTO> eventSearchRangeDate(String sDate , String eDate);
+	
+	public List<EventDTO> eventSearchScope(int scope);
+	
+	public List<EventDTO> eventSearchRangeTime(String date , String sTime, String eTime);
 	
 }

@@ -51,7 +51,7 @@
 			<c:forEach var="friend" items="${fList}">
 				<fieldset>
 					<legend>${friend.name}</legend>
-					<input type="checkbox">${friend.email}
+					<input type="checkbox" value="${friend.email}">${friend.email}
 				</fieldset>
 			</c:forEach>
 

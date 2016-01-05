@@ -2,6 +2,8 @@ package persistance.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,7 +31,7 @@ public class EventDAOImpl implements EventDAO {
 			EventDTO.setsTime(rs.getString("s_Time"));
 			EventDTO.setContent(rs.getString("content"));
 			EventDTO.setPlace(rs.getString("place"));
-			
+
 			return EventDTO;
 		}
 	};
@@ -101,33 +103,19 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public void eventModify(EventDTO oldEvent, EventDTO newEvent) {
 		// TODO Auto-generated method stub
-				String q = 
-						"update event_view set "
-						+ "title=?, "
-						+ "s_date=?, "
-						+ "e_date=?, "
-						+ "s_time=?, "
-						+ "e_time=?, "
-						+ "content=?, "
-						+ "place=?"
-						+ "where e_code= ?";
-				template.update(q,newEvent.getTitle(),newEvent.getsDate(),newEvent.geteDate(),newEvent.getsTime(),newEvent.geteTime(),newEvent.getContent(),newEvent.getPlace(),oldEvent.getCode());
+		String q = "update event_view set " + "title=?, " + "s_date=?, " + "e_date=?, " + "s_time=?, " + "e_time=?, "
+				+ "content=?, " + "place=?" + "where e_code= ?";
+		template.update(q, newEvent.getTitle(), newEvent.getsDate(), newEvent.geteDate(), newEvent.getsTime(),
+				newEvent.geteTime(), newEvent.getContent(), newEvent.getPlace(), oldEvent.getCode());
 	}
 
 	@Override
 	public void eventModifyCode(int eventCode, EventDTO newEvent) {
 		// TODO Auto-generated method stub
-		String q = 
-				"update event_view set "
-				+ "title=?, "
-				+ "s_date=?, "
-				+ "e_date=?, "
-				+ "s_time=?, "
-				+ "e_time=?, "
-				+ "content=?, "
-				+ "place=?"
-				+ "where e_code= ?";
-		template.update(q,newEvent.getTitle(),newEvent.getsDate(),newEvent.geteDate(),newEvent.getsTime(),newEvent.geteTime(),newEvent.getContent(),newEvent.getPlace(),eventCode);
+		String q = "update event_view set " + "title=?, " + "s_date=?, " + "e_date=?, " + "s_time=?, " + "e_time=?, "
+				+ "content=?, " + "place=?" + "where e_code= ?";
+		template.update(q, newEvent.getTitle(), newEvent.getsDate(), newEvent.geteDate(), newEvent.getsTime(),
+				newEvent.geteTime(), newEvent.getContent(), newEvent.getPlace(), eventCode);
 	}
 
 	// event search
@@ -139,19 +127,46 @@ public class EventDAOImpl implements EventDAO {
 		return template.queryForObject(q, EventDTOMapper, eventCode);
 
 	}
+
 	@Override
 	public List<EventDTO> eventSearch(EventDTO event) {
-		String q = "select * from event_view where "
-				+ "title = ? and "
-				+ "s_date = ? and "
-				+ "e_date = ? and "
-				+ "s_time = ? and "
-				+ "e_time = ? and "
-				+ "content = ? and "
-				+ "place = ? ";
-		
-		return template.query(q, EventDTOMapper, event.getTitle(),event.getsDate(),event.geteDate(),event.getsTime(),event.geteTime(),event.getContent(),event.getPlace());
+		String q = "select * from event_view where " + "title = ? and " + "s_date = ? and " + "e_date = ? and "
+				+ "s_time = ? and " + "e_time = ? and " + "content = ? and " + "place = ? ";
+
+		return template.query(q, EventDTOMapper, event.getTitle(), event.getsDate(), event.geteDate(), event.getsTime(),
+				event.geteTime(), event.getContent(), event.getPlace());
 	}
+
+	@Override
+
+	public List<EventDTO> eventSearchRangeDate(String sDate, String eDate) {
+		String q = "select * from event_view where s_date >= ? and e_date <=?";
+		return template.query(q, EventDTOMapper, sDate, eDate);
+	}
+
+	@Override
+	public List<EventDTO> eventSearchScope(int scope) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar rightNow = Calendar.getInstance();
+		// String currentDate = formatter.format(rightNow.getTime());
+		rightNow.add(Calendar.DATE, scope);
+		String scopeDate = formatter.format(rightNow.getTime());
+
+		System.out.println(scopeDate);
+
+		String q = "select * from event_view where s_date >= to_char(sysdate, 'yyyy-mm-dd') and e_date <= ?";
+		return template.query(q, EventDTOMapper, scopeDate);
+
+	}
+
+	@Override
+	public List<EventDTO> eventSearchRangeTime(String date, String sTime, String eTime) {
+
+		String q = "select * from event_view where s_date = ? and e_date = ? and s_time >=? and e_time <= ?";
+		return template.query(q, EventDTOMapper, date, date, sTime, eTime);
+	}
+
 	// eventParticipant Info search
 
 	@Override
@@ -170,10 +185,10 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public List<EventParticipantInfoDTO> eventParticipantInfoSearchCode(int eventCode) {
+	public EventParticipantInfoDTO eventParticipantInfoSearchCode(int eventCode) {
 
 		String q = "select * from e_participant_info_view where e_code=?";
-		return template.query(q, eventParticipantInfoViewDTOMapper, eventCode);
+		return template.queryForObject(q, eventParticipantInfoViewDTOMapper, eventCode);
 
 	}
 
@@ -194,7 +209,7 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public EventParticipantDTO eventParticipantSearch(String email, int eventCode) {
 		String q = "select * from e_participant_view where e_code=? and email=?";
-		return template.queryForObject(q, eventParticipantViewDTOMapper, eventCode,email);
+		return template.queryForObject(q, eventParticipantViewDTOMapper, eventCode, email);
 	}
 
 	// event regist
@@ -221,18 +236,14 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public void eventParticipantRegist(String email, EventDTO event) {
 		String q = "insert into e_participant_view(email,e_code) values(?,?)";
-		template.update(q,email,event.getCode());
+		template.update(q, email, event.getCode());
 	}
 
 	@Override
 	public List<EventDTO> eventSearchAll() {
-		// TODO Auto-generated method stub
 		String q = "select * from event_view";
-		
+
 		return template.query(q, EventDTOMapper);
 	}
-
-	
-
 
 }
