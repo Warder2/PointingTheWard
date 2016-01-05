@@ -144,37 +144,42 @@ public class GroupDAOImpl implements GroupDAO{
 
 	@Override
 	public void createGroupParticipant(int gCode, String email) {
-		template.update("");
+		template.update("insert into g_participant_view(g_code, email) values(?, ?)", gCode, email);
 	}
 
 	@Override
+	@Transactional
 	public void createGroupParticipants(int gCode, String... emails) {
-		// TODO Auto-generated method stub
-		
+		for(String email : emails){
+			createGroupParticipant(gCode, email);
+		}
 	}
 
 	@Override
 	public void createGroupParticipant(int gCode, List<String> emails) {
-		// TODO Auto-generated method stub
-		
+		for(String email : emails){
+			createGroupParticipant(gCode, email);
+		}
 	}
 
 	@Override
 	public void createGroupParticipant(int gCode, FriendDTO friend) {
-		// TODO Auto-generated method stub
-		
+		createGroupParticipant(gCode, friend.getFriendEmail());
 	}
 
 	@Override
+	@Transactional
 	public void createGroupParticipants(int gCode, FriendDTO... friends) {
-		// TODO Auto-generated method stub
-		
+		for(FriendDTO friend : friends){
+			createGroupParticipant(gCode, friend);
+		}
 	}
 
 	@Override
 	public void createGroupParticipants(int gCode, List<FriendDTO> friends) {
-		// TODO Auto-generated method stub
-		
+		for(FriendDTO friend : friends){
+			createGroupParticipant(gCode, friend);
+		}
 	}
 	
 }

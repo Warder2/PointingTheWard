@@ -1,17 +1,16 @@
 package command;
 
-public class MemberCommand {
+public class SignUpMemberRequest {
 	private String email;
 	private String name;
 	private String pwd;
 	private String location;
 	private String transportation;
 	
-	public MemberCommand() {
-		// TODO Auto-generated constructor stub
+	public SignUpMemberRequest() {
 	}
 
-	public MemberCommand(String email, String name, String pwd, String location, String transportation) {
+	public SignUpMemberRequest(String email, String name, String pwd, String location, String transportation) {
 		super();
 		this.email = email;
 		this.name = name;

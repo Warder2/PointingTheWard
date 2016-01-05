@@ -22,4 +22,7 @@
 	<bean id="placeList"	class="model.List.PlaceList"/>
 	<bean id="pointList"	class="model.List.PointList"/>
 	<bean id="wardList"		class="model.List.WardList"/>
+	
+	<bean id="certificationCodeCreator" class="model.certification.CertificationCodeCreator"/>
+	<bean id="emailSender" class="model.mail.EmailSender"/>
 </beans>

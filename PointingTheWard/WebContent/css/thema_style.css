@@ -87,6 +87,7 @@ textarea{
 }
 
 input[type=email], input[type=password], input[type=text] ,input[type=datetime-local],select ,option ,tr {
+  cursor: pointer;
   margin: 5px;
   padding: 0 10px;
   width: 200px;
@@ -107,7 +108,7 @@ input[type=email], input[type=password], input[type=text] ,input[type=datetime-l
   }
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
   padding: 0 18px;
   height: 29px;
   font-size: 12px;

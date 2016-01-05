@@ -193,3 +193,4 @@ drop trigger GROUP_DELETE_TRIGGER;
 
 select * from tab;
 select * from user_sequences;
+select * from all_triggers;

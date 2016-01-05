@@ -47,4 +47,11 @@ public class GroupDAOTest {
 		List<GroupParticipantInfoDTO> groupParticipantInfoDTOs = groupDAO.searchGroupParticipants(3);
 	}
 	
+	@Test
+	public void deleteGroup(){
+		System.out.println("deleteGroup");
+		
+		groupDAO.createGroup("email", "name!!");
+		groupDAO.deleteGroup(1);
+	}
 }

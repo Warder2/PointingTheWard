@@ -21,6 +21,6 @@ public class CertificationTest {
 		String code = creator.createCertificationCode();
 		
 		EmailSendable sendable = new EmailSender();
-		sendable.sendEmail("janghaeye@gmail.com", "nj186@naver.com", "인증코드 발송 테스트", code);
+		sendable.sendEmail("nj186@naver.com", "인증코드 발송 테스트", code);
 	}
 }

@@ -1,12 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
 
 <link rel="stylesheet" href="css/thema_style.css">
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input#certificationBtn').click(function(){
+			$.ajax({
+				url: 'sendCertificationCode',
+				type: 'GET',
+				data: {
+					email: $('input#email').val()},
+				success: function(data){
+					if(data != 'false'){
+						var domain = data.split('@')[1];
+						window.open('http://www.' + domain, '', '', '');
+					}
+				}
+			});
+		});
+	});
+</script>
 
 <title>Insert title here</title>
 </head>
@@ -14,18 +32,17 @@
 	<div class="container">
 		<div class="component">
 			<h1>Sign Up</h1>
-			<form method="post" action="index.html">
+			<form id="signUpMember" method="post" action="signUp">
 				<p>
-					<input type="email" name="login" value="" placeholder="e-mail"><input
-						type="submit" name="commit" value="check">
-
+					<input type="email" id="email" name="email" value="" placeholder="e-mail">
+					<input type="button" id="certificationBtn" value="send">
 				</p>
 				<p>
-					<input type="password" name="password" value=""
+					<input type="password" name="pwd" value=""
 						placeholder="Password" required>
 				</p>
 				<p>
-					<input type="password" name="passwordCheck" value=""
+					<input type="password" name="pwdCheck" value=""
 						placeholder="Password Check" required>
 				</p>
 
