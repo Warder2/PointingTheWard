@@ -1,9 +1,11 @@
 package service;
 
+import java.rmi.Remote;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -45,9 +47,15 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		List<String> emails = new ArrayList<String>();
 		emails.add("jangsb7113@naver.com");
 		emails.add("akjin47@naver.com");
+		emails.add("nj186@naver.com");
+		String scope = "2";
+		String period = "";
+		String runTime = "";
+		
+		
 		List<EventParticipantInfoDTO> events = getParticiantEvents(emails);
 		if(events!= null)// 참가자 일정 있을 경우 
-			getScopeInEvents(events, 2); 
+			getScopeInEvents(events, Integer.parseInt(scope)); 
 	}
 	
 	// 1. 참가자들의 모든 일정 가져오기
@@ -56,33 +64,37 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		List<EventParticipantInfoDTO> events = new ArrayList<EventParticipantInfoDTO>();
 
 		for (String email : particiantsEmails) {
-
+			
 			events.addAll(eventDAO.eventParticipantInfoSearchMail(email));
 		}
-		System.out.println(events.size());
 		
 		return events;
 	}
 
 	// 2. 범위 내 일정 가져오기
 	public void getScopeInEvents(List<EventParticipantInfoDTO> events, int scope) {
-
+		
+		// 오늘 날짜
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar rightNow = Calendar.getInstance();
-		String currentDate = formatter.format(rightNow.getTime());	// 오늘 날짜 
-
-		System.out.println("오늘날짜 : " + currentDate);
-		
+		String currentDate = formatter.format(rightNow.getTime());	 
+		//범위 종료날짜
 		rightNow.add(Calendar.DATE, scope);
-
 		String scopeDate = formatter.format(rightNow.getTime()); 	// 범위 날짜
+		System.out.println("현 : " + currentDate);
+		System.out.println("종 : " + scopeDate);
 		
-		System.out.println("오늘날짜 : " + scopeDate);
-
-		for (EventParticipantInfoDTO e : events) {
-			if (e.getsDate().compareTo(currentDate) > 0 && e.geteDate().compareTo(scopeDate) <= 0) {
-				System.out.println(e);
+		for(Iterator<EventParticipantInfoDTO> it = events.iterator() ; it.hasNext() ; )
+		{
+			EventParticipantInfoDTO value = it.next();
+			if(value.getsDate().compareTo("2016-01-07") < 0 || value.getsDate().compareTo("2016-01-09") > 0){
+				it.remove();
+			}else if(value.geteDate().compareTo("2016-01-07") == 0){
+				it.remove();
 			}
+		}
+		for(EventParticipantInfoDTO e:  events){
+			System.out.println(e);
 		}
 	}
 
