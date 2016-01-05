@@ -47,7 +47,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		emails.add("akjin47@naver.com");
 		List<EventParticipantInfoDTO> events = getParticiantEvents(emails);
 		if(events!= null)// 참가자 일정 있을 경우 
-			getScopeInEvents(events, 10); 
+			getScopeInEvents(events, 2); 
 	}
 	
 	// 1. 참가자들의 모든 일정 가져오기
@@ -72,6 +72,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		String currentDate = formatter.format(rightNow.getTime());	// 오늘 날짜 
 
 		System.out.println("오늘날짜 : " + currentDate);
+		
 		rightNow.add(Calendar.DATE, scope);
 
 		String scopeDate = formatter.format(rightNow.getTime()); 	// 범위 날짜
@@ -79,9 +80,8 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		System.out.println("오늘날짜 : " + scopeDate);
 
 		for (EventParticipantInfoDTO e : events) {
-			if (!(e.getsDate().compareTo("2016-01-07") > 0 && e.geteDate().compareTo(scopeDate) < 0)) {
+			if (e.getsDate().compareTo(currentDate) > 0 && e.geteDate().compareTo(scopeDate) <= 0) {
 				System.out.println(e);
-				events.remove(e);
 			}
 		}
 	}
