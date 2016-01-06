@@ -46,10 +46,6 @@ http://www.apache.org/licenses/LICENSE-2.0.txt
 junit - Eclipse Public License 1.0
 http://www.eclipse.org/legal/epl-v10.html
 
-#Document
-doc folder
--회의록, 벤치마킹, 계획서
-
 #Comment
 동영상은 데모 버젼입니다. 
 현재 script 작업중이며 알고리즘 구현은 70% 정도 된 상태입니다.
@@ -65,3 +61,7 @@ doc folder
 2. 범위 + 소요시간을 이용한 목적지 추출
 3. 중간지점 알고리즘 + 소요시간을 이용한 목적지 추출
 4. 각 목적지에서 다음 일정시간 고려한 적합한 시간과 장소 추천
+
+###Document
+doc folder
+-회의록, 벤치마킹, 계획서
