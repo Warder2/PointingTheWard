@@ -46,3 +46,6 @@ http://www.apache.org/licenses/LICENSE-2.0.txt
 junit - Eclipse Public License 1.0
 http://www.eclipse.org/legal/epl-v10.html
 
+#Document
+doc folder
+-회의록, 벤치마킹, 계획서
