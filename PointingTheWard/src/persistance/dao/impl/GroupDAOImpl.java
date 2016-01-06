@@ -35,7 +35,7 @@ public class GroupDAOImpl implements GroupDAO{
 			groupParticipantInfoViewDTO.setGName(rs.getString("g_name"));
 			groupParticipantInfoViewDTO.setOwner(rs.getString("owner"));
 			groupParticipantInfoViewDTO.setEmail(rs.getString("email"));
-			groupParticipantInfoViewDTO.setGName(rs.getString("name"));
+			groupParticipantInfoViewDTO.setName(rs.getString("name"));
 			groupParticipantInfoViewDTO.setLocation(rs.getString("location"));
 			groupParticipantInfoViewDTO.setTransportation(rs.getString("transportation"));
 			return groupParticipantInfoViewDTO;

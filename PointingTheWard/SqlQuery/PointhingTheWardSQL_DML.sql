@@ -64,7 +64,7 @@ select * from friend_info_view where email='email' and f_email='email1';
 
 
 insert into group_view(g_code, name, owner)
-values(group_sequence.nextval, 'name', 'email');
+values(group_sequence.nextval, 'group1', 'nj186@naver.com');
 
 select * from group_view;
 select * from group_view where g_code=0;
@@ -85,9 +85,9 @@ values(group_sequence.nextval, 'name1', 'email');
 
 
 insert into g_participant_view(g_code, email)
-values(1, 'email');
+values(0, 'nj186@naver.com');
 insert into g_participant_view(g_code, email)
-values(1, 'email1');
+values(0, 'test@test.com');
 insert into g_participant_view(g_code, email)
 values(2, 'email');
 insert into g_participant_view(g_code, email)

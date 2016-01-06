@@ -17,6 +17,7 @@
 <script>
 	$(document).ready(function() {
 		initFriend();
+		initGroup();
 		$(".flip").each(function(i) {
 			$(this).on("click", {
 				x : i
@@ -49,6 +50,22 @@
 			type: 'GET',
 			success: function(data){
 				console.log(data);
+				$('div#groupDiv').empty();
+				if(data instanceof Array){
+					$(data).each(function(index){
+						var groupTag = createGroupTagSet(this.gCode, this.name);
+						var gDiv = $(groupTag).children('div');
+						console.log(this.participants);
+						$(this.participants).each(function(index){
+							console.log(this.name);
+							var friendTag = createFriendTagSet(this.name, this.email);
+							console.log(friendTag);
+							$(gDiv).append(friendTag);
+						});
+						$('div#groupDiv').append(groupTag);
+					});
+					console.log($('div#groupDiv'));
+				}
 			}
 		});
 	}
@@ -85,17 +102,19 @@
 	<div class="container">
 		<div class="component">
 			<h2>Friends List</h2>
-			<div class="flip">
-				<input type="checkbox">멀티방
-				<div class="panel" id="0">
-					<fieldset>
-						<legend>장해</legend>
-						<input type="checkbox"> yeyeyey@~
-					</fieldset>
-					<fieldset>
-						<legend>봉봉이</legend>
-						<input type="checkbox">bongobbobo@~bog
-					</fieldset>
+			<div id="groupDiv">
+				<div class="flip">
+					<input type="checkbox">멀티방
+					<div class="panel" id="0">
+						<fieldset>
+							<legend>장해</legend>
+							<input type="checkbox"> yeyeyey@~
+						</fieldset>
+						<fieldset>
+							<legend>봉봉이</legend>
+							<input type="checkbox">bongobbobo@~bog
+						</fieldset>
+					</div>
 				</div>
 			</div>
 			<div id="friendsDiv">
