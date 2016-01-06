@@ -15,7 +15,6 @@ public class FriendSearchService extends AbstractFriendService implements Friend
 	public void setFriendDao(FriendDAO friendDao) {
 		this.friendDao = friendDao;
 	}
-	
 	@Override
 	public void execute(ServiceRequest request) {
 		String email = request.getObject("email");
@@ -29,10 +28,12 @@ public class FriendSearchService extends AbstractFriendService implements Friend
 			}else if(fName != null){
 				List<Friend> friends = searchFriendName(email, fName);
 				request.addObject("friends", friends);
-			}else{
+			} else {
 				List<Friend> friends = searchFriends(email);
 				request.addObject("friends", friends);
 			}
+		}else{
+			throw new NullPointerException("email is null");
 		}
 	}
 	

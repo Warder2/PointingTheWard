@@ -11,6 +11,7 @@
 	<bean id="memberController" class="controller.MemberController"/>
 	<bean id="groupController" class="controller.GroupController"/>
 	<bean id="calendarController" class="controller.CalendarController"/>
+	<bean id="friendController" class="controller.FriendController"/>
 	
 	
 	<!-- command objects -->

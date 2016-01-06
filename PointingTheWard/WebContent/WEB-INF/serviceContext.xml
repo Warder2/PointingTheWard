@@ -17,10 +17,14 @@
 	<bean id="eventRegistService" class="service.EventRegistService" />
 	<bean id="eventSearchService" class="service.EventSearchService" />
 
-	<bean id="friendAddtionService" class="service.FriendAddtionService" />
+	<bean id="friendAddtionService" class="service.FriendAddtionService">
+		<property name="friendDao" ref="FriendDao"/>
+	</bean>
 	<bean id="friendDeleteService" class="service.FriendDeleteService" />
 	<bean id="friendModifyService" class="service.FriendModifyService" />
-	<bean id="friendSearchService" class="service.FriendSearchService" />
+	<bean id="friendSearchService" class="service.FriendSearchService" >
+		<property name="friendDao" ref="FriendDao"/>
+	</bean>
 
 	<bean id="groupCreateService" class="service.GroupCreateService" />
 	<bean id="groupDeleteService" class="service.GroupDeleteService" />

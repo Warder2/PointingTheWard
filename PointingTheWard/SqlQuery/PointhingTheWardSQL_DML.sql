@@ -5,6 +5,9 @@ values('email1', 'name1', 'pwd1', 'location1', 'transit');
 insert into member_view(email, name, pwd, location, transportation) 
 values('email2', 'name2', 'pwd2', 'location2', 'driving');
 
+insert into member_view(email, name, pwd, location, transportation) 
+values('test@test.com', 'name2', '2222', 'location2', 'transit');
+
 select * from member_view;
 select * from member_view where email='email';
 
@@ -41,9 +44,10 @@ insert into friend_view(email, f_email) values('email', 'email1');
 select * from friend_view;
 select * from friend_view where email='email';
 
-delete from friend_view where email='email';
+delete from friend_view where email='nj186@naver.com';
 
 insert into friend_view(email, f_email) values('email', 'email1');
+insert into friend_view(email, f_email) values('nj186@naver.com', 'test@test.com');
 
 delete from friend_view where email='email' and f_email='email1';
 

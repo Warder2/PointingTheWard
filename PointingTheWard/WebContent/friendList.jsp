@@ -16,7 +16,7 @@
 
 <script>
 	$(document).ready(function() {
-
+		initFriend();
 		$(".flip").each(function(i) {
 			$(this).on("click", {
 				x : i
@@ -25,7 +25,24 @@
 				$("#" + event.data.x).slideToggle("slow");
 			});
 		});
+		
 	});
+	
+	function initFriend(){
+		$.ajax({
+			url: 'searchFriend',
+			type: 'GET',
+			success: function(data){
+				console.log(data);
+				var friendsDiv = $('div#friendsDiv').empty();
+				if(data != 'null' && data != 'empty'){
+					$(data).each(function(index){
+						$(friendsDiv).append(createFriendTagSet(this.name, this.email));
+					});
+				}
+			}
+		});
+	}
 	
 	function createFriendTagSet(name, email){
 		var fieldsetTag = document.createElement("fieldset");
@@ -42,13 +59,12 @@
 	function createGroupTagSet(gCode, gName){
 		var divTag = document.createElement("div");
 		$(divTag).attr('class', 'flip');
-		var inputTag = document.createElement("input");
-		var inputTagGCode = document.createElement("input");
-		$(inputTagGCode).val(gCode);
-		$(inputTagGCode).prop('hidden', true);
-		$(inputTag).attr('type', 'checkbox').html(gName);
+		var inputCheckTag = document.createElement("input");
+		$(inputCheckTag).attr('type', 'checkbox');
+		var friendsDivTag = document.createElement('div');
+		$(friendsDivTag).attr('class', 'panel');
+		$(divTag).append(inputCheckTag).append(friendsDivTag);
 		
-		$(divTag).append(inputTag).append(inputTagGCode);
 		return divTag;
 	}
 </script>
@@ -61,64 +77,30 @@
 		<div class="component">
 			<h2>Friends List</h2>
 
-			<c:forEach var="group" items="${gList}" varStatus="status">
-				<div class="flip">
-					<input type="checkbox">${group.name}</div>
-				<div class="panel" id="${status.index}">
-					<c:forEach var="friend" items="${group.fList}">
-						<fieldset>
-							<legend>${friend.name}</legend>
-							<input type="checkbox">${friend.email}
-						</fieldset>
-					</c:forEach>
-				</div>
-			</c:forEach>
-
-			<c:forEach var="friend" items="${fList}">
-				<fieldset>
-					<legend>${friend.name}</legend>
-					<input type="checkbox">${friend.email}
-				</fieldset>
-			</c:forEach>
-
-
-
-			<div class="flip">
+			<!-- <div class="flip">
 				<input type="checkbox">멀티방
+				<div class="panel" id="0">
+					<fieldset>
+						<legend>장해</legend>
+						<input type="checkbox"> yeyeyey@~
+					</fieldset>
+					<fieldset>
+						<legend>봉봉이</legend>
+						<input type="checkbox">bongobbobo@~bog
+					</fieldset>
+				</div>
 			</div>
-			<div class="panel" id="0">
+
+			<div id="friendsDiv">
 				<fieldset>
 					<legend>장해</legend>
-					<input type="checkbox"> yeyeyey@~
+					<input type="checkbox">yeyeyey@~
 				</fieldset>
 				<fieldset>
 					<legend>봉봉이</legend>
 					<input type="checkbox">bongobbobo@~bog
 				</fieldset>
-			</div>
-
-			<div class="flip">
-				<input type="checkbox">고3방
-			</div>
-			<div class="panel" id="1">
-				<fieldset>
-					<legend>대지니</legend>
-					<input type="checkbox">sivava@~
-				</fieldset>
-				<fieldset>
-					<legend>피카츄</legend>
-					<input type="checkbox">fuckfuck@~bog
-				</fieldset>
-			</div>
-
-			<fieldset>
-				<legend>장해</legend>
-				<input type="checkbox">yeyeyey@~
-			</fieldset>
-			<fieldset>
-				<legend>봉봉이</legend>
-				<input type="checkbox">bongobbobo@~bog
-			</fieldset>
+			</div> -->
 
 			<p class="submit">
 				<input type="submit" id="delete" name="commit" value="delete"><input

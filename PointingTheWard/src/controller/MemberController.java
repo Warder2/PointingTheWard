@@ -142,7 +142,6 @@ public class MemberController {
 	@RequestMapping(value={"/memberSearch"}, method=RequestMethod.GET)
 	public @ResponseBody <T> T memberSearch(HttpServletRequest servletRequest, HttpSession session){
 		System.out.println("memberSearch");
-		
 		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
 		
 		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);

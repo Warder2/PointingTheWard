@@ -36,7 +36,7 @@
 					type: 'GET',
 					data: data,
 					success: function(data){
-						$('div#friendArea').html('');
+						$('div#friendArea').empty();
 						if(data instanceof Array){
 							$(data).each(function(index){
 								$('div#friendArea').append(createFriendTag(this.name, this.email));
@@ -71,7 +71,13 @@
 				fEmail: $(this).attr('id')
 			},
 			success: function(data){
-				console.log(data);
+				if(data == 'true'){
+					confirm("success");
+					/* console.log($(this).parents());
+					$(this).parents().remove(); */
+				}else{
+					confirm("fail");
+				}
 			}
 		});
 	}

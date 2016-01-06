@@ -23,6 +23,8 @@
     <url-pattern>/signIn</url-pattern>
     <url-pattern>/certification</url-pattern>
   	<url-pattern>/memberSearch</url-pattern>
+  	<url-pattern>/addFriend</url-pattern>
+  	<url-pattern>/searchFriend</url-pattern>
   	  
     <!-- request page url -->
     <url-pattern>/signUpPage</url-pattern>

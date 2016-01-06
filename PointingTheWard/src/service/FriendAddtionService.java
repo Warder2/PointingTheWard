@@ -1,27 +1,28 @@
 package service;
 
-import model.beans.Friend;
+import persistance.dao.FriendDAO;
 import service.abstracts.AbstractFriendService;
 import service.interfaces.FriendAddible;
 
 public class FriendAddtionService extends AbstractFriendService implements FriendAddible{
-
+	private FriendDAO friendDao;
+	
+	public void setFriendDao(FriendDAO friendDao) {
+		this.friendDao = friendDao;
+	}
+	
 	@Override
 	public void execute(ServiceRequest request) {
-		// TODO Auto-generated method stub
-		System.out.println("FriendAddtionService test : " + request.getObject("test"));
+		String email = request.getObject("email");
+		String fEmail = request.getObject("fEmail");
+		if(email == null || fEmail == null){
+			throw new NullPointerException("email or friend email is null");
+		}else{
+			addFriend(email, fEmail);
+		}
 	}
-
 	@Override
-	public boolean addFriend(Friend friend) {
-		// TODO Auto-generated method stub
-		return false;
+	public void addFriend(String email, String fEmail) {
+		friendDao.addtionFriend(email, fEmail);
 	}
-
-	@Override
-	public boolean addFriend(int index, Friend friend) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
