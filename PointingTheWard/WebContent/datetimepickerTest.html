@@ -9,6 +9,16 @@
 <script>
 $(function(){
   $('.datetimepicker').appendDtpicker({'locale':'ko'});
+  $(document).ready(function(){
+	  console.log(location.host);
+	  console.log(getContextPath());
+  });
+  function getContextPath(){
+	    var offset=location.href.indexOf(location.host)+location.host.length;
+	    console.log(offset);
+	    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+	    return ctxPath;
+	}
 });
 </script>
 </head>

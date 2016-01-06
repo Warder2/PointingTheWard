@@ -111,11 +111,11 @@ body {
 	<div class="detailEvent">
 			<p>
 				<input type="text" name="title" value="대학 롤 정규 모임" > <br><br>
-				<input type="text" name="location" value="장소"> <br><br>
-				<input type="text" name="sDate" value="2016-01-06"> <br><br>
-				<input type="text" name="eTime" value="2016-01-06"> <br><br>
-				<input type="text" name="sTime" value="07:30"> <br><br>
-				<input type="text" name="eTime" value="12:30"> <br><br>
+				<input type="text" name="location" value="인하대 후문"> <br><br>
+				<input type="text" name="sDate" value="2016-01-07"> <br><br>
+				<input type="text" name="eTime" value="2016-01-07"> <br><br>
+				<input type="text" name="sTime" value="18:00"> <br><br>
+				<input type="text" name="eTime" value="22:00"> <br><br>
 				내용<br>
 				<textarea rows="5" cols="40">롤 정규 모임</textarea>
 				<p class="submit">

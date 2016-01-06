@@ -49,8 +49,8 @@
 
 				<p class="submit">
 				 <input type="submit" name="commit" value="add Particiant">
-					<input type="submit" name="commit" value="next"> <input
-						type="submit" name="commit" value="Cancel">
+					<a href='<c:url value="/wardRecommand"/>'><input type="button" name="commit" value="next"></a> 
+					<a href='<c:url value="/mainPage"/>'><input type="button" name="commit" value="Cancel"></a>
 				</p>
 			</form>
 

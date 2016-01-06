@@ -22,6 +22,16 @@
 	<mvc:view-controller path="/memberInfoPage" view-name="memberInfo"/>
 	<mvc:view-controller path="/friendListPage" view-name="friendList"/>
 	<mvc:view-controller path="/eventListPage" view-name="eventList"/>
+	<mvc:view-controller path="/detailEventPage" view-name="detailEvent"/>
+	<mvc:view-controller path="/eventRegist" view-name="eventRegist"/>
+	<mvc:view-controller path="/wardRecommand" view-name="wardRecommandList"/>
+	<mvc:view-controller path="/wardRequest" view-name="wardRegist"/>
+	<mvc:view-controller path="/friendAdd" view-name="friendAdd"/>
+	
+	
+	<mvc:view-controller path="/searchEventTest" view-name="eventList_copy"/>
+	<mvc:view-controller path="/detailEventPageTest" view-name="detailEvent_copy"/>
+	
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	
 	<import resource="controllerContext.xml"/>

@@ -22,7 +22,7 @@
 <body>
 	<div id="mainHeader">
 		<img id="sideMenuBtn" src="img/menu/menu_btn_img.png" /> 
-		<a id="logo" href="#">
+		<a id="logo" href="<c:url value='/mainPage'/>">
 			<img alt="" src="img/menu/logo.png">
 		</a>
 	</div>

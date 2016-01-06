@@ -5,11 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport"
-	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <link rel="stylesheet" href="css/thema_style.css">
 <link rel="stylesheet" href="css/list_style.css">
@@ -18,15 +16,6 @@
 	$(document).ready(function() {
 		initFriend();
 		initGroup();
-		/* $(".flip").each(function(i) {
-			$(this).on("click", {
-				x : i
-			}, function(event) {
-
-				$("#" + event.data.x).slideToggle("slow");
-			});
-		}); */
-		
 	});
 	
 	function initFriend(){
@@ -106,10 +95,10 @@
 			<div id="groupDiv"></div>
 			<div id="friendsDiv"></div>
 			<p class="submit">
-				<input type="submit" id="delete" name="commit" value="delete"><input
-					type="submit" name="commit" value="Check"><input
-					type="submit" name="commit" value="G-Add"> <input
-					type="submit" name="commit" value="search">
+				<input type="submit" id="delete" name="commit" value="delete">
+				<a href='<c:url value="/friendAdd"/>'><input type="submit" name="commit" value="F-Add"></a>
+				<input type="submit" name="commit" value="G-Add"> 
+				<input type="submit" name="commit" value="search">
 			</p>
 		</div>
 	</div>

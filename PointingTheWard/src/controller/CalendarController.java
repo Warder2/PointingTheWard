@@ -1,46 +1,23 @@
 package controller;
 
-import org.springframework.context.support.AbstractXmlApplicationContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CalendarController {
-	private AbstractXmlApplicationContext context;
 	
-	@RequestMapping(value={"/eventRegist"})
-	public ModelAndView eventRegist(){
-		System.out.println("eventRegist");
-		ModelAndView view = new ModelAndView();
-		view.setViewName("");//jspname
-		return view;
-	}
-	@RequestMapping(value={"/eventSearch"})
-	public ModelAndView eventSearch(){
-		System.out.println("eventSearch");
-		ModelAndView view = new ModelAndView();
-		view.setViewName("");//jspname
-		return view;
-	}
-	@RequestMapping(value={"/eventModify"})
-	public ModelAndView eventModify(){
-		System.out.println("eventModify");
-		ModelAndView view = new ModelAndView();
-		view.setViewName("");//jspname
-		return view;
-	}
-	@RequestMapping(value={"/eventDelete"})
-	public ModelAndView eventDelete(){
-		System.out.println("eventDelete");
-		ModelAndView view = new ModelAndView();
-		view.setViewName("");//jspname
-		return view;
-	}
-	public AbstractXmlApplicationContext getContext() {
-		return context;
-	}
-	public void setContext(AbstractXmlApplicationContext context) {
-		this.context = context;
+	@RequestMapping(value={"/searchEvent"}, method=RequestMethod.GET)
+	public String searchEvent(HttpServletRequest servletRequest){
+		System.out.println("searchEvent");
+		String day = servletRequest.getParameter("day");
+		String year = servletRequest.getParameter("year");
+		String month = servletRequest.getParameter("month");
+		System.out.println("year : " + year);
+		System.out.println("month : " + month);
+		System.out.println("day : " + day);
+		return "eventList";
 	}
 }

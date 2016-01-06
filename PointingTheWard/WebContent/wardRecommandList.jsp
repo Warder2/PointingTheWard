@@ -43,31 +43,28 @@
 					${ward.place}
 				</div>
 				<div class="panel" id="${status.index}">${movingTime}
-
 					${movingCost}</div>
-
 				<br>
 			</c:forEach>
 
 
 			<div class="flip">
-				1월6일 18:00 ~ 1월6일 22:00 <br> 인하대 후문
+				1월7일 18:00 ~ 1월7일 22:00 <a href='<c:url value="/mainPage"/>'><input type="button" style="float: right;" value="select"/></a> 
+				<br> 인하대 후문
 			</div>
 			<div class="panel" id="0">
-				비용:4700원<br> 시간:1시간13분<br> <img src="inha.PNG">
+				비용:4700원<br> 시간:1시간13분<br> 
+				<img src="inha.PNG">
 			</div>
 			<br>
 			<div class="flip">
-				1월7일 12:00 ~ 1월7일 22:00 <br> 구월동 로데오
+				1월8일 12:00 ~ 1월8일 22:00<a href='<c:url value="/mainPage"/>'><input type="button" style="float: right;" value="select"/></a>
+				 <br> 구월동 로데오 
 			</div>
 			<div class="panel" id="1">
 				비용:4700원<br> 시간:1시간13분<br> <img src="inha.PNG">
 			</div>
-			
-			
 		</div>
 	</div>
-
-
 </body>
 </html>

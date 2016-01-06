@@ -18,20 +18,13 @@
 </header>
 	<div class="container">
 		<div class="component">
-			<h1>1월 6일</h1>
+			<h1>1월 7일</h1>
 
 			<fieldset>
-				<a href='<c:url value="/detailEventPage"/>'>
-					<legend>7:30 - 12:30</legend>
+				<a href='<c:url value="/detailEventPageTest"/>'>
+					<legend>18:00 - 22:00</legend>
 					대학 롤 정규 모임
 				</a>
-			</fieldset>
-			
-			<fieldset>
-				<a href='<c:url value="/detailEventPage"/>'>
-					<legend>15:30 - 19:30</legend>
-					데이트 >_<
-				</a> 
 			</fieldset>
 
 			<c:forEach var="event" items="${eList}">

@@ -27,6 +27,7 @@
   	<url-pattern>/searchFriend</url-pattern>
   	<url-pattern>/searchGroup</url-pattern>
   	<url-pattern>/eventListPage</url-pattern>
+  	<url-pattern>/searchEvent</url-pattern>
   	  
     <!-- request page url -->
     <url-pattern>/signUpPage</url-pattern>
@@ -34,6 +35,15 @@
   	<url-pattern>/mainPage</url-pattern>
   	<url-pattern>/memberInfoPage</url-pattern>
   	<url-pattern>/friendListPage</url-pattern>
+  	<url-pattern>/detailEventPage</url-pattern>
+  	<url-pattern>/eventRegist</url-pattern>
+  	<url-pattern>/wardRecommand</url-pattern>
+  	<url-pattern>/wardRequest</url-pattern>
+  	<url-pattern>/friendAdd</url-pattern>
+  	
+  	
+  	<url-pattern>/searchEventTest</url-pattern>
+  	<url-pattern>/detailEventPageTest</url-pattern>
   </servlet-mapping>
   
   <filter>

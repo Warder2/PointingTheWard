@@ -37,11 +37,14 @@
 				</p>
 				
 				<p>
-					<input type="text" name="location" value="" placeholder="location" >
+					<input type="text" name="location" value="" placeholder="location" > 
 				</p>
 				<p class="submit">
-					<input type="submit" name="commit" value="regist"> <input
-						type="submit" name="commit" value="Cancel">
+					<a href='<c:url value="/mainPage"/>'><input type="button" name="commit" value="regist"></a>
+					<a href='<c:url value="/wardRequest"/>'><input type="button" value="recommand"/></a>
+					<a href='<c:url value="/mainPage"/>'> 
+						<input type="button" name="commit" value="Cancel">
+					</a>
 				</p>
 			</form>
 		</div>

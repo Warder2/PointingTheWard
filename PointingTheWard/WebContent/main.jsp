@@ -53,7 +53,9 @@
 	function setCalendar() {
 		var dayBlocks = $('div.day_block');
 		for (var i = calendar.getDayOfWeek(), j = 1; j < calendar.getSeveralMonthDays()[calendar.getMonth() - 1]; i++, j++) {
+			var url = getContextPath() + '/searchEventTest?year=' + calendar.getYear() + '&month=' + calendar.getMonth() + '&day=' + j;
 			$($(dayBlocks[i]).children()[0]).html(j);
+			$($(dayBlocks[i]).children('a.dayBlocks')[0]).attr('href', url);
 		}
 
 		$('label#currentYear').html(calendar.getYear());
@@ -64,6 +66,12 @@
 		$('div.day_block').each(function(index) {
 			$($(this).children()[0]).html('');
 		});
+	}
+	function getContextPath(){
+	    var offset=location.href.indexOf(location.host)+location.host.length;
+	    console.log(offset);
+	    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+	    return ctxPath;
 	}
 </script>
 
@@ -79,7 +87,7 @@
 					<td><label id="currentYear">2015</label></td>
 					<td><label id="currentMonth">12</label></td>
 					<td id="calendarControlBtns" colspan="5">
-						<a type="button" id="registEventBtn"></a>
+						<a type="button" id="registEventBtn" href='<c:url value="/eventRegist"/>'></a>
 						<input type="button" class="calendarControlBtn" id="nextMonthBtn"/>
 						<input type="button" class="calendarControlBtn" id="nextYearBtn"/> 
 						<input type="button" class="calendarControlBtn" id="prevYearBtn"/> 
@@ -116,7 +124,7 @@
 						<c:forEach varStatus="j" begin="0" end="6">
 							<td>
 								<div class="day_block">
-									<a class="dayBlocks" href="#">
+									<a class="dayBlocks" href="">
 										<c:choose>
 											<c:when test="${j.index eq 0 }">
 												<label class="sunDaysLabel"></label>
@@ -130,7 +138,6 @@
 										</c:choose>
 									<br /> 
 									</a>
-									<!-- <div class="event_img"></div> -->
 								</div>
 							</td>
 						</c:forEach>
