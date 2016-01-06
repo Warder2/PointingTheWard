@@ -8,7 +8,7 @@
 이 프로젝트의 목적은 다른 사용자의 일정을 알지 않아도, 각자의 일정과 환경을 고려하여 적합한 장소를 제공하여 만남을 편리하게 해주는 것입니다
 #소개 자료
 video link : 
-slideshare link :
+slideshare link : http://www.slideshare.net/ssuserd1449f/pointing-the-ward-introduce
 #어려운 점 및 해결 방안
 ###최적화 된 장소란 무엇인가
 사람들이 만나서 무언가를 많이 할 수 있는 곳으로 선정(번화가)
