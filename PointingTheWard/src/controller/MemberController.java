@@ -176,7 +176,6 @@ public class MemberController {
 			System.out.println(emptyResultDataAccessException.getMessage());
 			emptyResultDataAccessException.printStackTrace();
 		}
-		
 		return result;
 	}
 	

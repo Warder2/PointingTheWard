@@ -136,4 +136,9 @@ public class FriendDAOImpl implements FriendDAO {
 		
 		return template.queryForObject(searchSql, friendInfoViewDTOMapper,email,friendEmail);
 	}
+
+	@Override
+	public List<FriendInfoDTO> searchFriendInfoByName(String email, String fName) {
+		return template.query("select * from friend_info_view where email=? and f_name=?", friendInfoViewDTOMapper, email, fName);
+	}
 }

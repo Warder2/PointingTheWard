@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport"
@@ -26,6 +26,31 @@
 			});
 		});
 	});
+	
+	function createFriendTagSet(name, email){
+		var fieldsetTag = document.createElement("fieldset");
+		var legendTag = document.createElement("legend");
+		var inputTag = document.createElement("input");
+		
+		$(legendTag).html(name);
+		$(inputTag).html(email).attr('type', 'checkbox');
+		$(fieldsetTag).append(legendTag).append(inputTag);
+		
+		return fieldsetTag;
+	}
+	
+	function createGroupTagSet(gCode, gName){
+		var divTag = document.createElement("div");
+		$(divTag).attr('class', 'flip');
+		var inputTag = document.createElement("input");
+		var inputTagGCode = document.createElement("input");
+		$(inputTagGCode).val(gCode);
+		$(inputTagGCode).prop('hidden', true);
+		$(inputTag).attr('type', 'checkbox').html(gName);
+		
+		$(divTag).append(inputTag).append(inputTagGCode);
+		return divTag;
+	}
 </script>
 
 

@@ -41,5 +41,7 @@ public interface FriendSearchDAO {
 	 * @return 친구의 회원정보
 	 */
 	public FriendInfoDTO searchFriendInfoEmail(String email,String friendEmail);
+	
+	public List<FriendInfoDTO> searchFriendInfoByName(String email, String fName);
 		
 }
