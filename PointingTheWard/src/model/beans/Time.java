@@ -6,6 +6,7 @@ public class Time {
 
 	public Time() {
 		this("0", "0");
+		checkTime();
 	}
 
 	public Time(String hour, String min) {
@@ -16,6 +17,11 @@ public class Time {
 	public Time(Time time){
 		this.hour = time.getHour();
 		this.min = time.getMin();
+		checkTime();
+	}
+	public Time(String time){
+		this.hour = time.substring(0,2);
+		this.min = time.substring(3,5);
 		checkTime();
 	}
 	public Time(int hour,int min){
@@ -60,6 +66,19 @@ public class Time {
 		}
 		this.hour = String.valueOf(h);
 		this.min = String.valueOf(m);
+		if(Integer.parseInt(this.hour.trim()) == 0){
+			this.hour = "00";
+		}
+		if(Integer.parseInt(this.min.trim()) == 0){
+			this.min = "00";
+		}
+		if(Integer.parseInt(this.hour.trim()) < 10 && Integer.parseInt(this.hour.trim()) > 0){
+			this.hour = "0" + this.hour;
+		}
+		if(Integer.parseInt(this.min.trim()) < 10 && Integer.parseInt(this.min.trim()) > 0){
+			this.hour = "0" + this.min;
+		}
+		
 	}
 	
 	public String getHour() {
@@ -80,6 +99,7 @@ public class Time {
 	public void setTime(Time time){
 		this.hour = time.getHour();
 		this.min = time.getMin();
+		checkTime();
 	}
 	public void setTime(String time){
 		this.hour = time.substring(0,2);

@@ -16,9 +16,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import model.beans.Event;
-import model.beans.Place;
 import model.beans.Time;
 import model.beans.Ward;
+import model.beans.WardStartEndLocation;
 import model.list.WardList;
 import persistance.dao.EventDAO;
 import persistance.dto.EventParticipantInfoDTO;
@@ -56,65 +56,26 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		// 1.참가자들의 모든 일정을 가져온다.
 		List<EventParticipantInfoDTO> events = getParticiantEvents(emails);
 		Map<String, List<EventParticipantInfoDTO>> dayEventParticipantInfoMap = null;
-
+		List<Ward> tempWards = null;
+		Map<String, List<EventParticipantInfoDTO>> participantEventInfoMap = null;
+		Map<Ward, List<WardStartEndLocation>> wardStartEndLocationMap = new HashMap<Ward, List<WardStartEndLocation>>();
+		
 		if (events != null) {// 참가자 일정 있을 경우
 			// 2. 범위 내 일정 가져오기
 			getScopeInEvents(events, Integer.parseInt(scope));
 			// 3. 기간 나눠서 거르기(ver2)
 			// 4. 일 단위로 리스트 나누기
 			dayEventParticipantInfoMap = dayEventParticipantInfoList(events, Integer.parseInt(scope));
-			// 4. ward리스트 뽑기
+			// 5. ward리스트 뽑기
+			tempWards = possiblePlace(dayEventParticipantInfoMap, runTime);
+			// 6. 참가자별 일정을 나누기
+			participantEventInfoMap = participantEventList(events, emails);
+			// 7. ward 이전 시작점 / 이후 도착점 찾기
+			wardStartEndLocationMap = getWardStartEndLocation(tempWards, participantEventInfoMap);
+			// 8. 
+			
 		}
-		
-		Set<String> keys = dayEventParticipantInfoMap.keySet();
-		List<Ward> wards = new ArrayList<Ward>();
 
-		for (String key : keys) {// 날짜를 키값으로
-			Time wardStartTime = new Time("00", "00");
-			Time wardEndTime = new Time(wardStartTime);
-			wardEndTime.increaseTime(runTime);
-			System.out.println("현재 날짜 : " + key);
-			System.out.println("새 와드의 시작 시간 : " + wardStartTime);
-			System.out.println("새 와드의 종료 시간 :" + wardEndTime);
-			System.out.println();
-			// 24시까지 와드를 생성 할 수 있는 루프
-			while (wardEndTime.getHourInt() < 24) {
-				// 해당 날짜의 Event를 하나씩 가져와서 비교
-				for (EventParticipantInfoDTO event : dayEventParticipantInfoMap.get(key)) {
-					if(wardStartTime.compare(event.getsTime()) >=0 && wardEndTime.compare(event.geteTime()) <= 0){
-						wardStartTime.setTime(event.geteTime());
-						wardEndTime.setTime(wardStartTime); // 새 와드의 종료 시간은 새와드의 시작 시간 + runtime시간
-						wardEndTime.increaseTime(runTime);
-					}else if (wardEndTime.compare(event.getsTime()) == 0) { // 와드의 종료시간과 이벤트의 시작 시간이 겹침
-						// 와드를 생성
-						Ward ward = new Ward(key, key, wardStartTime.getTime(), wardEndTime.getTime());
-						wards.add(ward);
-
-						wardStartTime.setTime(event.geteTime());// 새 와드의 시작 시간은
-																// 현재 이벤트의 종료시간
-						wardEndTime.setTime(wardStartTime); // 새 와드의 종료 시간은 새와드의
-															// 시작 시간 + runtime시간
-						wardEndTime.increaseTime(runTime);
-						break;
-					}
-				}
-				if(wardStartTime.compare("24:00") == 0){
-					break;
-				}
-				wardEndTime.increaseHalfTime();
-				System.out.println("변경된 새 와드의 종료시간 : " + wardEndTime);
-				if(wardEndTime.compare("24:00") == 0){
-					// 와드를 생성
-					Ward ward = new Ward(key, key, wardStartTime.getTime(), wardEndTime.getTime());
-					wards.add(ward);
-					break;
-				}
-			}
-		}
-		System.out.println(wards.size());
-		for(Ward w : wards){
-			System.out.println(w);
-		}
 	}
 
 	// 1. 참가자들의 모든 일정 가져오기
@@ -179,36 +140,20 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 						// System.out.println("엥 근데 끝날짜가 다르다?");
 						// 종료날짜가 시작 날짜와 같지 않다는 것은 다음날로 이어진다는 것이므로
 						dayEventParticipantInfos.add(new EventParticipantInfoDTO(event.getEventCode(), event.getEmail(),
-								event.getTitle(), event.getsDate(), event.getsDate(), // 같은
-																						// 날짜를
-																						// 넣음,
-																						// 즉,
-																						// 일정을
-																						// 둘로
-																						// 쪼개어
-																						// 넣음
-								event.getsTime(), "24:00", event.getContent(), event.getPlace()));
+								event.getTitle(), event.getsDate(), event.getsDate(), event.getsTime(), "24:00",
+								event.getContent(), event.getPlace(), event.getName(), event.getLocation(),
+								event.getTransportation()));
 						// System.out.println("나눠버리자!");
 					} else {
 						// System.out.println("문제 없다!");
 						dayEventParticipantInfos.add(event);
 					}
-				} else if (event.geteDate().compareTo(scopeDate) == 0) {// 날짜의
-																		// 시작 날은
-																		// 달라도
-																		// 끝이 같은
-																		// 날일 경우
+				} else if (event.geteDate().compareTo(scopeDate) == 0) {
 					// System.out.println("엥 시작 날짜가 다르다!");
-					dayEventParticipantInfos.add(new EventParticipantInfoDTO(event.getEventCode(), event.getEmail(),
-							event.getTitle(), event.geteDate(), event.geteDate(), // 같은
-																					// 날짜를
-																					// 넣음,
-																					// 즉,
-																					// 일정을
-																					// 둘로
-																					// 쪼개어
-																					// 넣음
-							"00:00", event.geteTime(), event.getContent(), event.getPlace()));
+					dayEventParticipantInfos
+							.add(new EventParticipantInfoDTO(event.getEventCode(), event.getEmail(), event.getTitle(),
+									event.geteDate(), event.geteDate(), "00:00", event.geteTime(), event.getContent(),
+									event.getPlace(), event.getName(), event.getLocation(), event.getTransportation()));
 					// System.out.println("나눠서 넣자!");
 				} else {
 					// System.out.println("이날이 아니구나!");
@@ -217,17 +162,192 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			dayEventParticipantInfoMap.put(scopeDate, dayEventParticipantInfos);
 		}
 
+		// Set<String> keys = dayEventParticipantInfoMap.keySet();
 		/*
-		 * Set<String> keys = dayEventParticipantInfoMap.keySet(); for (String
-		 * key : keys) { for (EventParticipantInfoDTO event :
+		 * for (String key : keys) { for (EventParticipantInfoDTO event :
 		 * dayEventParticipantInfoMap.get(key)) { System.out.println("========="
 		 * + key + "========="); System.out.println(event); } }
 		 */
-		// --------------------------------------------------------------------------------------------------
 
 		return dayEventParticipantInfoMap;
 	}
 
+	// 4. 가능한 일정 추출
+	public List<Ward> possiblePlace(Map<String, List<EventParticipantInfoDTO>> dayEventParticipantInfoMap,
+			String runTime) {
+		Set<String> keys = dayEventParticipantInfoMap.keySet();
+		List<Ward> wards = new ArrayList<Ward>();
+
+		for (String key : keys) {// 날짜를 키값으로
+			Time wardStartTime = new Time("00", "00");
+			Time wardEndTime = new Time(wardStartTime);
+			wardEndTime.increaseTime(runTime);
+			/*
+			 * System.out.println("현재 날짜 : " + key); System.out.println(
+			 * "새 와드의 시작 시간 : " + wardStartTime); System.out.println(
+			 * "새 와드의 종료 시간 :" + wardEndTime); System.out.println();
+			 */
+			// 24시까지 와드를 생성 할 수 있는 루프
+			while (wardEndTime.getHourInt() < 24) {
+				// 해당 날짜의 Event를 하나씩 가져와서 비교
+				for (EventParticipantInfoDTO event : dayEventParticipantInfoMap.get(key)) {
+					if (wardStartTime.compare(event.getsTime()) == 0) {
+						wardStartTime.setTime(event.geteTime());
+						wardEndTime.setTime(wardStartTime); // 새 와드의 종료 시간은 새와드의
+															// 시작 시간 + runtime시간
+						wardEndTime.increaseTime(runTime);
+					} else if (wardEndTime.compare(event.getsTime()) == 0) {
+						Ward ward = new Ward(key, key, wardStartTime.getTime(), wardEndTime.getTime());
+						wards.add(ward);
+
+						wardStartTime.setTime(event.geteTime());// 새 와드의 시작 시간은
+																// 현재 이벤트의 종료시간
+						wardEndTime.setTime(wardStartTime); // 새 와드의 종료 시간은 새와드의
+															// 시작 시간 + runtime시간
+						wardEndTime.increaseTime(runTime);
+
+						break;
+					}
+					if (wardEndTime.compare(event.geteTime()) >= 0 && wardStartTime.compare(event.getsTime()) >= 0
+							&& wardStartTime.compare(event.geteTime()) < 0) {
+						wardStartTime.setTime(event.geteTime());
+						wardEndTime.setTime(wardStartTime); // 새 와드의 종료 시간은 새와드의
+															// 시작 시간 + runtime시간
+						wardEndTime.increaseTime(runTime);
+					}
+					if (wardEndTime.compare(event.getsTime()) < 0 && wardStartTime.compare(event.getsTime()) < 0
+							&& wardEndTime.compare(event.getsTime()) >= 0) {
+						wardStartTime.setTime(event.geteTime());
+						wardEndTime.setTime(wardStartTime); // 새 와드의 종료 시간은 새와드의
+															// 시작 시간 + runtime시간
+						wardEndTime.increaseTime(runTime);
+					}
+
+				}
+				if (wardStartTime.compare("24:00") == 0) {
+					break;
+				}
+				wardEndTime.increaseHalfTime();
+				// System.out.println("변경된 새 와드의 종료시간 : " + wardEndTime);
+				if (wardEndTime.compare("24:00") == 0) {
+					// 와드를 생성
+					Ward ward = new Ward(key, key, wardStartTime.getTime(), wardEndTime.getTime());
+					wards.add(ward);
+					break;
+				}
+			}
+		}
+		return wards;
+	}
+
+	// 5. 인원 별 일정 분류
+	public Map<String, List<EventParticipantInfoDTO>> participantEventList(List<EventParticipantInfoDTO> events,
+			List<String> emails) {
+		Map<String, List<EventParticipantInfoDTO>> participantEvents = new HashMap<String, List<EventParticipantInfoDTO>>();
+
+		for (String email : emails) {
+			List<EventParticipantInfoDTO> eventList = new ArrayList<EventParticipantInfoDTO>();
+			for (EventParticipantInfoDTO eventInfo : events) {
+				if (eventInfo.getEmail().trim().equals(email)) {
+					eventList.add(eventInfo);
+				}
+			}
+			participantEvents.put(email, eventList);
+			eventList = null;
+		}
+		return participantEvents;
+	}
+
+	// 6. 와드전 시작 위치와 끝 위치
+	public Map<Ward, List<WardStartEndLocation>> getWardStartEndLocation(List<Ward> tempWards,Map<String, List<EventParticipantInfoDTO>> participantEventInfoMap){
+		Map<Ward, List<WardStartEndLocation>> wardStartEndLocationMap = new HashMap<Ward, List<WardStartEndLocation>>();
+		List<WardStartEndLocation> location = null;
+
+		Set<String> keys = participantEventInfoMap.keySet();
+		// 와드들 검사
+		for (Ward ward : tempWards) {
+			System.out.println("ward : " + ward);
+			location = new ArrayList<WardStartEndLocation>();
+			// 참가인원대로
+			for (String key : keys) {
+				EventParticipantInfoDTO beforeEvent = null;
+				EventParticipantInfoDTO afterEvent = null;
+				String beforeEventLocation = null;
+				String afterEventLocation = null;
+				// 참가 인원의 이벤트들 검사
+				for (EventParticipantInfoDTO event : participantEventInfoMap.get(key)) {
+					System.out.println(event);
+					beforeEventLocation = event.getLocation();
+					afterEventLocation = event.getLocation();
+					Time wardsT = new Time(ward.getsTime());
+					Time wardeT = new Time(ward.geteTime());
+					Time eventsT = new Time(event.getsTime());
+					Time eventeT = new Time(event.geteTime());
+					if (ward.getsDate().equals(event.getsDate()) && ward.geteDate().equals(event.geteDate())) {
+						System.out.println("같은 날");
+						if (wardsT.compare(eventeT.getTime()) >= 0) {
+							System.out.println("와드전");
+							if (beforeEvent == null) {
+								beforeEvent = event;
+							} else if (new Time(beforeEvent.geteTime()).compare(event.geteTime()) <= 0) {
+								beforeEvent = event;
+							}
+
+						} else {
+							System.out.println("와드후");
+							if (afterEvent == null) {
+								afterEvent = event;
+							} else if (new Time(afterEvent.getsTime()).compare(event.getsTime()) >= 0) {
+								afterEvent = event;
+							}
+						}
+					} else if (ward.getsDate().equals(event.getsDate())
+							&& !(ward.geteDate().equals(event.geteDate()))) {
+						System.out.println("와드 후");
+						if (afterEvent == null) {
+							afterEvent = event;
+						} else if (new Time(afterEvent.getsTime()).compare(event.getsTime()) >= 0) {
+							afterEvent = event;
+						}
+					} else if (!(ward.getsDate().equals(event.getsDate()))
+							&& ward.geteDate().equals(event.geteDate())) {
+						System.out.println("와드 전");
+						if (beforeEvent == null) {
+							beforeEvent = event;
+						} else if (new Time(beforeEvent.geteTime()).compare(event.geteTime()) <= 0) {
+							beforeEvent = event;
+						}
+					} else {
+						System.out.println("다른 날");
+					}
+				}
+				// 한명의 참가인원의 모든 이벤트 검사 완료 다음 인원으로 넘어감
+				if (beforeEvent != null) {
+					beforeEventLocation = beforeEvent.getPlace();
+				}
+				if (afterEvent != null) {
+					afterEventLocation = afterEvent.getPlace();
+				}
+				location.add(new WardStartEndLocation(beforeEventLocation, afterEventLocation));
+			}
+			// 한개 와드의 모든 인원 조사 완료
+			wardStartEndLocationMap.put(ward, location);
+		}
+		// 모든 와드의 시작점 조사 완료
+		// 확인
+		
+
+		Set<Ward> WardMapKeys = wardStartEndLocationMap.keySet();
+		for (Ward key : WardMapKeys) {
+			System.out.println("와드 정보" + key);
+			for (WardStartEndLocation wardStartEndLocation : wardStartEndLocationMap.get(key)) {
+				System.out.println(wardStartEndLocation);
+			}
+		}
+
+		return wardStartEndLocationMap;
+	}
+	
 	public List<String> possibleEventList(List<EventParticipantInfoDTO> events) {
 
 		return null;
