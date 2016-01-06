@@ -7,6 +7,7 @@ import java.util.List;
  *
  */
 public class Event {
+	private int eCode;
 	/**
 	 * 제목
 	 */
@@ -44,7 +45,7 @@ public class Event {
 	 */
 	public Event() {
 	}
-	public Event(String title, String sDate, String eDate, String sTime, String eTime, String content, Place place,
+	public Event(int eCode, String title, String sDate, String eDate, String sTime, String eTime, String content, Place place,
 			List<Member> participants) {
 		super();
 		this.title = title;

@@ -29,7 +29,9 @@
 	<bean id="groupCreateService" class="service.GroupCreateService" />
 	<bean id="groupDeleteService" class="service.GroupDeleteService" />
 	<bean id="groupModifyService" class="service.GroupModifyService" />
-	<bean id="groupSearchService" class="service.GroupSearchService" />
+	<bean id="groupSearchService" class="service.GroupSearchService" >
+		<property name="groupDao" ref="groupDao"/>
+	</bean>
 
 	<bean id="memberDropoutService" class="service.MemberDropoutService" />
 	<bean id="memberModifyService" class="service.MemberModifyService" />

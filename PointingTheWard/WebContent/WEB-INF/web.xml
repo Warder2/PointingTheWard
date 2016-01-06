@@ -25,6 +25,7 @@
   	<url-pattern>/memberSearch</url-pattern>
   	<url-pattern>/addFriend</url-pattern>
   	<url-pattern>/searchFriend</url-pattern>
+  	<url-pattern>/searchGroup</url-pattern>
   	  
     <!-- request page url -->
     <url-pattern>/signUpPage</url-pattern>

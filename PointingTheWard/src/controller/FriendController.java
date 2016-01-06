@@ -103,6 +103,7 @@ public class FriendController {
 			if(email != null){
 				request.addObject("email", email);
 			}else{
+				///여기를 삭제
 				request.addObject("email", "nj186@naver.com");
 				//return null;
 			}

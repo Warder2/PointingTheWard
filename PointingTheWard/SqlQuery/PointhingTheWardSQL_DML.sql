@@ -7,6 +7,8 @@ values('email2', 'name2', 'pwd2', 'location2', 'driving');
 
 insert into member_view(email, name, pwd, location, transportation) 
 values('test@test.com', 'name2', '2222', 'location2', 'transit');
+insert into member_view(email, name, pwd, location, transportation) 
+values('nj186@naver.com', 'aaaa', '1111', 'location2', 'driving');
 
 select * from member_view;
 select * from member_view where email='email';

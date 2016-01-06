@@ -32,11 +32,12 @@ public class GroupDAOImpl implements GroupDAO{
 		public GroupParticipantInfoDTO mapRow(ResultSet rs, int index) throws SQLException {
 			GroupParticipantInfoDTO groupParticipantInfoViewDTO = new GroupParticipantInfoDTO();
 			groupParticipantInfoViewDTO.setGCode(rs.getInt("g_code"));
+			groupParticipantInfoViewDTO.setGName(rs.getString("g_name"));
+			groupParticipantInfoViewDTO.setOwner(rs.getString("owner"));
 			groupParticipantInfoViewDTO.setEmail(rs.getString("email"));
 			groupParticipantInfoViewDTO.setGName(rs.getString("name"));
 			groupParticipantInfoViewDTO.setLocation(rs.getString("location"));
 			groupParticipantInfoViewDTO.setTransportation(rs.getString("transportation"));
-			groupParticipantInfoViewDTO.setOwner(rs.getString("owner"));
 			return groupParticipantInfoViewDTO;
 		}
 	};

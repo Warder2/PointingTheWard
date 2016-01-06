@@ -1,8 +1,12 @@
 package service.interfaces;
 
+
+import java.util.List;
+
 import model.beans.Group;
 
 public interface GroupSearchable {
-public Group searchGroupName(String name);	
-	public Group searchGroup(Group group);
+	List<Group> searchGroup(String owner);
+	Group searchGroup(int gCode);
+	List<Group> searchGroupName(String name, String owner);	
 }

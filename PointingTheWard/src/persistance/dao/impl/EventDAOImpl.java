@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import model.beans.Transportation;
 import persistance.dao.EventDAO;
 import persistance.dto.EventDTO;
 import persistance.dto.EventParticipantDTO;
@@ -61,6 +62,9 @@ public class EventDAOImpl implements EventDAO {
 			eventParticipantInfoViewDTO.setsTime(rs.getString("s_time"));
 			eventParticipantInfoViewDTO.setContent(rs.getString("content"));
 			eventParticipantInfoViewDTO.setPlace(rs.getString("place"));
+			eventParticipantInfoViewDTO.setName(rs.getString("name"));
+			eventParticipantInfoViewDTO.setLocation(rs.getString("location"));
+			eventParticipantInfoViewDTO.setTransportation(Transportation.valueOfByStr(rs.getString("transportation")));
 			return eventParticipantInfoViewDTO;
 		}
 	};

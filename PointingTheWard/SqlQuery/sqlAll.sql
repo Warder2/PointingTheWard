@@ -144,13 +144,12 @@ WHERE
 GT.G_CODE = PT.G_CODE AND PT.EMAIL = MT.EMAIL;
 
 
-CREATE VIEW E_PARTICIPANT_INFO_VIEW(e_code, email, title, s_date, e_date, s_time, e_time, content, place)
+CREATE VIEW E_PARTICIPANT_INFO_VIEW(e_code, email, title, s_date, e_date, s_time, e_time, content, place, name, location, transportation)
 AS
-SELECT ET.E_CODE, MT.EMAIL, ET.TITLE,ET.S_DATE,ET.E_DATE,ET.S_TIME,ET.E_TIME,ET.CONTENT,ET.PLACE
+SELECT ET.E_CODE, MT.EMAIL, ET.TITLE,ET.S_DATE,ET.E_DATE,ET.S_TIME,ET.E_TIME,ET.CONTENT,ET.PLACE, MT.NAME, MT.LOCATION, MT.TRANSPORTATION
 FROM EVENT_TB ET, E_PARTICIPANT_TB PT,MEMBER_TB MT
 WHERE 
 ET.E_CODE = PT.E_CODE AND PT.EMAIL = MT.EMAIL;
-
 
 
 insert into member_tb(email, name, pwd, location, transportation) 

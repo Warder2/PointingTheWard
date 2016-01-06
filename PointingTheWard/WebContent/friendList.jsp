@@ -33,7 +33,6 @@
 			url: 'searchFriend',
 			type: 'GET',
 			success: function(data){
-				console.log(data);
 				var friendsDiv = $('div#friendsDiv').empty();
 				if(data != 'null' && data != 'empty'){
 					$(data).each(function(index){
@@ -44,14 +43,24 @@
 		});
 	}
 	
+	function initGroup(){
+		$.ajax({
+			url: 'searchGroup',
+			type: 'GET',
+			success: function(data){
+				console.log(data);
+			}
+		});
+	}
+	
 	function createFriendTagSet(name, email){
 		var fieldsetTag = document.createElement("fieldset");
 		var legendTag = document.createElement("legend");
 		var inputTag = document.createElement("input");
 		
 		$(legendTag).html(name);
-		$(inputTag).html(email).attr('type', 'checkbox');
-		$(fieldsetTag).append(legendTag).append(inputTag);
+		$(inputTag).html(email).attr('type', 'checkbox').attr('class', 'friendChecks');
+		$(fieldsetTag).append(legendTag).append(inputTag).append(email);
 		
 		return fieldsetTag;
 	}
@@ -76,8 +85,7 @@
 	<div class="container">
 		<div class="component">
 			<h2>Friends List</h2>
-
-			<!-- <div class="flip">
+			<div class="flip">
 				<input type="checkbox">멀티방
 				<div class="panel" id="0">
 					<fieldset>
@@ -90,17 +98,8 @@
 					</fieldset>
 				</div>
 			</div>
-
 			<div id="friendsDiv">
-				<fieldset>
-					<legend>장해</legend>
-					<input type="checkbox">yeyeyey@~
-				</fieldset>
-				<fieldset>
-					<legend>봉봉이</legend>
-					<input type="checkbox">bongobbobo@~bog
-				</fieldset>
-			</div> -->
+			</div>
 
 			<p class="submit">
 				<input type="submit" id="delete" name="commit" value="delete"><input
