@@ -86,6 +86,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<header>
+	<c:import url="menu.jsp"/>
+</header>
 	<div class="container">
 		<div class="component">
 			<h1>Friend Add</h1>

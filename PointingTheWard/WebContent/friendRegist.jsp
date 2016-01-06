@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport"
@@ -32,6 +32,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<header>
+	<c:import url="menu.jsp"/>
+</header>
 	<div class="container">
 		<div class="component">
 			<h2>Friends List</h2>

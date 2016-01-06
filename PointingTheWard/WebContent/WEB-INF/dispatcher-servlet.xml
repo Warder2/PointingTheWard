@@ -20,7 +20,8 @@
 	<mvc:view-controller path="/signInPage" view-name="signIn"/>
 	<mvc:view-controller path="/mainPage" view-name="main"/>
 	<mvc:view-controller path="/memberInfoPage" view-name="memberInfo"/>
-	
+	<mvc:view-controller path="/friendListPage" view-name="friendList"/>
+	<mvc:view-controller path="/eventListPage" view-name="eventList"/>
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	
 	<import resource="controllerContext.xml"/>

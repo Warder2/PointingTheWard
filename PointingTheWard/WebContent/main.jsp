@@ -46,8 +46,8 @@
 		$('div#calendar_div').on('swiperight', function(e) {
 			$('input#prevMonthBtn').trigger('click');
 		});
-		
 		console.log($('label.satDaysLabel'));
+		
 	});
 
 	function setCalendar() {
@@ -66,11 +66,12 @@
 		});
 	}
 </script>
+
 </head>
 <body>
 	<header>
-		<c:import url="menu.jsp"/>
-	</header>
+	<c:import url="menu.jsp"/>
+</header>
 	<div id="calendar_div">
 		<table id="calendarTable">
 			<thead>

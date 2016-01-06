@@ -94,32 +94,17 @@
 		return divTag;
 	}
 </script>
-
-
 <title>Insert title here</title>
 </head>
 <body>
+<header>
+	<c:import url="menu.jsp"/>
+</header>
 	<div class="container">
 		<div class="component">
 			<h2>Friends List</h2>
-			<div id="groupDiv">
-				<div class="flip">
-					<input type="checkbox">멀티방
-					<div class="panel" id="0">
-						<fieldset>
-							<legend>장해</legend>
-							<input type="checkbox"> yeyeyey@~
-						</fieldset>
-						<fieldset>
-							<legend>봉봉이</legend>
-							<input type="checkbox">bongobbobo@~bog
-						</fieldset>
-					</div>
-				</div>
-			</div>
-			<div id="friendsDiv">
-			</div>
-
+			<div id="groupDiv"></div>
+			<div id="friendsDiv"></div>
 			<p class="submit">
 				<input type="submit" id="delete" name="commit" value="delete"><input
 					type="submit" name="commit" value="Check"><input

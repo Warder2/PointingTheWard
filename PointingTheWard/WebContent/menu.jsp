@@ -31,8 +31,8 @@
 			<li>
 				<a href="<c:url value='/memberInfoPage'/>">회원정보</a>
 			</li>
-			<li><a href="#">친구목록</a></li>
-			<li><a href="#">일정정보</a></li>
+			<li><a href="<c:url value='/friendListPage'/>">친구목록</a></li>
+			<li><a href="<c:url value='/eventListPage'/>">일정정보</a></li>
 		</ul>
 	</div>
 </body>

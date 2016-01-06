@@ -26,12 +26,14 @@
   	<url-pattern>/addFriend</url-pattern>
   	<url-pattern>/searchFriend</url-pattern>
   	<url-pattern>/searchGroup</url-pattern>
+  	<url-pattern>/eventListPage</url-pattern>
   	  
     <!-- request page url -->
     <url-pattern>/signUpPage</url-pattern>
     <url-pattern>/signInPage</url-pattern>
   	<url-pattern>/mainPage</url-pattern>
   	<url-pattern>/memberInfoPage</url-pattern>
+  	<url-pattern>/friendListPage</url-pattern>
   </servlet-mapping>
   
   <filter>
