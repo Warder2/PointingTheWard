@@ -59,7 +59,6 @@ public class GroupController {
 			}
 			List<Group> groups = request.getObject("groups");
 			if(groups != null){
-				System.out.println(groups);
 				return (T) groups;
 			}
 			return null;

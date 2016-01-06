@@ -18,14 +18,14 @@
 	$(document).ready(function() {
 		initFriend();
 		initGroup();
-		$(".flip").each(function(i) {
+		/* $(".flip").each(function(i) {
 			$(this).on("click", {
 				x : i
 			}, function(event) {
 
 				$("#" + event.data.x).slideToggle("slow");
 			});
-		});
+		}); */
 		
 	});
 	
@@ -49,22 +49,18 @@
 			url: 'searchGroup',
 			type: 'GET',
 			success: function(data){
-				console.log(data);
 				$('div#groupDiv').empty();
 				if(data instanceof Array){
 					$(data).each(function(index){
-						var groupTag = createGroupTagSet(this.gCode, this.name);
+						var groupTag = createGroupTagSet(this.gCode, this.name, index);
 						var gDiv = $(groupTag).children('div');
-						console.log(this.participants);
 						$(this.participants).each(function(index){
-							console.log(this.name);
-							var friendTag = createFriendTagSet(this.name, this.email);
-							console.log(friendTag);
-							$(gDiv).append(friendTag);
+							$(gDiv).append(createFriendTagSet(this.name, this.email));
 						});
 						$('div#groupDiv').append(groupTag);
+						
+						console.log(groupTag);
 					});
-					console.log($('div#groupDiv'));
 				}
 			}
 		});
@@ -76,20 +72,24 @@
 		var inputTag = document.createElement("input");
 		
 		$(legendTag).html(name);
-		$(inputTag).html(email).attr('type', 'checkbox').attr('class', 'friendChecks');
+		$(inputTag).attr('type', 'checkbox').attr('class', 'friendChecks');
 		$(fieldsetTag).append(legendTag).append(inputTag).append(email);
 		
 		return fieldsetTag;
 	}
 	
-	function createGroupTagSet(gCode, gName){
-		var divTag = document.createElement("div");
-		$(divTag).attr('class', 'flip');
+	function createGroupTagSet(gCode, gName, index){
 		var inputCheckTag = document.createElement("input");
 		$(inputCheckTag).attr('type', 'checkbox');
 		var friendsDivTag = document.createElement('div');
-		$(friendsDivTag).attr('class', 'panel');
-		$(divTag).append(inputCheckTag).append(friendsDivTag);
+		$(friendsDivTag).attr('class', 'panel').click(function(){
+			$(this).slideToggle("slow");
+		});
+		var divTag = document.createElement("div");
+		$(divTag).attr('class', 'flip').append(inputCheckTag)
+		.append(gName).append(friendsDivTag).click(function(){
+			$(this).children('div.panel')[0].click();
+		});
 		
 		return divTag;
 	}
