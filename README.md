@@ -32,15 +32,8 @@ slideshare link :
 3.	군 집단이 생기지 않을 때 까지 루프 반복
 
 #개발환경
-JDK 1.8
-Tomacat 8.0(servelt 3.1, jsp 2.2)
-Oracle database
-html5, css3
-eclipse(MARS)
-git hub
-starUML
-ERWIN
-Spring Framework 4.2 
+JDK 1.8 | Tomacat 8.0(servelt 3.1, jsp 2.2) | Oracle database | html5 | css3 | eclipse(MARS) | git hub | starUML
+ERWIN | Spring Framework 4.2 
 
 #Open api
 사용자 일정 정보 – google calendar api
