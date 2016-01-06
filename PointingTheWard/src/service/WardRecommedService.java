@@ -1,5 +1,7 @@
 package service;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,10 +18,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import model.beans.Event;
+import model.beans.Point;
 import model.beans.Time;
 import model.beans.Ward;
 import model.beans.WardStartEndLocation;
 import model.list.WardList;
+import model.openData.RequestInfo;
+import model.openData.StoreZoneDataGetter;
+import model.openData.dataForm.StoreZoneDataForm;
+import model.openData.template.DataGetterTemplate;
+import model.openDataVO.StoreZone;
 import persistance.dao.EventDAO;
 import persistance.dto.EventParticipantInfoDTO;
 import service.abstracts.AbstractWardService;
@@ -43,7 +51,6 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		getParticiantEvents(particiantsEmails);
 	}
 
-	@Test
 	public void test() {
 		List<String> emails = new ArrayList<String>();
 		emails.add("jangsb7113@naver.com");
@@ -59,7 +66,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		List<Ward> tempWards = null;
 		Map<String, List<EventParticipantInfoDTO>> participantEventInfoMap = null;
 		Map<Ward, List<WardStartEndLocation>> wardStartEndLocationMap = new HashMap<Ward, List<WardStartEndLocation>>();
-		
+
 		if (events != null) {// 참가자 일정 있을 경우
 			// 2. 범위 내 일정 가져오기
 			getScopeInEvents(events, Integer.parseInt(scope));
@@ -72,10 +79,109 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			participantEventInfoMap = participantEventList(events, emails);
 			// 7. ward 이전 시작점 / 이후 도착점 찾기
 			wardStartEndLocationMap = getWardStartEndLocation(tempWards, participantEventInfoMap);
-			// 8. 
-			
+			// 8.
+
 		}
 
+	}
+
+	public void possibleEventList(Map<String, List<EventParticipantInfoDTO>> events) {
+
+		List<EventParticipantInfoDTO> list = events.get("2016-01-07");
+		int[] hour = new int[25];
+		hour[24] = 1;
+
+		for (EventParticipantInfoDTO e : list) {
+			int st = Integer.parseInt(e.getsTime().substring(0, 2));
+			int et = Integer.parseInt(e.geteTime().substring(0, 2));
+
+			for (int k = st; k < et; k++) {
+				hour[k] = 1;
+			}
+		}
+
+		List<Ward> wList = new ArrayList<Ward>();
+		int c = 0;
+
+		while (true) {
+
+			for (int h : hour) {
+				if (h == 0) {
+					c++;
+				}
+			}
+			if (c == 0)
+				break;
+
+			Ward w = new Ward();
+			boolean sema = true;
+			for (int i = 0; i < hour.length; i++) {
+				if (hour[i] == 0) {
+					hour[i] = 1;
+					if (sema == true) {
+						w.setsTime(String.valueOf(i));
+						sema = false;
+					}
+				} else if (hour[i] == 1) {
+					if (sema == false) {
+						w.seteTime(String.valueOf(i));
+						wList.add(w);
+						break;
+					}
+				}
+			}
+
+			c = 0;
+		}
+
+		for (Ward w : wList) {
+			if (w.getsTime().length() == 1)
+				w.setsTime("0" + w.getsTime());
+
+			if (w.geteTime().length() == 1)
+				w.seteTime("0" + w.geteTime());
+
+			for (EventParticipantInfoDTO e : list) {
+				if (w.geteTime().equals(e.getsTime().substring(0, 2))) {
+					w.seteTime(w.geteTime().concat(e.getsTime().substring(2, 5)));
+				}
+
+				if (w.getsTime().equals(e.geteTime().substring(0, 2))) {
+					w.setsTime(w.getsTime().concat(e.geteTime().substring(2, 5)));
+				}
+			}
+
+			if (w.geteTime().equals("24"))
+				w.seteTime(w.geteTime().concat(":00"));
+			if (w.getsTime().equals("00"))
+				w.setsTime(w.getsTime().concat(":00"));
+		}
+
+		for (Ward w : wList)
+			System.out.println(w);
+
+	}
+
+	@Test
+	public void testttt() {
+		List<StoreZone> szList;
+		try {
+			
+			szList = getStreet(new Point(37.570421, 127.001630), "1000");
+
+			for (StoreZone sz : szList) {
+				System.out.println(sz.getCtprvnNm());
+				System.out.println(sz.getSignguNm());
+				System.out.println(sz.getMainTrarNm());
+				System.out.println("lat : " +sz.getCoords().getPoints().get(0).getLat());
+				System.out.println("lng : " +sz.getCoords().getPoints().get(0).getLng());
+				
+			//	for (Point p : sz.getCoords().getPoints())
+				//	System.out.println("lat : " + p.getLat() + " lng : " + p.getLng());
+			}
+
+		} catch (Exception e) {
+		}
 	}
 
 	// 1. 참가자들의 모든 일정 가져오기
@@ -259,7 +365,8 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 	}
 
 	// 6. 와드전 시작 위치와 끝 위치
-	public Map<Ward, List<WardStartEndLocation>> getWardStartEndLocation(List<Ward> tempWards,Map<String, List<EventParticipantInfoDTO>> participantEventInfoMap){
+	public Map<Ward, List<WardStartEndLocation>> getWardStartEndLocation(List<Ward> tempWards,
+			Map<String, List<EventParticipantInfoDTO>> participantEventInfoMap) {
 		Map<Ward, List<WardStartEndLocation>> wardStartEndLocationMap = new HashMap<Ward, List<WardStartEndLocation>>();
 		List<WardStartEndLocation> location = null;
 
@@ -301,8 +408,8 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 								afterEvent = event;
 							}
 						}
-					} else if (ward.getsDate().equals(event.getsDate())
-							&& !(ward.geteDate().equals(event.geteDate()))) {
+					} else
+						if (ward.getsDate().equals(event.getsDate()) && !(ward.geteDate().equals(event.geteDate()))) {
 						System.out.println("와드 후");
 						if (afterEvent == null) {
 							afterEvent = event;
@@ -335,7 +442,6 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		}
 		// 모든 와드의 시작점 조사 완료
 		// 확인
-		
 
 		Set<Ward> WardMapKeys = wardStartEndLocationMap.keySet();
 		for (Ward key : WardMapKeys) {
@@ -347,7 +453,51 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 		return wardStartEndLocationMap;
 	}
-	
+
+	// 7. 범위 내 상권 리스트 및 좌표 다가져오기
+	public List<StoreZone> getStreet(Point p, String radius) throws UnsupportedEncodingException, IOException {
+
+		String lat = String.valueOf(p.getLat());
+		String lng = String.valueOf(p.getLng());
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("type", "xml");
+		parameters.put("numOfRows", "999");
+		parameters.put("radius", "500");
+		parameters.put("cx", lat);
+		parameters.put("cy", lng);
+		parameters.put("pageNo", "1");
+
+		RequestInfo requestInfo = new RequestInfo("http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius",
+				parameters, "ServiceKey",
+				"og2lJU4CeWL4ZEgfp3o%2F17D%2Fj9mbsbSCK4YTwWPF15sGHlakqZEKX8PA%2B6XyAs%2BD0%2FPe24pVucXQckQ%2Fw230tA%3D%3D");
+
+		DataGetterTemplate templete = new StoreZoneDataGetter();
+		List<StoreZoneDataForm> infos = templete.getData(requestInfo);
+
+		for (StoreZoneDataForm dataForm : infos)
+			System.out.println(dataForm);
+
+		List<StoreZone> szList = new ArrayList<StoreZone>();
+
+		for (StoreZoneDataForm dataForm : infos) {
+
+			dataForm.setCoords(dataForm.getCoords().replace("POLYGON ((", ""));
+			dataForm.setCoords(dataForm.getCoords().replace("))", ""));
+
+			StoreZone sz = new StoreZone();
+
+			sz.setCoordNum(Integer.parseInt(dataForm.getCoordNum()));
+			sz.setcoordes(dataForm.getCoords());
+			sz.setMainTrarNm(dataForm.getMainTrarNm());
+			sz.setCtprvnNm((dataForm.getCtprvnNm()));
+			sz.setSignguNm(dataForm.getSignguNm());
+
+			szList.add(sz);
+		}
+		return szList;
+	}
+
 	public List<String> possibleEventList(List<EventParticipantInfoDTO> events) {
 
 		return null;

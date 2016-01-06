@@ -1,5 +1,6 @@
 package model.list;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ public class PointList {
 
 	public PointList() {
 		super();
+		points = new ArrayList<Point>();
 	}
 
 	public PointList(List<Point> points) {

@@ -9,6 +9,7 @@ import model.openData.dataForm.GoogleDistanceMatrixDataForm;
 import model.openData.template.DataGetterDOMTemplate;
 
 public class GoogleDistansMatrixDataGetter extends DataGetterDOMTemplate {
+	
 	@Override
 	protected <T> List<T> getData(Element root) {
 
