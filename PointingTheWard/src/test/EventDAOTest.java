@@ -36,7 +36,7 @@ public class EventDAOTest {
 		eventsList.add(new EventDTO(0, "title2", "sD", "eD", "sT", "eT", "content", "place"));
 		eventsList.add(new EventDTO(0, "title3", "sD", "eD", "sT", "eT", "content", "place"));
 
-		eventPsArray = new EventParticipantInfoDTO[] {
+		/*eventPsArray = new EventParticipantInfoDTO[] {
 				new EventParticipantInfoDTO(1, "email1", "title", "sDate", "eDate", "sTime", "eTime", "content",
 						"place"),
 				new EventParticipantInfoDTO(2, "email1", "title2", "sDate", "eDate", "sTime", "eTime", "content",
@@ -44,7 +44,7 @@ public class EventDAOTest {
 				new EventParticipantInfoDTO(3, "email3", "title3", "sDate", "eDate", "sTime", "eTime", "content",
 						"place"),
 
-		};
+		};*/
 
 		eventsArray = new EventDTO[] { new EventDTO("sival", "sDate", "eDate", "sTime", "eTime", "content", "place"),
 				new EventDTO(2, "title2", "sDate", "eDate", "sTime", "eTime", "content", "place"),

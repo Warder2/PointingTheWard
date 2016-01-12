@@ -50,7 +50,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 		getParticiantEvents(particiantsEmails);
 	}
-
+	@Test
 	public void test() {
 		List<String> emails = new ArrayList<String>();
 		emails.add("jangsb7113@naver.com");
@@ -162,7 +162,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 	}
 
-	@Test
+
 	public void testttt() {
 		List<StoreZone> szList;
 		try {
