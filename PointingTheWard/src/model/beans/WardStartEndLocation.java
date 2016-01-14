@@ -1,7 +1,17 @@
 package model.beans;
-
+/**
+ * 와드 전 일정의 위치와 후 일정의 위치정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class WardStartEndLocation {
+	/**
+	 * 전 일정의 위치
+	 */
 	private String startLocation;
+	/**
+	 * 후 일정의 위치
+	 */
 	private String endLocation;
 	public WardStartEndLocation() {
 		this("시작위치","끝 위치");

@@ -1,7 +1,17 @@
 package model.beans;
-
+/**
+ * 로그인 정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class SignInInfo {
+	/**
+	 * 이메일
+	 */
 	private String email;
+	/**
+	 * 비밀번호
+	 */
 	private String pwd;
 	
 	public SignInInfo() {

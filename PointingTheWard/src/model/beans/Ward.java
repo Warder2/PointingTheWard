@@ -1,10 +1,29 @@
 package model.beans;
-
+/**
+ * 와드 정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Ward {
+	/**
+	 * 시작날짜
+	 */
 	private String sDate;
+	/**
+	 * 종료날짜
+	 */
 	private String eDate;
+	/**
+	 * 시작시간
+	 */
 	private String sTime;
+	/**
+	 * 종료시간
+	 */
 	private String eTime;
+	/**
+	 * 장소
+	 */
 	private Place place;
 
 	public Ward() {

@@ -1,7 +1,17 @@
 package model.beans;
-
+/**
+ * 좌표정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Point {
+	/**
+	 * 경도
+	 */
 	private double lng;
+	/**
+	 * 위도
+	 */
 	private double lat;
 
 	public Point() {

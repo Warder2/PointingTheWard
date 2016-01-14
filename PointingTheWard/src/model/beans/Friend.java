@@ -1,7 +1,17 @@
 package model.beans;
-
+/**
+ * 친구정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Friend {
+	/**
+	 * 친구이름
+	 */
 	private String name;
+	/**
+	 * 친구 이메일
+	 */
 	private String email;
 	public Friend() {
 	}
