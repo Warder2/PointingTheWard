@@ -7,7 +7,11 @@ import model.beans.Member;
 import model.beans.Place;
 import service.abstracts.AbstractCalendarService;
 import service.interfaces.EventSearchable;
-
+/**
+ * 이벤트 조회 서비스 클래스
+ * @author SEONGBONG
+ *
+ */
 public class EventSearchService extends AbstractCalendarService implements EventSearchable{
 
 	@Override

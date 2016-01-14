@@ -8,7 +8,11 @@ import org.w3c.dom.NodeList;
 
 import model.openData.dataForm.GoogleDistanceMatrixDataForm;
 import model.openData.template.DataGetterDOMTemplate;
-
+/**
+ * google Distance Matrix api를 이용하여 길찾기 관련 시간과 거리 값을 가져오는 class
+ * @author SEONGBONG
+ *
+ */
 public class GoogleDistansMatrixDataGetter extends DataGetterDOMTemplate {
 
 	@SuppressWarnings("unchecked")

@@ -7,7 +7,11 @@ import model.beans.Member;
 import model.beans.Place;
 import service.abstracts.AbstractCalendarService;
 import service.interfaces.EventModifiable;
-
+/**
+ * 이벤트 수정 서비스 클래스
+ * @author SEONGBONG
+ *
+ */
 public class EventModifyService extends AbstractCalendarService implements EventModifiable{
 
 	@Override
