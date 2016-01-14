@@ -10,6 +10,7 @@ import org.junit.Test;
 import model.openData.GoogleDistansMatrixDataGetter;
 import model.openData.RequestInfo;
 import model.openData.StoreZoneDataGetter;
+import model.openData.dataForm.GoogleDistanceMatrixDataForm;
 import model.openData.dataForm.StoreZoneDataForm;
 import model.openData.template.DataGetterTemplate;
 
@@ -35,15 +36,22 @@ public class ApiTest {
 	@Test
 	public void getGoogle(){
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("origins", "Vancouver BC|역삼역|수원역");		
+		parameters.put("origins", "Vancouver BC|역삼역|강남역");		
 		parameters.put("destinations", "San Francisco|강남역|금정역");
 		parameters.put("mode", "transit");
 		parameters.put("language", "kr-ko");
 		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/distancematrix/xml", parameters, "key", "AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
-		
+		List<GoogleDistanceMatrixDataForm> result = null;
 		DataGetterTemplate templete = new GoogleDistansMatrixDataGetter();
 		try {
-			templete.getData(requestInfo);
+			result = templete.getData(requestInfo);
+			if(result != null){
+				for(GoogleDistanceMatrixDataForm g : result){
+					System.out.println(g);
+				}
+			}else{
+				System.out.println("결과가 없습니다.");
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
