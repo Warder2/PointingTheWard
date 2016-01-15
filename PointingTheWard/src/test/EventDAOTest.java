@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import model.beans.Transportation;
 import persistance.dao.EventDAO;
 import persistance.dto.EventDTO;
 import persistance.dto.EventParticipantDTO;
@@ -38,11 +39,11 @@ public class EventDAOTest {
 
 		eventPsArray = new EventParticipantInfoDTO[] {
 				new EventParticipantInfoDTO(1, "email1", "title", "sDate", "eDate", "sTime", "eTime", "content",
-						"place"),
+						"place", "name", "location", Transportation.DRIVING),
 				new EventParticipantInfoDTO(2, "email1", "title2", "sDate", "eDate", "sTime", "eTime", "content",
-						"place"),
+						"place", "name", "location", Transportation.TRANSIT),
 				new EventParticipantInfoDTO(3, "email3", "title3", "sDate", "eDate", "sTime", "eTime", "content",
-						"place"),
+						"place", "name", "location", Transportation.DRIVING),
 
 		};
 
