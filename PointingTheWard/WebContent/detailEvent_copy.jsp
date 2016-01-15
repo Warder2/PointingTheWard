@@ -110,14 +110,14 @@ body {
 </header>
 	<div class="detailEvent">
 			<p>
-				<input type="text" name="title" value="대학 롤 정규 모임" > <br><br>
+				<input type="text" name="title" value="네이버D2" > <br><br>
 				<input type="text" name="location" value="인하대 후문"> <br><br>
 				<input type="text" name="sDate" value="2016-01-07"> <br><br>
 				<input type="text" name="eTime" value="2016-01-07"> <br><br>
 				<input type="text" name="sTime" value="18:00"> <br><br>
 				<input type="text" name="eTime" value="22:00"> <br><br>
 				내용<br>
-				<textarea rows="5" cols="40">롤 정규 모임</textarea>
+				<textarea rows="5" cols="40">프로젝트 모임</textarea>
 				<p class="submit">
 					<a href='<c:url value="/mainPage"/>'>
 						<input type="button" name="commit" value="확인">

@@ -159,6 +159,9 @@ values('nj186@naver.com', '장해', '1111', '수원시 인계동 무궁화 아�
 insert into member_tb(email, name, pwd, location, transportation) 
 values('akjin47@naver.com', '대진', '1111', '인천광역시 연수구 옥련동 럭키아파트', 'transit');
 
+insert into member_tb(email, name, pwd, location, transportation) 
+values('testMail@naver.com', '네이버', '1111', '네이버', 'transit');
+
 insert into FRIEND_TB(EMAIL,F_EMAIL)
 VALUES('jangsb7113@naver.com','akjin47@naver.com');
 insert into FRIEND_TB(EMAIL,F_EMAIL)
@@ -172,7 +175,7 @@ VALUES('nj186@naver.com','jangsb7113@naver.com');
 insert into FRIEND_TB(EMAIL,F_EMAIL)
 VALUES('nj186@naver.com','akjin47@naver.com');
 
-
+select * from FRIEND_TB;
 insert into group_tb(g_code, name, owner)
 values(group_sequence.nextval, '성봉그룹1', 'jangsb7113@naver.com');
 insert into group_tb(g_code, name, owner)
@@ -196,6 +199,7 @@ insert into g_participant_tb(g_code, email)
 values(3, 'jangsb7113@naver.com');
 insert into g_participant_tb(g_code, email)
 values(3, 'akjin47@naver.com');
+
 
 INSERT INTO EVENT_TB(E_CODE,TITLE,S_DATE,E_DATE,S_TIME,E_TIME,CONTENT,PLACE)
 VALUES(EVENT_SEQUENCE.NEXTVAL,'성봉일정1','2016-01-05','2016-01-05','09:00','12:00','데이트','신사동 가로수 길');

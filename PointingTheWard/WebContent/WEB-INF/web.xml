@@ -19,13 +19,11 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
-    <url-pattern>/signUp</url-pattern>
+    <url-pattern>/member</url-pattern>
     <url-pattern>/signIn</url-pattern>
     <url-pattern>/certification</url-pattern>
-  	<url-pattern>/memberSearch</url-pattern>
-  	<url-pattern>/addFriend</url-pattern>
-  	<url-pattern>/searchFriend</url-pattern>
-  	<url-pattern>/searchGroup</url-pattern>
+  	<url-pattern>/friend</url-pattern>
+  	<url-pattern>/group</url-pattern>
   	<url-pattern>/eventListPage</url-pattern>
   	<url-pattern>/searchEvent</url-pattern>
   	  

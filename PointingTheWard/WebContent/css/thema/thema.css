@@ -1,0 +1,29 @@
+@import url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
+@MEDIA screen and (max-width: 767px) {
+	div.alert{
+		left: 15%;
+		width: 70%;
+	}
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+}
+
+@MEDIA screen and (min-width: 960px) {
+	div.alert{
+		left: 35%;
+		width: 30%;
+	}
+}
+body{
+	background-color: #68D168;
+}
+
+div.panel-body {
+	background-color: #969696;
+}
+
+div.alert{
+	position: absolute;
+	top: 30%;
+}

@@ -20,7 +20,7 @@
 	
 	function initFriend(){
 		$.ajax({
-			url: 'searchFriend',
+			url: 'friend',
 			type: 'GET',
 			success: function(data){
 				var friendsDiv = $('div#friendsDiv').empty();
@@ -35,7 +35,7 @@
 	
 	function initGroup(){
 		$.ajax({
-			url: 'searchGroup',
+			url: 'group',
 			type: 'GET',
 			success: function(data){
 				$('div#groupDiv').empty();

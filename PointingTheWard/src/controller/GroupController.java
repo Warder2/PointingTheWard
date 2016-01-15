@@ -19,7 +19,7 @@ import service.ServiceRequest;
 
 @Controller
 public class GroupController {
-	@RequestMapping(value={"/searchGroup"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/group"}, method=RequestMethod.GET)
 	public @ResponseBody <T> T searchGroup(HttpServletRequest servletRequest, HttpSession session){
 		System.out.println("searchGroup");
 		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(servletRequest.getServletContext());

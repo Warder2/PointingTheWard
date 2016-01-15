@@ -1,0 +1,17 @@
+@IMPORT url("../thema/thema.css");
+
+@MEDIA screen and (max-width: 767px) {
+	div.container {
+		padding-top: 35%;
+	}
+}
+
+@MEDIA screen and (min-width: 768px) and (max-width:959px) {
+}
+
+@MEDIA screen and (min-width: 960px) {
+	div.container {
+		padding-top: 15%;
+		width: 50%;
+	}
+}

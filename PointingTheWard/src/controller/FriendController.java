@@ -24,7 +24,7 @@ import validation.exception.NonValidatedEmailFormEception;
 
 @Controller
 public class FriendController {
-	@RequestMapping(value={"/addFriend"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/friend"}, method=RequestMethod.POST)
 	public @ResponseBody String addFriend(@RequestParam("fEmail") String fEmail, HttpSession session){
 		System.out.println("addFriend");
 		
@@ -67,7 +67,7 @@ public class FriendController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value={"/searchFriend"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/friend"}, method=RequestMethod.GET)
 	public @ResponseBody <T> T searchFriend(HttpServletRequest servletRequest, HttpSession session){
 		System.out.println("searchFriend");
 		

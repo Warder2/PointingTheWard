@@ -23,7 +23,7 @@
 			<fieldset>
 				<a href='<c:url value="/detailEventPageTest"/>'>
 					<legend>18:00 - 22:00</legend>
-					대학 롤 정규 모임
+					네이버D2
 				</a>
 			</fieldset>
 

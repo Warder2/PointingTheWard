@@ -32,7 +32,7 @@
 					}
 				}
 				$.ajax({
-					url: 'memberSearch',
+					url: 'member',
 					type: 'GET',
 					data: data,
 					success: function(data){
@@ -65,7 +65,7 @@
 	
 	function addFriend(){
 		$.ajax({
-			url: 'addFriend',
+			url: 'friend',
 			type: 'POST',
 			data: {
 				fEmail: $(this).attr('id')

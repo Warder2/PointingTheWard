@@ -37,7 +37,7 @@ import validation.exception.PwdMisMatchedException;
 @Controller
 public class MemberController {
 	
-	@RequestMapping(value={"/signUp"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/member"}, method=RequestMethod.POST)
 	public ModelAndView memberSignUp(@ModelAttribute("signUpMemberRequest") SignUpMemberRequest signUpMemberRequest, HttpSession session){
 		System.out.println("memberSignUp");
 		ModelAndView modelAndView = new ModelAndView();
@@ -139,7 +139,7 @@ public class MemberController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value={"/memberSearch"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/member"}, method=RequestMethod.GET)
 	public @ResponseBody <T> T memberSearch(HttpServletRequest servletRequest, HttpSession session){
 		System.out.println("memberSearch");
 		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
@@ -201,54 +201,4 @@ public class MemberController {
 //		view.setViewName("");//jsp명
 //		return view;
 //	}
-	
-	@RequestMapping(value={"/certification"}, method=RequestMethod.GET)
-	public @ResponseBody Map<String, String> sendCertificationCode(@RequestParam("email") String email, HttpSession session){
-		System.out.println("sendCertificationCode");
-		
-		Map<String, String> result = new HashMap<String, String>();
-		try{
-			ValdateAction.checkEmailForm(email);
-			
-			WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
-			Service service = context.getBean("sendCertificationCodeService", Service.class);
-			ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
-			
-			request.addObject("email", email);
-			
-			service.execute(request);
-			
-			synchronized (session) {
-				session.setAttribute("certificationCode", request.getObject("code"));
-			}
-			
-			result.put("result", "true");
-			result.put("email", email);
-		}catch(NullPointerException npe){
-			result.put("result", "false");
-			result.put("message", "not input email");
-		}catch(NonValidatedEmailFormEception nvef){
-			result.put("result", "false");
-			result.put("message", "nonvalidated email form");
-		}catch(ClassCastException cce){
-			result.put("result", "false");
-		}
-		return result;
-	}
-	
-	@RequestMapping(value={"/certification"}, method=RequestMethod.POST)
-	public @ResponseBody Boolean confirmCertificationCode(@RequestParam("code") String code, HttpSession session){
-		System.out.println("confirmCertificationCode");
-		String certificationCode = "";
-		synchronized (session) {
-			certificationCode = (String) session.getAttribute("certificationCode");
-		}
-		if(certificationCode.equals(code)){
-			synchronized (session) {
-				session.removeAttribute("certificationCode");
-			}
-			return true;
-		}
-		return false;
-	}
 }
