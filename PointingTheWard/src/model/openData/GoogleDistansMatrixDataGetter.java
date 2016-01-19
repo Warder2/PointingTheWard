@@ -18,11 +18,10 @@ public class GoogleDistansMatrixDataGetter extends DataGetterDOMTemplate {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List<GoogleDistanceMatrixDataForm> getData(Element root) {
-
+		
 		NodeList origin = root.getElementsByTagName("origin_address");
 		NodeList destination = root.getElementsByTagName("destination_address");
 		NodeList rows = root.getElementsByTagName("row");
-
 		
 		if (rows.getLength() != 0) {
 			List<GoogleDistanceMatrixDataForm> distanceResult = new ArrayList<GoogleDistanceMatrixDataForm>();
@@ -38,8 +37,8 @@ public class GoogleDistansMatrixDataGetter extends DataGetterDOMTemplate {
 
 						GoogleDistanceMatrixDataForm distanceData = new GoogleDistanceMatrixDataForm();
 
-						Element duration = (Element) element.getElementsByTagName("duration").item(0);
-						Element distance = (Element) element.getElementsByTagName("distance").item(0);
+						Element duration = (Element) root.getElementsByTagName("duration").item(0);
+						Element distance = (Element) root.getElementsByTagName("distance").item(0);
 						distanceData.setOrigins(origin.item(rowCnt).getTextContent());
 						distanceData.setDestination(destination.item(elementCnt).getTextContent());
 						distanceData.setDurationValue(getValue("value", duration));
@@ -49,7 +48,7 @@ public class GoogleDistansMatrixDataGetter extends DataGetterDOMTemplate {
 						distanceResult.add(distanceData);
 					} else if (getValue("status", element).trim().toUpperCase().equals("ZERO_RESULTS")) {
 						//System.out.println("불가능한 경로");
-					}
+					} 
 				}
 				
 			}
