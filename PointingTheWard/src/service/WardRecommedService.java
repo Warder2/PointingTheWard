@@ -166,28 +166,6 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 	}
 
-
-	public void testttt() {
-		List<StoreZone> szList;
-		try {
-			
-			szList = getStreet(new Point(37.570421, 127.001630), "1000");
-
-			for (StoreZone sz : szList) {
-				System.out.println(sz.getCtprvnNm());
-				System.out.println(sz.getSignguNm());
-				System.out.println(sz.getMainTrarNm());
-				System.out.println("lat : " +sz.getCoords().getPoints().get(0).getLat());
-				System.out.println("lng : " +sz.getCoords().getPoints().get(0).getLng());
-				
-			//	for (Point p : sz.getCoords().getPoints())
-				//	System.out.println("lat : " + p.getLat() + " lng : " + p.getLng());
-			}
-
-		} catch (Exception e) {
-		}
-	}
-
 	// 1. 참가자들의 모든 일정 가져오기
 	public List<EventParticipantInfoDTO> getParticiantEvents(List<String> particiantsEmails) {
 
@@ -518,6 +496,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		}
 		
 	}
+
 	//주소 -> 좌표 변환 
 	public Point changePointFromPlace(String place){
 
@@ -534,8 +513,8 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			result = template.getData(requestInfo);
 			for (GoogleGeocoding f : result) {
 				
-				p.setLat(Double.parseDouble(f.getLatitude()));
-				p.setLng(Double.parseDouble(f.getLongitude()));
+				p.setLat(f.getLatitude());
+				p.setLng(f.getLongitude());
 			
 			}
 		} catch (IOException e) {

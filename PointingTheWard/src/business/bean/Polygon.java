@@ -18,7 +18,7 @@ public class Polygon {
 		this.mCenterPoint = mCenterPoint;
 	}
 
-	public void addPoint(double xPos, double yPos) {
+	public void addPoint(String xPos, String yPos) {
 		mVertexs.add(new Point(xPos, yPos));
 		mCenterPoint = null;
 	}
@@ -45,19 +45,26 @@ public class Polygon {
 
 			firstPoint = mVertexs.get(firstIndex);
 			secondPoint = mVertexs.get(secondIndex);
+			
+			double flat= Double.parseDouble(firstPoint.getLat());
+			double flng = Double.parseDouble(firstPoint.getLng());
+			
+			double slat= Double.parseDouble(secondPoint.getLat());
+			double slng = Double.parseDouble(secondPoint.getLng());
+			
 
-			factor = ((firstPoint.getLat() * secondPoint.getLng()) - (secondPoint.getLat() * firstPoint.getLng()));	
+			factor = ((flat * slng) - (slat * flng ));	
 			area += factor;
 			
-			centerX += (firstPoint.getLat() + secondPoint.getLat()) * ((firstPoint.getLat() * secondPoint.getLng()) - (secondPoint.getLat()*firstPoint.getLng()));
-			centerY += (firstPoint.getLng() + secondPoint.getLng()) * ((firstPoint.getLat() * secondPoint.getLng()) - (secondPoint.getLat()*firstPoint.getLng()));
+			centerX += (flat + slat) * ((flat * slng) - (slat * flng));
+			centerY += (flng + slng) * ((flat *slng) - (slat * flng));
 		}
 		area *= 0.5;
 		centerX /= 6 * area;
 		centerY /= 6 * area;
 
-		mCenterPoint.setLat(centerX);
-		mCenterPoint.setLng(centerY);
+		mCenterPoint.setLat(String.valueOf(centerX));
+		mCenterPoint.setLng(String.valueOf(centerY));
 
 		return mCenterPoint;
 	}
@@ -77,10 +84,19 @@ public class Polygon {
 		Point secondPoint;
 		double factor = 0;
 		for (firstIndex = 0; firstIndex < sizeOfVertexs; firstIndex++) {
+		
 			secondIndex = (firstIndex + 1) % sizeOfVertexs;
 			firstPoint = mVertexs.get(firstIndex);
 			secondPoint = mVertexs.get(secondIndex);
-			factor = ((firstPoint.getLat() * secondPoint.getLng()) - (secondPoint.getLat() * firstPoint.getLng()));
+			
+			double flat= Double.parseDouble(firstPoint.getLat());
+			double flng = Double.parseDouble(firstPoint.getLng());
+			
+			double slat= Double.parseDouble(secondPoint.getLat());
+			double slng = Double.parseDouble(secondPoint.getLng());
+			
+
+			factor = ((flat * slng) - (slat * flng ));
 			area += factor;
 		}
 
