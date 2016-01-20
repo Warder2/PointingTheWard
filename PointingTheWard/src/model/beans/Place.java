@@ -19,10 +19,8 @@ public class Place {
 	}
 	
 	public Place(String name) {
-		this.name = name;
-		this.point = new Point();
+		this(name, new Point());
 	}
-
 	public Place(String name, Point point) {
 		this.name = name;
 		this.point = point;

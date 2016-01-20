@@ -18,15 +18,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import model.beans.Event;
+import model.beans.Place;
 import model.beans.Point;
 import model.beans.Time;
 import model.beans.Ward;
 import model.beans.WardStartEndLocation;
 import model.list.WardList;
+import model.openData.GoogleGeocodingDataGetter;
 import model.openData.RequestInfo;
 import model.openData.StoreZoneDataGetter;
 import model.openData.dataForm.StoreZoneDataForm;
 import model.openData.template.DataGetterTemplate;
+import model.openDataVO.GoogleGeocoding;
 import model.openDataVO.StoreZone;
 import persistance.dao.EventDAO;
 import persistance.dto.EventParticipantInfoDTO;
@@ -50,6 +53,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 		getParticiantEvents(particiantsEmails);
 	}
+
 	@Test
 	public void test() {
 		List<String> emails = new ArrayList<String>();
@@ -80,7 +84,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			// 7. ward 이전 시작점 / 이후 도착점 찾기
 			wardStartEndLocationMap = getWardStartEndLocation(tempWards, participantEventInfoMap);
 			// 8.
-
+			setPoints(wardStartEndLocationMap);
 		}
 
 	}
@@ -440,17 +444,6 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			// 한개 와드의 모든 인원 조사 완료
 			wardStartEndLocationMap.put(ward, location);
 		}
-		// 모든 와드의 시작점 조사 완료
-		// 확인
-
-		Set<Ward> WardMapKeys = wardStartEndLocationMap.keySet();
-		for (Ward key : WardMapKeys) {
-			System.out.println("와드 정보" + key);
-			for (WardStartEndLocation wardStartEndLocation : wardStartEndLocationMap.get(key)) {
-				System.out.println(wardStartEndLocation);
-			}
-		}
-
 		return wardStartEndLocationMap;
 	}
 
@@ -498,6 +491,63 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		return szList;
 	}
 
+	// 8. 시작끝점 좌표 set 
+	public void setPoints(Map<Ward, List<WardStartEndLocation>> wMap){
+		
+		Set<Ward> WardMapKeys = wMap.keySet();
+		
+		for (Ward key : WardMapKeys) {
+			for (WardStartEndLocation wardStartEndLocation : wMap.get(key)) {
+				
+				Point p = changePointFromPlace(wardStartEndLocation.getStartLocation().getName());
+				
+				wardStartEndLocation.getStartLocation().setPoint(p);
+				
+				p = changePointFromPlace(wardStartEndLocation.getEndLocation().getName());
+				
+				wardStartEndLocation.getEndLocation().setPoint(p);
+				
+			}
+		}
+		
+		for (Ward key : WardMapKeys) {
+			for (WardStartEndLocation w : wMap.get(key)) {
+				System.out.println("시작점 : " + w.getStartLocation().getName()+ " : "+ w.getStartLocation().getPoint());
+				System.out.println("끝점 : " + w.getEndLocation().getName()+ " : "+ w.getEndLocation().getPoint());
+			}
+		}
+		
+	}
+	//주소 -> 좌표 변환 
+	public Point changePointFromPlace(String place){
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		List<GoogleGeocoding> result = null;
+		Point p = new Point();
+		
+		parameters.put("address", place);
+		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/geocode/xml", parameters, "key",
+				"AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
+		DataGetterTemplate template = new GoogleGeocodingDataGetter();
+		try {
+			
+			result = template.getData(requestInfo);
+			for (GoogleGeocoding f : result) {
+				
+				p.setLat(Double.parseDouble(f.getLatitude()));
+				p.setLng(Double.parseDouble(f.getLongitude()));
+			
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
+	
+	
+	
 	public List<String> possibleEventList(List<EventParticipantInfoDTO> events) {
 
 		return null;
