@@ -8,33 +8,33 @@ public class Point {
 	/**
 	 * 경도
 	 */
-	private double lng;
+	private String lng;
 	/**
 	 * 위도
 	 */
-	private double lat;
+	private String lat;
 
 	public Point() {
-		this(0.0,0.0);
+		this("0.0","0.0");
 	}
-	public Point(double lng, double lat) {
+	public Point(String lng, String lat) {
 		this.lng = lng;
 		this.lat = lat;
 	}
 
-	public double getLng() {
+	public String getLng() {
 		return lng;
 	}
 
-	public void setLng(double lng) {
+	public void setLng(String lng) {
 		this.lng = lng;
 	}
 
-	public double getLat() {
+	public String getLat() {
 		return lat;
 	}
 
-	public void setLat(double lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 

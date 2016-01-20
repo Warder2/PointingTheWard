@@ -375,7 +375,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 			e.printStackTrace();
 			return null;
 		}
-		return new Place(address,new Point(Double.parseDouble(geocoding.getLatitude()),Double.parseDouble(geocoding.getLongitude())));
+		return new Place(address,new Point(geocoding.getLatitude(),geocoding.getLongitude()));
 	}
 	// 7. 범위 내 상권 리스트 및 좌표 다가져오기
 	public List<StoreZone> getStreet(Point p, String radius) throws UnsupportedEncodingException, IOException {

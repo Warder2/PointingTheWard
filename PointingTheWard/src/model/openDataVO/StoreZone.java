@@ -98,7 +98,7 @@ public class StoreZone {
 				String lng = points.nextToken();
 				Double lngD = Double.parseDouble(lng);
 
-				coords.getPoints().add(new Point(lngD, latD));
+				coords.getPoints().add(new Point(lng, lat));
 			}
 		}
 	}
