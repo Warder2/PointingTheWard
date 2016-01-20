@@ -15,6 +15,7 @@ public class Point {
 	private double lat;
 
 	public Point() {
+		this(0.0,0.0);
 	}
 	public Point(double lng, double lat) {
 		this.lng = lng;

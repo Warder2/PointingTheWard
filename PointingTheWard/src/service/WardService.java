@@ -57,7 +57,6 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 		emails.add("akjin47@naver.com");
 		emails.add("nj186@naver.com");
 		String scope = "2";
-		String period = "";
 		String runTime = "01:00";
 
 		// 1.참가자들의 모든 일정을 가져온다.
@@ -79,109 +78,10 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 			participantEventInfoMap = participantEventList(events, emails);
 			// 7. ward 이전 시작점 / 이후 도착점 찾기
 			wardStartEndLocationMap = getWardStartEndLocation(tempWards, participantEventInfoMap);
-			// 8.
-
-		}
-
-	}
-
-	public void possibleEventList(Map<String, List<EventParticipantInfoDTO>> events) {
-
-		List<EventParticipantInfoDTO> list = events.get("2016-01-07");
-		int[] hour = new int[25];
-		hour[24] = 1;
-
-		for (EventParticipantInfoDTO e : list) {
-			int st = Integer.parseInt(e.getsTime().substring(0, 2));
-			int et = Integer.parseInt(e.geteTime().substring(0, 2));
-
-			for (int k = st; k < et; k++) {
-				hour[k] = 1;
-			}
-		}
-
-		List<Ward> wList = new ArrayList<Ward>();
-		int c = 0;
-
-		while (true) {
-
-			for (int h : hour) {
-				if (h == 0) {
-					c++;
-				}
-			}
-			if (c == 0)
-				break;
-
-			Ward w = new Ward();
-			boolean sema = true;
-			for (int i = 0; i < hour.length; i++) {
-				if (hour[i] == 0) {
-					hour[i] = 1;
-					if (sema == true) {
-						w.setsTime(String.valueOf(i));
-						sema = false;
-					}
-				} else if (hour[i] == 1) {
-					if (sema == false) {
-						w.seteTime(String.valueOf(i));
-						wList.add(w);
-						break;
-					}
-				}
-			}
-
-			c = 0;
-		}
-
-		for (Ward w : wList) {
-			if (w.getsTime().length() == 1)
-				w.setsTime("0" + w.getsTime());
-
-			if (w.geteTime().length() == 1)
-				w.seteTime("0" + w.geteTime());
-
-			for (EventParticipantInfoDTO e : list) {
-				if (w.geteTime().equals(e.getsTime().substring(0, 2))) {
-					w.seteTime(w.geteTime().concat(e.getsTime().substring(2, 5)));
-				}
-
-				if (w.getsTime().equals(e.geteTime().substring(0, 2))) {
-					w.setsTime(w.getsTime().concat(e.geteTime().substring(2, 5)));
-				}
-			}
-
-			if (w.geteTime().equals("24"))
-				w.seteTime(w.geteTime().concat(":00"));
-			if (w.getsTime().equals("00"))
-				w.setsTime(w.getsTime().concat(":00"));
-		}
-
-		for (Ward w : wList)
-			System.out.println(w);
-
-	}
-
-
-	public void testttt() {
-		List<StoreZone> szList;
-		try {
+			// 8. 
 			
-			szList = getStreet(new Point(37.570421, 127.001630), "1000");
-
-			for (StoreZone sz : szList) {
-				System.out.println(sz.getCtprvnNm());
-				System.out.println(sz.getSignguNm());
-				System.out.println(sz.getMainTrarNm());
-				System.out.println("lat : " +sz.getCoords().getPoints().get(0).getLat());
-				System.out.println("lng : " +sz.getCoords().getPoints().get(0).getLng());
-				
-			//	for (Point p : sz.getCoords().getPoints())
-				//	System.out.println("lat : " + p.getLat() + " lng : " + p.getLng());
-			}
-
-		} catch (Exception e) {
 		}
+
 	}
 
 	// 1. 참가자들의 모든 일정 가져오기
@@ -373,7 +273,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 		Set<String> keys = participantEventInfoMap.keySet();
 		// 와드들 검사
 		for (Ward ward : tempWards) {
-			System.out.println("ward : " + ward);
+			//System.out.println("ward : " + ward);
 			location = new ArrayList<WardStartEndLocation>();
 			// 참가인원대로
 			for (String key : keys) {
@@ -383,7 +283,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 				String afterEventLocation = null;
 				// 참가 인원의 이벤트들 검사
 				for (EventParticipantInfoDTO event : participantEventInfoMap.get(key)) {
-					System.out.println(event);
+					//System.out.println(event);
 					beforeEventLocation = event.getLocation();
 					afterEventLocation = event.getLocation();
 					Time wardsT = new Time(ward.getsTime());
@@ -391,9 +291,9 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 					Time eventsT = new Time(event.getsTime());
 					Time eventeT = new Time(event.geteTime());
 					if (ward.getsDate().equals(event.getsDate()) && ward.geteDate().equals(event.geteDate())) {
-						System.out.println("같은 날");
+						//System.out.println("같은 날");
 						if (wardsT.compare(eventeT.getTime()) >= 0) {
-							System.out.println("와드전");
+							//System.out.println("와드전");
 							if (beforeEvent == null) {
 								beforeEvent = event;
 							} else if (new Time(beforeEvent.geteTime()).compare(event.geteTime()) <= 0) {
@@ -401,7 +301,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 							}
 
 						} else {
-							System.out.println("와드후");
+							//System.out.println("와드후");
 							if (afterEvent == null) {
 								afterEvent = event;
 							} else if (new Time(afterEvent.getsTime()).compare(event.getsTime()) >= 0) {
@@ -410,7 +310,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 						}
 					} else
 						if (ward.getsDate().equals(event.getsDate()) && !(ward.geteDate().equals(event.geteDate()))) {
-						System.out.println("와드 후");
+						//System.out.println("와드 후");
 						if (afterEvent == null) {
 							afterEvent = event;
 						} else if (new Time(afterEvent.getsTime()).compare(event.getsTime()) >= 0) {
@@ -418,14 +318,14 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 						}
 					} else if (!(ward.getsDate().equals(event.getsDate()))
 							&& ward.geteDate().equals(event.geteDate())) {
-						System.out.println("와드 전");
+						//System.out.println("와드 전");
 						if (beforeEvent == null) {
 							beforeEvent = event;
 						} else if (new Time(beforeEvent.geteTime()).compare(event.geteTime()) <= 0) {
 							beforeEvent = event;
 						}
 					} else {
-						System.out.println("다른 날");
+						//System.out.println("다른 날");
 					}
 				}
 				// 한명의 참가인원의 모든 이벤트 검사 완료 다음 인원으로 넘어감

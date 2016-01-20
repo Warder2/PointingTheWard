@@ -15,9 +15,15 @@ public class Place {
 	private Point point;
 	
 	public Place() {
+		this("Place name",new Point());
 	}
+	
+	public Place(String name) {
+		this.name = name;
+		this.point = new Point();
+	}
+
 	public Place(String name, Point point) {
-		super();
 		this.name = name;
 		this.point = point;
 	}
@@ -36,6 +42,5 @@ public class Place {
 	@Override
 	public String toString() {
 		return "Place [name=" + name + ", point=" + point + "]";
-	}
-	
+	}	
 }

@@ -8,29 +8,34 @@ public class WardStartEndLocation {
 	/**
 	 * 전 일정의 위치
 	 */
-	private String startLocation;
+	private Place startLocation;
 	/**
 	 * 후 일정의 위치
 	 */
-	private String endLocation;
+	private Place endLocation;
 	public WardStartEndLocation() {
-		this("시작위치","끝 위치");
+		this(new Place(),new Place());
 	}
-	public WardStartEndLocation(String startLocation, String endLocation) {
-		super();
+	
+	public WardStartEndLocation(String startLocationName, String endLocationName) {
+		this.startLocation = new Place(startLocationName);
+		this.endLocation = new Place(endLocationName);
+	}
+
+	public WardStartEndLocation(Place startLocation, Place endLocation) {
 		this.startLocation = startLocation;
 		this.endLocation = endLocation;
 	}
-	public String getStartLocation() {
+	public Place getStartLocation() {
 		return startLocation;
 	}
-	public void setStartLocation(String startLocation) {
+	public void setStartLocation(Place startLocation) {
 		this.startLocation = startLocation;
 	}
-	public String getEndLocation() {
+	public Place getEndLocation() {
 		return endLocation;
 	}
-	public void setEndLocation(String endLocation) {
+	public void setEndLocation(Place endLocation) {
 		this.endLocation = endLocation;
 	}
 	@Override
