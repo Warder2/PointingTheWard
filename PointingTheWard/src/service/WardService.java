@@ -18,15 +18,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import model.beans.Event;
+import model.beans.Place;
 import model.beans.Point;
 import model.beans.Time;
 import model.beans.Ward;
 import model.beans.WardStartEndLocation;
 import model.list.WardList;
+import model.openData.GoogleGeocodingDataGetter;
 import model.openData.RequestInfo;
 import model.openData.StoreZoneDataGetter;
 import model.openData.dataForm.StoreZoneDataForm;
 import model.openData.template.DataGetterTemplate;
+import model.openDataVO.GoogleGeocoding;
 import model.openDataVO.StoreZone;
 import persistance.dao.EventDAO;
 import persistance.dto.EventParticipantInfoDTO;
@@ -335,7 +338,8 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 				if (afterEvent != null) {
 					afterEventLocation = afterEvent.getPlace();
 				}
-				location.add(new WardStartEndLocation(beforeEventLocation, afterEventLocation));
+	
+				location.add(new WardStartEndLocation(geocodingPlace(beforeEventLocation), geocodingPlace(afterEventLocation)));
 			}
 			// 한개 와드의 모든 인원 조사 완료
 			wardStartEndLocationMap.put(ward, location);
@@ -353,7 +357,26 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 
 		return wardStartEndLocationMap;
 	}
-
+	// 7. 지역이름으로 좌표값가져오기
+	public Place geocodingPlace(String address){
+		GoogleGeocoding geocoding =null;
+	
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("address", address);
+		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/geocode/xml", parameters, "key",
+				"AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
+		DataGetterTemplate template = new GoogleGeocodingDataGetter();
+		try {
+			List<GoogleGeocoding> result = template.getData(requestInfo);
+			for (GoogleGeocoding f : result) {
+				geocoding = f;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return new Place(address,new Point(Double.parseDouble(geocoding.getLatitude()),Double.parseDouble(geocoding.getLongitude())));
+	}
 	// 7. 범위 내 상권 리스트 및 좌표 다가져오기
 	public List<StoreZone> getStreet(Point p, String radius) throws UnsupportedEncodingException, IOException {
 

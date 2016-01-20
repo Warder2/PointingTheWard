@@ -35,7 +35,7 @@ public class ApiTest {
 			System.out.println(dataForm);
 		}
 	}
-	@Test
+	
 	public void getGoogle() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		/*
@@ -65,7 +65,7 @@ public class ApiTest {
 		}
 	}
 
-	
+	@Test
 	public void getGoogleGeocoding() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("address", "시흥시 은행동 대우 4차 푸르지오");
