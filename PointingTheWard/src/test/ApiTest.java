@@ -35,11 +35,15 @@ public class ApiTest {
 			System.out.println(dataForm);
 		}
 	}
-
+	@Test
 	public void getGoogle() {
 		Map<String, String> parameters = new HashMap<String, String>();
+		/*
 		parameters.put("origins", "Vancouver BC|역삼역|강남역");
 		parameters.put("destinations", "San Francisco|강남역|금정역");
+		*/
+		parameters.put("origins", "인천광역시 연수구 옥련동 626 럭키송도아파트");
+		parameters.put("destinations", "강남역");
 		parameters.put("mode", "transit");
 		parameters.put("language", "kr-ko");
 		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/distancematrix/xml", parameters,
@@ -61,7 +65,7 @@ public class ApiTest {
 		}
 	}
 
-	@Test
+	
 	public void getGoogleGeocoding() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("address", "시흥시 은행동 대우 4차 푸르지오");
