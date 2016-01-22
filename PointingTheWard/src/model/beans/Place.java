@@ -1,14 +1,27 @@
 package model.beans;
-
+/**
+ * 장소정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Place {
-	
+	/**
+	 * 장소 명
+	 */
 	private String name;
+	/**
+	 * 좌표
+	 */
 	private Point point;
 	
 	public Place() {
+		this("Place name",new Point());
+	}
+	
+	public Place(String name) {
+		this(name, new Point());
 	}
 	public Place(String name, Point point) {
-		super();
 		this.name = name;
 		this.point = point;
 	}
@@ -27,6 +40,5 @@ public class Place {
 	@Override
 	public String toString() {
 		return "Place [name=" + name + ", point=" + point + "]";
-	}
-	
+	}	
 }

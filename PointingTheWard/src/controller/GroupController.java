@@ -16,10 +16,20 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import model.beans.Group;
 import service.Service;
 import service.ServiceRequest;
-
+/**
+ * 그룹 정보를 다루는 controller 클래스
+ * @author SEONGBONG
+ *
+ */
 @Controller
 public class GroupController {
 	@RequestMapping(value={"/group"}, method=RequestMethod.GET)
+	/**
+	 * 그룹 조회
+	 * @param servletRequest
+	 * @param session
+	 * @return
+	 */
 	public @ResponseBody <T> T searchGroup(HttpServletRequest servletRequest, HttpSession session){
 		System.out.println("searchGroup");
 		WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(servletRequest.getServletContext());

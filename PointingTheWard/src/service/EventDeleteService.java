@@ -3,7 +3,11 @@ package service;
 import model.beans.Event;
 import service.abstracts.AbstractCalendarService;
 import service.interfaces.EventDelible;
-
+/**
+ * 이벤트 삭제 서비스 클래스
+ * @author SEONGBONG
+ *
+ */
 public class EventDeleteService extends AbstractCalendarService implements EventDelible{
 
 	@Override

@@ -1,5 +1,9 @@
 package model.beans;
-
+/**
+ * 이동수간 enum 클래스
+ * @author SEONGBONG
+ *
+ */
 public enum Transportation {
 	TRANSIT("transit"), DRIVING("driving");
 	private String str;

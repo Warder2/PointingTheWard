@@ -1,29 +1,40 @@
 package model.beans;
-
+/**
+ * 좌표정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Point {
-	private double lng;
-	private double lat;
+	/**
+	 * 경도
+	 */
+	private String lng;
+	/**
+	 * 위도
+	 */
+	private String lat;
 
 	public Point() {
+		this("0.0","0.0");
 	}
-	public Point(double lng, double lat) {
+	public Point(String lng, String lat) {
 		this.lng = lng;
 		this.lat = lat;
 	}
 
-	public double getLng() {
+	public String getLng() {
 		return lng;
 	}
 
-	public void setLng(double lng) {
+	public void setLng(String lng) {
 		this.lng = lng;
 	}
 
-	public double getLat() {
+	public String getLat() {
 		return lat;
 	}
 
-	public void setLat(double lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 

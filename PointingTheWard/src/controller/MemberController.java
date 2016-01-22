@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +32,21 @@ import validation.Validator;
 import validation.exception.NonValidatedEmailFormEception;
 import validation.exception.NonValidatedTransportationFormException;
 import validation.exception.PwdMisMatchedException;
-
+/**
+ * 회원정보 controller 클래스
+ * @author SEONGBONG
+ *
+ */
 @Controller
 public class MemberController {
 	
 	@RequestMapping(value={"/member"}, method=RequestMethod.POST)
+	/**
+	 * 회원가입
+	 * @param signUpMemberRequest
+	 * @param session
+	 * @return
+	 */
 	public ModelAndView memberSignUp(@ModelAttribute("signUpMemberRequest") SignUpMemberRequest signUpMemberRequest, HttpSession session){
 		System.out.println("memberSignUp");
 		ModelAndView modelAndView = new ModelAndView();
@@ -86,7 +95,12 @@ public class MemberController {
 		return modelAndView;
 	}
 	
-	
+	/**
+	 * 로그인
+	 * @param signInRequest
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value={"/signIn"}, method=RequestMethod.POST)
 	public ModelAndView signIn(@ModelAttribute("signInRequest") SignInRequest signInRequest, HttpSession session){
 		System.out.println("signIn");
@@ -137,7 +151,12 @@ public class MemberController {
 		}
 		return modelAndView;
 	}
-	
+	/**
+	 * 회원조회
+	 * @param servletRequest
+	 * @param session
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value={"/member"}, method=RequestMethod.GET)
 	public @ResponseBody <T> T memberSearch(HttpServletRequest servletRequest, HttpSession session){
@@ -201,4 +220,64 @@ public class MemberController {
 //		view.setViewName("");//jsp명
 //		return view;
 //	}
+	/**
+	 * 인증코드 발송
+	 * @param email 수신자 이메일
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value={"/certification"}, method=RequestMethod.GET)
+	public @ResponseBody Map<String, String> sendCertificationCode(@RequestParam("email") String email, HttpSession session){
+		System.out.println("sendCertificationCode");
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try{
+			ValdateAction.checkEmailForm(email);
+			
+			WebApplicationContext context = WebApplicationContextUtils.findWebApplicationContext(session.getServletContext());
+			Service service = context.getBean("sendCertificationCodeService", Service.class);
+			ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
+			
+			request.addObject("email", email);
+			
+			service.execute(request);
+			
+			synchronized (session) {
+				session.setAttribute("certificationCode", request.getObject("code"));
+			}
+			
+			result.put("result", "true");
+			result.put("email", email);
+		}catch(NullPointerException npe){
+			result.put("result", "false");
+			result.put("message", "not input email");
+		}catch(NonValidatedEmailFormEception nvef){
+			result.put("result", "false");
+			result.put("message", "nonvalidated email form");
+		}catch(ClassCastException cce){
+			result.put("result", "false");
+		}
+		return result;
+	}
+	/**
+	 * 인증코드 확인
+	 * @param code 코드번호
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value={"/certification"}, method=RequestMethod.POST)
+	public @ResponseBody Boolean confirmCertificationCode(@RequestParam("code") String code, HttpSession session){
+		System.out.println("confirmCertificationCode");
+		String certificationCode = "";
+		synchronized (session) {
+			certificationCode = (String) session.getAttribute("certificationCode");
+		}
+		if(certificationCode.equals(code)){
+			synchronized (session) {
+				session.removeAttribute("certificationCode");
+			}
+			return true;
+		}
+		return false;
+	}
 }

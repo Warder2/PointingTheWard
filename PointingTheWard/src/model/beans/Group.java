@@ -1,10 +1,23 @@
 package model.beans;
 
 import java.util.List;
-
+/**
+ * 그룹정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Group {
+	/**
+	 * 그룹코드
+	 */
 	private int gCode;
+	/**
+	 * 그룹이름
+	 */
 	private String name;
+	/**
+	 * 참여자들
+	 */
 	private List<Friend> participants;
 	
 	public Group() {

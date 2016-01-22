@@ -47,7 +47,7 @@ public class PointList {
 	public Point searchPointValue(double lng, double lat){
 		
 		for(Point p : points){
-			if(p.getLat() == lat && p.getLng() == lng)
+			if(p.getLat().equals(lat) && p.getLng().equals(lng))
 				return p;
 		}
 		
@@ -66,7 +66,7 @@ public class PointList {
 
 	}
 	
-	public boolean modifyPointValue(Point point, double newlng , double newlat){
+	public boolean modifyPointValue(Point point, String newlng , String newlat){
 		
 		Point p = searchPoint(point);
 		

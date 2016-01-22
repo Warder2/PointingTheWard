@@ -1,10 +1,29 @@
 package model.beans;
-
+/**
+ * 회원정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Member {
+	/**
+	 * 회원이름
+	 */
 	private String name;
+	/**
+	 * 회원이메일
+	 */
 	private String email;
+	/**
+	 * 비밀번호
+	 */
 	private String pwd;
+	/**
+	 * 기본 주소
+	 */
 	private String location;
+	/**
+	 * 기본 이동 수단
+	 */
 	private Transportation transportation;
 	public Member() {
 	}

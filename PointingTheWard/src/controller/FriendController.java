@@ -21,10 +21,20 @@ import service.Service;
 import service.ServiceRequest;
 import validation.ValdateAction;
 import validation.exception.NonValidatedEmailFormEception;
-
+/**
+ * 친구 관련 정보를 다루는 controller 클래스
+ * @author SEONGBONG
+ *
+ */
 @Controller
 public class FriendController {
 	@RequestMapping(value={"/friend"}, method=RequestMethod.POST)
+	/**
+	 * 친구 추가 
+	 * @param fEmail 친구 이메일
+	 * @param session
+	 * @return
+	 */
 	public @ResponseBody String addFriend(@RequestParam("fEmail") String fEmail, HttpSession session){
 		System.out.println("addFriend");
 		
@@ -65,7 +75,12 @@ public class FriendController {
 		}
 		return "false";
 	}
-	
+	/**
+	 * 친구 검색 
+	 * @param servletRequest
+	 * @param session
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value={"/friend"}, method=RequestMethod.GET)
 	public @ResponseBody <T> T searchFriend(HttpServletRequest servletRequest, HttpSession session){

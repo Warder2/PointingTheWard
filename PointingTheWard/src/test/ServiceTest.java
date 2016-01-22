@@ -227,7 +227,7 @@ public class ServiceTest {
 		service = context.getBean("placeRegistService", Service.class);
 		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
 		
-		request.addObject("placeInfo", new Place("장소이름",new Point(0.0,0.0)));
+		request.addObject("placeInfo", new Place("장소이름",new Point("0.0","0.0")));
 		
 		service.execute(request);
 	}
@@ -249,8 +249,8 @@ public class ServiceTest {
 		service = context.getBean("placeModifyService", Service.class);
 		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
 		
-		request.addObject("placeInfo",new Place("장소이름",new Point(0.0,0.0)));
-		request.addObject("newPlaceInfo", new Place("새장소이름",new Point(1.0,1.0)));
+		request.addObject("placeInfo",new Place("장소이름",new Point("0","0")));
+		request.addObject("newPlaceInfo", new Place("새장소이름",new Point("1.0","1.0")));
 		
 		service.execute(request);
 	}
@@ -261,7 +261,7 @@ public class ServiceTest {
 		service = context.getBean("placeDeleteService", Service.class);
 		ServiceRequest request = context.getBean("serviceRequest", ServiceRequest.class);
 		
-		request.addObject("placeInfo",new Place("장소이름",new Point(0.0,0.0)));
+		request.addObject("placeInfo",new Place("장소이름",new Point("0.0","0.0")));
 				
 		service.execute(request);
 	}

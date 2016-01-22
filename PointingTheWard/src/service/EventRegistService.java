@@ -4,7 +4,11 @@ import model.beans.Event;
 import model.list.MemberList;
 import service.abstracts.AbstractCalendarService;
 import service.interfaces.EventRegistable;
-
+/**
+ * 이벤트 등록 서비스 클래스
+ * @author SEONGBONG
+ *
+ */
 public class EventRegistService extends AbstractCalendarService implements EventRegistable{
 
 	@Override

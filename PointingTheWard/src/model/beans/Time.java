@@ -1,7 +1,17 @@
 package model.beans;
-
+/**
+ * 시간정보를 가지는 클래스
+ * @author SEONGBONG
+ *
+ */
 public class Time {
+	/**
+	 * 시
+	 */
 	private String hour;
+	/**
+	 * 분
+	 */
 	private String min;
 
 	public Time() {
