@@ -75,7 +75,7 @@ public class ApiTest {
 		GoogleGeocoding geocoding = null;
 
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("address", "센트럴시티");
+		parameters.put("address", "서울 센트럴시티");
 		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/geocode/xml", parameters, "key",
 				"AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
 		DataGetterTemplate template = new GoogleGeocodingDataGetter();
