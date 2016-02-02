@@ -30,6 +30,9 @@ public class Polygon {
 	public Point centerOfPolygon() {
 		if (mCenterPoint != null) {
 			return mCenterPoint;
+		}else if(mVertexs.size() > 3){
+			//좌표가 3개 이상일 경우 max X,Y | min X,Y를 이용한 사각형좌표로 초기화
+			tetragonFromVertexs();
 		}
 		double centerX = 0, centerY = 0;
 		double area = 0;
@@ -68,7 +71,28 @@ public class Polygon {
 
 		return mCenterPoint;
 	}
-
+	public void tetragonFromVertexs(){
+		Point initPoint = this.mVertexs.get(0);
+		Point max = new Point(initPoint.getLat(),initPoint.getLng());
+		Point min = new Point(initPoint.getLat(),initPoint.getLng());
+		for(Point point: this.mVertexs){
+			if(max.getLat().compareTo(point.getLat()) < 0){
+				max.setLat(point.getLat());
+			}else if(min.getLat().compareTo(point.getLat()) > 0){
+				min.setLat(point.getLat());
+			} 
+			if(max.getLng().compareTo(point.getLng()) < 0){
+				max.setLng(point.getLng());
+			}else if(min.getLng().compareTo(point.getLng()) > 0){
+				min.setLng(point.getLng());
+			}
+		}
+		this.mVertexs.clear();
+		this.mVertexs.add(new Point(min.getLat(),max.getLng()));//(min x, max y)
+		this.mVertexs.add(new Point(max.getLat(),max.getLng()));//(max x, max y)
+		this.mVertexs.add(new Point(max.getLat(),min.getLng()));//(max x, min y)
+		this.mVertexs.add(new Point(min.getLat(),min.getLng()));//(min x, min y)		
+	}
 	/**
 	 * Polygon
 	 * 
