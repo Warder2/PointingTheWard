@@ -24,9 +24,11 @@ import model.beans.Time;
 import model.beans.Ward;
 import model.beans.WardStartEndLocation;
 import model.list.WardList;
+import model.openData.GoogleDistansMatrixDataGetter;
 import model.openData.GoogleGeocodingDataGetter;
 import model.openData.RequestInfo;
 import model.openData.StoreZoneDataGetter;
+import model.openData.dataForm.GoogleDistanceMatrixDataForm;
 import model.openData.dataForm.StoreZoneDataForm;
 import model.openData.template.DataGetterTemplate;
 import model.openDataVO.GoogleGeocoding;
@@ -61,7 +63,6 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		emails.add("akjin47@naver.com");
 		emails.add("nj186@naver.com");
 		String scope = "2";
-		String period = "";
 		String runTime = "01:00";
 
 		// 1.참가자들의 모든 일정을 가져온다.
@@ -83,87 +84,31 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			participantEventInfoMap = participantEventList(events, emails);
 			// 7. ward 이전 시작점 / 이후 도착점 찾기
 			wardStartEndLocationMap = getWardStartEndLocation(tempWards, participantEventInfoMap);
-			// 8.
-			setPoints(wardStartEndLocationMap);
+			
+			// 9. 후회없이 꿈꿧다 말해요
+			searchWardRecommend(wardStartEndLocationMap);
+
+			//			Set<Ward> wk = wardStartEndLocationMap.keySet();
+//			Point ppp = null;
+//			for (Ward w : wk) {
+//				for (WardStartEndLocation wel : wardStartEndLocationMap.get(w)) {
+//					ppp = wel.getStartLocation().getPoint();
+//					System.out.println(wel.getStartLocation().getName());
+//					break;
+//				}
+//				break;
+//			}
+//
+//			List<StoreZone> szlist = new ArrayList<StoreZone>();
+//			try {
+//				szlist = getStreet(ppp);
+//
+//				for (StoreZone s : szlist)
+//					System.out.println(s);
+//			} 
+//			catch (Exception e) {}
+
 		}
-
-	}
-
-	public void possibleEventList(Map<String, List<EventParticipantInfoDTO>> events) {
-
-		List<EventParticipantInfoDTO> list = events.get("2016-01-07");
-		int[] hour = new int[25];
-		hour[24] = 1;
-
-		for (EventParticipantInfoDTO e : list) {
-			int st = Integer.parseInt(e.getsTime().substring(0, 2));
-			int et = Integer.parseInt(e.geteTime().substring(0, 2));
-
-			for (int k = st; k < et; k++) {
-				hour[k] = 1;
-			}
-		}
-
-		List<Ward> wList = new ArrayList<Ward>();
-		int c = 0;
-
-		while (true) {
-
-			for (int h : hour) {
-				if (h == 0) {
-					c++;
-				}
-			}
-			if (c == 0)
-				break;
-
-			Ward w = new Ward();
-			boolean sema = true;
-			for (int i = 0; i < hour.length; i++) {
-				if (hour[i] == 0) {
-					hour[i] = 1;
-					if (sema == true) {
-						w.setsTime(String.valueOf(i));
-						sema = false;
-					}
-				} else if (hour[i] == 1) {
-					if (sema == false) {
-						w.seteTime(String.valueOf(i));
-						wList.add(w);
-						break;
-					}
-				}
-			}
-
-			c = 0;
-		}
-
-		for (Ward w : wList) {
-			if (w.getsTime().length() == 1)
-				w.setsTime("0" + w.getsTime());
-
-			if (w.geteTime().length() == 1)
-				w.seteTime("0" + w.geteTime());
-
-			for (EventParticipantInfoDTO e : list) {
-				if (w.geteTime().equals(e.getsTime().substring(0, 2))) {
-					w.seteTime(w.geteTime().concat(e.getsTime().substring(2, 5)));
-				}
-
-				if (w.getsTime().equals(e.geteTime().substring(0, 2))) {
-					w.setsTime(w.getsTime().concat(e.geteTime().substring(2, 5)));
-				}
-			}
-
-			if (w.geteTime().equals("24"))
-				w.seteTime(w.geteTime().concat(":00"));
-			if (w.getsTime().equals("00"))
-				w.setsTime(w.getsTime().concat(":00"));
-		}
-
-		for (Ward w : wList)
-			System.out.println(w);
-
 	}
 
 	// 1. 참가자들의 모든 일정 가져오기
@@ -355,7 +300,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		Set<String> keys = participantEventInfoMap.keySet();
 		// 와드들 검사
 		for (Ward ward : tempWards) {
-			System.out.println("ward : " + ward);
+			// System.out.println("ward : " + ward);
 			location = new ArrayList<WardStartEndLocation>();
 			// 참가인원대로
 			for (String key : keys) {
@@ -365,7 +310,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 				String afterEventLocation = null;
 				// 참가 인원의 이벤트들 검사
 				for (EventParticipantInfoDTO event : participantEventInfoMap.get(key)) {
-					System.out.println(event);
+					// System.out.println(event);
 					beforeEventLocation = event.getLocation();
 					afterEventLocation = event.getLocation();
 					Time wardsT = new Time(ward.getsTime());
@@ -373,9 +318,9 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 					Time eventsT = new Time(event.getsTime());
 					Time eventeT = new Time(event.geteTime());
 					if (ward.getsDate().equals(event.getsDate()) && ward.geteDate().equals(event.geteDate())) {
-						System.out.println("같은 날");
+						// System.out.println("같은 날");
 						if (wardsT.compare(eventeT.getTime()) >= 0) {
-							System.out.println("와드전");
+							// System.out.println("와드전");
 							if (beforeEvent == null) {
 								beforeEvent = event;
 							} else if (new Time(beforeEvent.geteTime()).compare(event.geteTime()) <= 0) {
@@ -383,16 +328,16 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 							}
 
 						} else {
-							System.out.println("와드후");
+							// System.out.println("와드후");
 							if (afterEvent == null) {
 								afterEvent = event;
 							} else if (new Time(afterEvent.getsTime()).compare(event.getsTime()) >= 0) {
 								afterEvent = event;
 							}
 						}
-					} else
-						if (ward.getsDate().equals(event.getsDate()) && !(ward.geteDate().equals(event.geteDate()))) {
-						System.out.println("와드 후");
+					} else if (ward.getsDate().equals(event.getsDate())
+							&& !(ward.geteDate().equals(event.geteDate()))) {
+						// System.out.println("와드 후");
 						if (afterEvent == null) {
 							afterEvent = event;
 						} else if (new Time(afterEvent.getsTime()).compare(event.getsTime()) >= 0) {
@@ -400,14 +345,14 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 						}
 					} else if (!(ward.getsDate().equals(event.getsDate()))
 							&& ward.geteDate().equals(event.geteDate())) {
-						System.out.println("와드 전");
+						// System.out.println("와드 전");
 						if (beforeEvent == null) {
 							beforeEvent = event;
 						} else if (new Time(beforeEvent.geteTime()).compare(event.geteTime()) <= 0) {
 							beforeEvent = event;
 						}
 					} else {
-						System.out.println("다른 날");
+						// System.out.println("다른 날");
 					}
 				}
 				// 한명의 참가인원의 모든 이벤트 검사 완료 다음 인원으로 넘어감
@@ -417,24 +362,60 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 				if (afterEvent != null) {
 					afterEventLocation = afterEvent.getPlace();
 				}
-				location.add(new WardStartEndLocation(beforeEventLocation, afterEventLocation));
+
+				location.add(new WardStartEndLocation(geocodingPlace(beforeEventLocation),
+						geocodingPlace(afterEventLocation)));
 			}
 			// 한개 와드의 모든 인원 조사 완료
 			wardStartEndLocationMap.put(ward, location);
 		}
+		// 모든 와드의 시작점 조사 완료
+		// 확인
+
+		Set<Ward> WardMapKeys = wardStartEndLocationMap.keySet();
+		for (Ward key : WardMapKeys) {
+			System.out.println("와드 정보" + key);
+			for (WardStartEndLocation wardStartEndLocation : wardStartEndLocationMap.get(key)) {
+				System.out.println(wardStartEndLocation);
+			}
+		}
+
 		return wardStartEndLocationMap;
 	}
 
-	// 7. 범위 내 상권 리스트 및 좌표 다가져오기
-	public List<StoreZone> getStreet(Point p, String radius) throws UnsupportedEncodingException, IOException {
+	// 7. 지역이름으로 좌표값가져오기
+	public Place geocodingPlace(String address) {
+		GoogleGeocoding geocoding = null;
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("address", address);
+		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/geocode/xml", parameters, "key",
+				"AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
+		DataGetterTemplate template = new GoogleGeocodingDataGetter();
+		try {
+			List<GoogleGeocoding> result = template.getData(requestInfo);
+			for (GoogleGeocoding f : result) {
+				geocoding = f;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return new Place(address, new Point(geocoding.getLatitude(), geocoding.getLongitude()));
+	}
+
+	// 8. 범위 내 상권 리스트 및 좌표 다가져오기
+	public List<StoreZone> getStreet(Point p) throws UnsupportedEncodingException, IOException {
 
 		String lat = String.valueOf(p.getLat());
 		String lng = String.valueOf(p.getLng());
+		
+		System.out.println("lat : " + lat + " lng : " + lng);
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("type", "xml");
 		parameters.put("numOfRows", "999");
-		parameters.put("radius", "500");
+		parameters.put("radius", "10000");
 		parameters.put("cx", lat);
 		parameters.put("cy", lng);
 		parameters.put("pageNo", "1");
@@ -446,8 +427,8 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		DataGetterTemplate templete = new StoreZoneDataGetter();
 		List<StoreZoneDataForm> infos = templete.getData(requestInfo);
 
-		for (StoreZoneDataForm dataForm : infos)
-			System.out.println(dataForm);
+		//for (StoreZoneDataForm dataForm : infos)
+		//	System.out.println(dataForm);
 
 		List<StoreZone> szList = new ArrayList<StoreZone>();
 
@@ -466,62 +447,77 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 			szList.add(sz);
 		}
+		
+		for(StoreZone sz : szList)
+			System.out.println(sz);
+		
 		return szList;
 	}
 
-	// 8. 시작끝점 좌표 set 
-	public void setPoints(Map<Ward, List<WardStartEndLocation>> wMap){
+
+	// 9. ward의 가장 빠른 상권 보내줌 
+	public StoreZone searchWardRecommend(Map<Ward, List<WardStartEndLocation>> wardlist){
 		
-		Set<Ward> WardMapKeys = wMap.keySet();
-		
-		for (Ward key : WardMapKeys) {
-			for (WardStartEndLocation wardStartEndLocation : wMap.get(key)) {
-				
-				Point p = changePointFromPlace(wardStartEndLocation.getStartLocation().getName());
-				
-				wardStartEndLocation.getStartLocation().setPoint(p);
-				
-				p = changePointFromPlace(wardStartEndLocation.getEndLocation().getName());
-				
-				wardStartEndLocation.getEndLocation().setPoint(p);
+		Set<Ward> wk = wardlist.keySet();
+		List<StoreZone> szlist = new ArrayList<StoreZone>();
+
+		for(Ward w : wk ){
+			
+			for(WardStartEndLocation wse : wardlist.get(w)){
+				try {
+					
+					List<StoreZone> sival = null;
+					
+					sival = getStreet(wse.getStartLocation().getPoint());
+					szlist.addAll(sival);
+					sival = getStreet(wse.getEndLocation().getPoint());
+					szlist.addAll(sival);
+								
+				} catch (Exception e){}
 				
 			}
+
+			break;
 		}
 		
-		for (Ward key : WardMapKeys) {
-			for (WardStartEndLocation w : wMap.get(key)) {
-				System.out.println("시작점 : " + w.getStartLocation().getName()+ " : "+ w.getStartLocation().getPoint());
-				System.out.println("끝점 : " + w.getEndLocation().getName()+ " : "+ w.getEndLocation().getPoint());
-			}
-		}
+		System.out.println("지나간것은 ");
+		for(StoreZone sz : szlist)
+			System.out.println(sz);
 		
+		return null;
 	}
-
-	//주소 -> 좌표 변환 
-	public Point changePointFromPlace(String place){
-
+	
+	
+	// 10. 시간 계산 
+	public String getGoogle(String startP , String endP) {
 		Map<String, String> parameters = new HashMap<String, String>();
-		List<GoogleGeocoding> result = null;
-		Point p = new Point();
+
+		parameters.put("origins", startP);
+		parameters.put("destinations", endP);
+		parameters.put("mode", "transit");
+		parameters.put("language", "kr-ko");
+		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/distancematrix/xml", parameters,
+				"key", "AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
+		List<GoogleDistanceMatrixDataForm> result = null;
 		
-		parameters.put("address", place);
-		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/geocode/xml", parameters, "key",
-				"AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
-		DataGetterTemplate template = new GoogleGeocodingDataGetter();
+		String durationResult = null;
+		
+		DataGetterTemplate templete = new GoogleDistansMatrixDataGetter();
 		try {
-			
-			result = template.getData(requestInfo);
-			for (GoogleGeocoding f : result) {
-				
-				p.setLat(f.getLatitude());
-				p.setLng(f.getLongitude());
-			
+			result = templete.getData(requestInfo);
+			if (result != null) {
+				for (GoogleDistanceMatrixDataForm g : result) {
+					durationResult = g.getDurationResult();
+				}
+			} else {
+				System.out.println("결과가 없습니다.");
 			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return p;
+		return durationResult;
 	}
 	
 	

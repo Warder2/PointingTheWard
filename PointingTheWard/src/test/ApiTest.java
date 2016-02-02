@@ -18,10 +18,11 @@ import model.openDataVO.GoogleGeocoding;
 
 public class ApiTest {
 
+	@Test
 	public void getStoreZone() throws IOException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("type", "xml");
-		parameters.put("key", "1882");
+		parameters.put("key", "1232");
 		parameters.put("numOfRows", "999");
 		parameters.put("pageNo", "1");
 
@@ -36,6 +37,8 @@ public class ApiTest {
 		}
 	}
 	
+	
+
 	public void getGoogle() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		/*
@@ -54,7 +57,7 @@ public class ApiTest {
 			result = templete.getData(requestInfo);
 			if (result != null) {
 				for (GoogleDistanceMatrixDataForm g : result) {
-					System.out.println(g);
+					System.out.println(g.getDurationResult());
 				}
 			} else {
 				System.out.println("결과가 없습니다.");
@@ -65,7 +68,6 @@ public class ApiTest {
 		}
 	}
 
-	@Test
 	public void getGoogleGeocoding() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("address", "시흥시 은행동 대우 4차 푸르지오");
