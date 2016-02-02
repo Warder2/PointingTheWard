@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import model.beans.Place;
+import model.beans.Point;
 import model.openData.GoogleDistansMatrixDataGetter;
 import model.openData.GoogleGeocodingDataGetter;
 import model.openData.RequestInfo;
@@ -18,7 +20,7 @@ import model.openDataVO.GoogleGeocoding;
 
 public class ApiTest {
 
-	@Test
+
 	public void getStoreZone() throws IOException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("type", "xml");
@@ -68,6 +70,25 @@ public class ApiTest {
 		}
 	}
 
+	@Test
+	public void geocodingPlace() {
+		GoogleGeocoding geocoding = null;
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("address", "고속터미널 센트럴");
+		RequestInfo requestInfo = new RequestInfo("https://maps.googleapis.com/maps/api/geocode/xml", parameters, "key",
+				"AIzaSyB11fLFswQhh45Yh2a9UkBmHFIkAuTpniE");
+		DataGetterTemplate template = new GoogleGeocodingDataGetter();
+		try {
+			List<GoogleGeocoding> result = template.getData(requestInfo);
+			for (GoogleGeocoding f : result) {
+				System.out.println(f);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void getGoogleGeocoding() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("address", "시흥시 은행동 대우 4차 푸르지오");

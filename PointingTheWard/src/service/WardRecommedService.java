@@ -362,7 +362,8 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 				if (afterEvent != null) {
 					afterEventLocation = afterEvent.getPlace();
 				}
-
+				
+				//System.out.println("sex");
 				location.add(new WardStartEndLocation(geocodingPlace(beforeEventLocation),
 						geocodingPlace(afterEventLocation)));
 			}
