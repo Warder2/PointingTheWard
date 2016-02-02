@@ -81,6 +81,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 			participantEventInfoMap = participantEventList(events, emails);
 			// 7. ward 이전 시작점 / 이후 도착점 찾기
 			wardStartEndLocationMap = getWardStartEndLocation(tempWards, participantEventInfoMap);
+			
 			// 8. 
 			
 		}
@@ -272,7 +273,7 @@ public class WardService extends AbstractWardService implements WardRecommendabl
 			Map<String, List<EventParticipantInfoDTO>> participantEventInfoMap) {
 		Map<Ward, List<WardStartEndLocation>> wardStartEndLocationMap = new HashMap<Ward, List<WardStartEndLocation>>();
 		List<WardStartEndLocation> location = null;
-
+		//System.out.println(tempWards.size());
 		Set<String> keys = participantEventInfoMap.keySet();
 		// 와드들 검사
 		for (Ward ward : tempWards) {
