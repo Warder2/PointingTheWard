@@ -1,6 +1,8 @@
 package test;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import model.openData.dataForm.GoogleDistanceMatrixDataForm;
 import model.openData.dataForm.StoreZoneDataForm;
 import model.openData.template.DataGetterTemplate;
 import model.openDataVO.GoogleGeocoding;
+import model.openDataVO.StoreZone;
 
 public class ApiTest {
 
@@ -70,7 +73,6 @@ public class ApiTest {
 		}
 	}
 
-	@Test
 	public void geocodingPlace() {
 		GoogleGeocoding geocoding = null;
 
@@ -103,5 +105,51 @@ public class ApiTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//127.3795590
+	//37.6841320
+	@Test
+	public void getStreet() throws UnsupportedEncodingException, IOException {
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("type", "xml");
+		parameters.put("numOfRows", "999");
+		parameters.put("radius", "5000");
+		parameters.put("cx", "127.004528");
+		parameters.put("cy", "37.567538");
+		parameters.put("pageNo", "1");
+
+		RequestInfo requestInfo = new RequestInfo("http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius",
+				parameters, "ServiceKey",
+				"og2lJU4CeWL4ZEgfp3o%2F17D%2Fj9mbsbSCK4YTwWPF15sGHlakqZEKX8PA%2B6XyAs%2BD0%2FPe24pVucXQckQ%2Fw230tA%3D%3D");
+
+		DataGetterTemplate templete = new StoreZoneDataGetter();
+		List<StoreZoneDataForm> infos = templete.getData(requestInfo);
+
+		//for (StoreZoneDataForm dataForm : infos)
+		//	System.out.println(dataForm);
+
+		List<StoreZone> szList = new ArrayList<StoreZone>();
+
+		for (StoreZoneDataForm dataForm : infos) {
+
+			dataForm.setCoords(dataForm.getCoords().replace("POLYGON ((", ""));
+			dataForm.setCoords(dataForm.getCoords().replace("))", ""));
+
+			StoreZone sz = new StoreZone();
+
+			sz.setCoordNum(Integer.parseInt(dataForm.getCoordNum()));
+			sz.setcoordes(dataForm.getCoords());
+			sz.setMainTrarNm(dataForm.getMainTrarNm());
+			sz.setCtprvnNm((dataForm.getCtprvnNm()));
+			sz.setSignguNm(dataForm.getSignguNm());
+
+			szList.add(sz);
+		}
+		
+		for(StoreZone sz : szList)
+			System.out.println(sz);
+		
 	}
 }

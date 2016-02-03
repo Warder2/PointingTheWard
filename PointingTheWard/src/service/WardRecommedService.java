@@ -88,7 +88,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			// 9. 후회없이 꿈꿧다 말해요
 			searchWardRecommend(wardStartEndLocationMap);
 
-			//			Set<Ward> wk = wardStartEndLocationMap.keySet();
+//			Set<Ward> wk = wardStartEndLocationMap.keySet();
 //			Point ppp = null;
 //			for (Ward w : wk) {
 //				for (WardStartEndLocation wel : wardStartEndLocationMap.get(w)) {
@@ -415,7 +415,7 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("type", "xml");
 		parameters.put("numOfRows", "999");
-		parameters.put("radius", "10000");
+		parameters.put("radius", "2000");
 		parameters.put("cx", lat);
 		parameters.put("cy", lng);
 		parameters.put("pageNo", "1");
@@ -456,23 +456,27 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 
 
 	// 9. ward의 가장 빠른 상권 보내줌 
-	public StoreZone searchWardRecommend(Map<Ward, List<WardStartEndLocation>> wardlist){
+	public void searchWardRecommend(Map<Ward, List<WardStartEndLocation>> wardlist){
 		
 		Set<Ward> wk = wardlist.keySet();
 		List<StoreZone> szlist = new ArrayList<StoreZone>();
 
 		for(Ward w : wk ){
-			
+			System.out.println(w);
 			for(WardStartEndLocation wse : wardlist.get(w)){
 				try {
 					
 					List<StoreZone> sival = null;
 					
+					System.out.println(wse.getStartLocation().getName());
 					sival = getStreet(wse.getStartLocation().getPoint());
 					szlist.addAll(sival);
+					
+					System.out.println(wse.getEndLocation().getName());
 					sival = getStreet(wse.getEndLocation().getPoint());
 					szlist.addAll(sival);
-								
+
+			
 				} catch (Exception e){}
 				
 			}
@@ -480,11 +484,11 @@ public class WardRecommedService extends AbstractWardService implements WardReco
 			break;
 		}
 		
-		System.out.println("지나간것은 ");
-		for(StoreZone sz : szlist)
-			System.out.println(sz);
+		System.out.println("지나간것은 " + szlist.size());
+	
+		//for(StoreZone sz : szlist)
+		//	System.out.println(sz);
 		
-		return null;
 	}
 	
 	
